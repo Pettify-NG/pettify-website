@@ -17,36 +17,36 @@
   <body>
     <header>
       <div class="navbar">
-        <h1>Pettify</h1>
-        <nav>
-          <nav class="navbar">
-            <div class="hamburger" id="hamburger">
-              &#9776;
-              <!-- Hamburger icon -->
+        <img src="./images/pettify-logo.png" alt="" />
+        <nav class="navbar">
+          <div class="hamburger" id="hamburger">
+            &#9776;
+            <!-- Hamburger icon -->
+          </div>
+          <div class="navbar-menu" id="navbar-menu">
+            <div class="menu-header">
+              <div class="close-button" id="close-button">&times;</div>
+              <img src="./images/pettify-logo.png" alt="" />
+              <button class="cta-button" onclick="location.href='signup.html'">
+                Create a Free Account
+              </button>
             </div>
-            <div class="navbar-menu" id="navbar-menu">
-              <div class="menu-header">
-                <div class="close-button" id="close-button">&times;</div>
-                <h1 class="company-name">Pettify</h1>
-                <button
-                  class="cta-button"
-                  onclick="location.href='signup.html'"
-                >
-                  Create a Free Account
-                </button>
-              </div>
-              <div
-                style="height: 1px; background-color: #ed770b; margin: 20px 0"
-              ></div>
-              <ul>
-                <li><a href="#pricing">Pricing</a></li>
-                <!-- <li><a href="#company">Company</a></li> -->
-                <li><a href="#FAQS">FAQs</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
-            </div>
-          </nav>
+            <div
+              style="height: 1px; background-color: #ed770b; margin: 20px 0"
+            ></div>
+            <ul>
+              <li><a href="#pricing">Pricing</a></li>
+              <!-- <li><a href="#company">Company</a></li> -->
+              <li><a href="#FAQS">FAQs</a></li>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <button class="cta-button" onclick="location.href='signup.html'">
+              Create a Free Account
+            </button>
+          </div>
         </nav>
         <!-- <a href="signup.html">
                 <button class="cta-button">Create a Free Account</button>
@@ -319,61 +319,84 @@
     <section class="faqs">
       <h2>We’ve Got Answers</h2>
       <div class="faq-container">
-        <div class="questions">
-          <div class="question active">What is Pettify?</div>
-          <div class="question">How do I sign up for Pettify?</div>
-          <div class="question">How do I buy a pet on Pettify?</div>
-          <div class="question">How do I list a pet for sale?</div>
-          <div class="question">Is it safe to buy pets through Pettify?</div>
-          <div class="question">What payment methods are accepted?</div>
-          <div class="question">Can I get a refund for my purchase?</div>
-          <div class="question">How do I contact customer support?</div>
+        <div class="questions-container">
+          <h3 class="faq-header">FAQs</h3>
+          <div class="questions">
+            <div class="question active">What is Pettify?</div>
+            <div class="question">How do I sign up for Pettify?</div>
+            <div class="question">How do I buy a pet on Pettify?</div>
+            <div class="question">How do I list a pet for sale?</div>
+            <div class="question">Is it safe to buy pets through Pettify?</div>
+            <div class="question">What payment methods are accepted?</div>
+            <div class="question">Can I get a refund for my purchase?</div>
+            <div class="question">How do I contact customer support?</div>
+          </div>
         </div>
 
-        <div class="answers">
-          <div class="answer active">
-            Pettify is an online marketplace for pet lovers, trusted breeders,
-            pet vendors, and veterinarians. You can buy & sell pets, pet
-            accessories, book vet appointments and many more.
-          </div>
-          <div class="answer">
-            Buyers - Download the Pettify app from Google Play & App Store.
-            Breeders & Vets - Sign up on www.pettify.co to create an account.
-            Simply provide your email or Google sign in to get started.
-          </div>
-          <div class="answer">
-            Download the Pettify mobile app from Google Play or App store.
-            Browse the available pets listed by trusted breeders and sellers on
-            the mobile app. Once you find the right companion, you can make the
-            purchase and enter your delivery address for your pet to be
-            delivered.
-          </div>
-          <div class="answer">
-            If you’re a breeder or vendor, you can sign up on the Pettify web
-            app at www.pettify.co and start listing pets for sale. Provide
-            detailed descriptions such as category, breed, description, age and
-            vaccination details and clear beautiful pet photos to attract eager
-            buyers.
-          </div>
-          <div class="answer">
-            Pettify vets sellers and provides a safe platform to connect with
-            breeders, but we recommend always verifying the seller and ensuring
-            the pet’s health records before making any purchase.
-          </div>
-          <div class="answer">
-            Pettify supports various payment methods such as direct transfers or
-            payments via debit/credit cards through Paystack.
-          </div>
-          <div class="answer">
-            Refund policies are determined by Pettify only if the received Pet
-            was in bad condition or false pet delivery. We can also refund
-            canceled Vet appointments. Please contact Pettify through email
-            hello@pettify.co directly for any refund requests or help.
-          </div>
-          <div class="answer">
-            If you have any questions or issues, you can contact Pettify support
-            via email at hello@pettify.co or through the app’s support section
-            and social media channels.
+        <div class="answers-container">
+          <h3 class="faq-header">Answers</h3>
+          <div class="answers">
+            <div class="answer active">
+              <p>
+                Pettify is an online marketplace for pet lovers, trusted
+                breeders, pet vendors, and veterinarians. You can buy & sell
+                pets, pet accessories, book vet appointments and many more.
+              </p>
+            </div>
+            <div class="answer">
+              <p>
+                Buyers - Download the Pettify app from Google Play & App Store.
+                Breeders & Vets - Sign up on www.pettify.co to create an
+                account. Simply provide your email or Google sign in to get
+                started.
+              </p>
+            </div>
+            <div class="answer">
+              <p>
+                Download the Pettify mobile app from Google Play or App store.
+                Browse the available pets listed by trusted breeders and sellers
+                on the mobile app. Once you find the right companion, you can
+                make the purchase and enter your delivery address for your pet
+                to be delivered.
+              </p>
+            </div>
+            <div class="answer">
+              <p>
+                If you’re a breeder or vendor, you can sign up on the Pettify
+                web app at www.pettify.co and start listing pets for sale.
+                Provide detailed descriptions such as category, breed,
+                description, age and vaccination details and clear beautiful pet
+                photos to attract eager buyers.
+              </p>
+            </div>
+            <div class="answer">
+              <p>
+                Pettify vets sellers and provides a safe platform to connect
+                with breeders, but we recommend always verifying the seller and
+                ensuring the pet’s health records before making any purchase.
+              </p>
+            </div>
+            <div class="answer">
+              <p>
+                Pettify supports various payment methods such as direct
+                transfers or payments via debit/credit cards through Paystack.
+              </p>
+            </div>
+            <div class="answer">
+              <p>
+                Refund policies are determined by Pettify only if the received
+                Pet was in bad condition or false pet delivery. We can also
+                refund canceled Vet appointments. Please contact Pettify through
+                email hello@pettify.co directly for any refund requests or help.
+              </p>
+            </div>
+            <div class="answer">
+              <p>
+                If you have any questions or issues, you can contact Pettify
+                support via email at hello@pettify.co or through the app’s
+                support section and social media channels.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -453,14 +476,14 @@
     <footer id="contact">
       <div class="footer-container">
         <!-- Pettify Section -->
-        <div>
-          <h3>Pettify</h3>
+        <div class="footer-logo">
+          <img src="./images/pettify-logo.png" alt="">
         </div>
 
         <!-- Product Links -->
         <div>
           <h3>Product</h3>
-          <ul>
+          <ul class="footer-links">
             <li><a href="#faqs">FAQs</a></li>
             <li><a href="#pricing">Pricing</a></li>
           </ul>
@@ -469,7 +492,7 @@
         <!-- Legal Links -->
         <div>
           <h3>Legal</h3>
-          <ul>
+          <ul class="footer-links">
             <li><a href="#terms">Terms of Use</a></li>
             <li><a href="#privacy">Privacy Policy</a></li>
           </ul>
