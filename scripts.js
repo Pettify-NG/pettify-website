@@ -103,7 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const ctaButtons = document.querySelectorAll(".cta-button");
+    const ctaButton = document.querySelectorAll(".bcta-button");
     ctaButtons.forEach((button) => {
+        button.addEventListener("click", scrollToDownload);
+    });
+    ctaButton.forEach((button) => {
         button.addEventListener("click", scrollToDownload);
     });
 
