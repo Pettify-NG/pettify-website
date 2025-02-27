@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pettify Landing Page</title>
+        <link rel="icon" href="images/favicon-32x32.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+    <header>
+        <div class="navbar">
+            <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
+            <nav>
+                <div class="hamburger" id="hamburger">&#9776;</div>
+                <div class="navbar-menu" id="navbar-menu">
+                    <div class="menu-header">
+                        <div class="close-button" id="close-button">&times;</div>
+                        <img src="images/nav_logo.png" alt="Pettify Logo" class="nav-logo">
+                        <button class="cta-button" onclick="scrollToDownload()">Create Account</button>
+                    </div>
+                    <div style="height: 1px; background-color: #ED770B; margin: 20px 0;"></div>
+                    <ul>
+                        <li>
+                            <a href="#" id="pricing-link">Pricing</a>
+                            <div id="pricing-dropdown" class="dropdown-content">
+                                <h1>Our transaction fee</h1>
+                                <p>Using Pettify is free for LIFE. We only make money when you start making money. We charge a little transaction fee. This helps us keep the lights on and cover payment processor fees. Don't worry about any monthly fees or any hidden fee.</p>
+                                <div>
+                                    <h2>For Vendors/Breeders/Pet sellers:</h2>
+                                    <p>We charge 9% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
+                                </div>
+                                <div>
+                                    <h2>For Vets:</h2>
+                                    <p>We charge 4% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
+                                </div>
+                                <div>
+                                    <h2>For Buyers:</h2>
+                                    <p>We charge 1% of product/pet/accessories and vet booking as service fee. No other fee is required.</p>
+                                </div>
+                                <p class="disclaimer"><strong>Disclaimer:</strong> Depending on the seller, delivery fee may apply when you want to purchase. This does not come to us as Pettify do not determine the delivery fee of the seller. Some sellers may offer free delivery while some don't.</p>
+                            </div>
+                        </li>
+                        <li><a href="#founder">Company</a></li>
+                        <li><a href="#FAQS">FAQs</a></li>
+                        <!-- <li><a href="#blog">Blog</a></li> -->
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <a href="signup.html" class="cta-button-desktop">
+                <button class="cta-button" onclick="scrollToDownload()">Create a Free Account</button>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Need a Pet Companion?</h2>
+                <p>Find your pawfect partner, whether you are a creative looking for your muse, a remote worker looking for a work buddy, or a family searching for a new best friend. At Pettify, we make it easy, safe, and fun to discover the companion who'll bring joy to your everyday.</p>
+            </div>
+            <div class="hero-image">
+                <img src="images/orange-woman.png" alt="Woman with a dog" class="responsive-womanImage">
+            </div>
+        </div>
+    </section>
+
+    <section class="download">
+        <div class="tabs">
+            <button class="tab active" data-target="#customers">Customers</button>
+            <button class="tab" data-target="#vendors">Vendors</button>
+            <button class="tab" data-target="#vet">Vet</button>
+        </div>
+
+        <!---->
+        <div class="tab-content">
+            <!-- Download the App Section -->
+            <section id="customers" class="active-tab">
+                <div class="active-text">
+                    <h2>Download the App</h2>
+                    <p>Ready to find your pawfect companion? Download the Pettify app on Google Play and shop with trusted breeders and sellers near you. Your next best friend is just a click away.</p>
+                    <div class="download-active-btn">
+                        <button>
+                            <img src="images/google-play.png" alt="Google Play" class="download-icon" />
+                            Download Now on Google Play
+                        </button>
+                        <button disabled>
+                            <img src="images/app-store.png" alt="App Store" class="download-icon" />
+                            Coming Soon on App Store
+                        </button>
+                    </div>
+                </div>
+                <div class="app-download">
+                    <img src="images/app preview.png" alt="app preview" class="responsive-appPreview">
+                </div>
+            </section>
+    
+            <!-- Create Account Section -->
+            <section id="vendors" class="inactive-tab">
+                <div class="active-text">
+                    <h2>Create a free account</h2>
+                    <p>Are you a breeder or pet vendor? Join Pettify today to list your pets, pet accessories and connect with thousands of eager buyers. It's easy, secure and the best way to reach pet lovers near you.</p>
+                    <div class="vendor-active-btn">
+                        <a href="https://dashboard.pettify.co/login" target="_blank">
+                            <button>Create a free account</button>
+                        </a>                        
+                    </div>
+                </div>
+                <div class="laptop-view">
+                    <img src="images/laptop-preview.png" alt="vendor preview" class="responsive-laptopImage">
+                </div>
+            </section>
+    
+            <!-- Vet Section -->
+            <section id="vet" class="inactive-tab">
+                <div class="active-text">
+                    <h2>Create a free account</h2>
+                    <p>Are a licensed veterinarian? Join Pettify today to list your services and connect with pet owners looking to care for their pet. It's easy, secure, and the best way to reach pet lovers near you.</p>
+                    <div class="vet-active-btn">
+                        <button>Create a free account</button>
+                    </div>
+                </div>
+                <div class="vet-image">
+                    <img src="images/vet-doctor.png" alt="vet preview" class="responsive-vetImage">
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <div style="height: 1px; background-color: #ED770B; margin: 20px 0;"></div>
+
+    <section class="founder" id="founder">
+        <h1>Why Pettify?</h1>
+        <div class="founder-container">
+            <div class="founder-bio">
+                <h2>Founder’s Story</h2>
+                <img src="images/titi.jpg" alt="Founder Titilayo Sunday" class="responsive-founder-image">
+                <h2>Titilayo Sunday</h2>
+                <h3>CEO / FOUNDER</h3>
+                <a href="https://www.linkedin.com/in/thetitilayo?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                    <img src="images/orange-linkedin-icon.png" alt="LinkedIn" class="founder-media-icon">
+                </a>
+            </div>
+            <div class="founder-story">
+                <p>
+                    I grew up surrounded by dogs, my dad was a local breeder and our first family pet, a greyhound named Jet was much more than just a dog, he was my childhood companion, always by my side, running errands with me and brightening every day. But on January 18, 2002, Jet wandered off and never came back. Losing him left a deep void in my heart, and since then, I have been searching for a pet like Jet, a companion that feels like family.
+                </p>
+                <p>
+                    Over the years, I realized just how difficult it was for others to find pets, especially one that matched their lifestyle and personality. The traditional ways of finding breeders or pet vendors were limited, often long and inconvenient, considering that you have to first find a breeder or wait for someone to help you import, it also lacked the variety people wanted. People had to rely on word of mouth, drive long distances, or settle for fewer choices simply because there was no better way.
+                </p>
+                <p>
+                    We started Pettify to solve these pain points to bring convenience, choice, and peace of mind to pet lovers. With Pettify, buyers can easily find trusted breeders and vendors close to their location, compare a variety of pets, and make their choice without hassle. Whether you're a remote worker or creative looking for a loyal companion or a family searching for the perfect pet to add joy to your home, Pettify makes the process simple, safe, and tailored to your needs. We've built a platform that puts control back into the hands of pet lovers, making it easier than ever to shop from trusted sellers, discover the perfect pet, and bring home not just an animal, but a companion that will improve your life. My journey started with Jet, and through Pettify, We want to help others find their own Jets—pets that fill our lives with love, loyalty, and companionship.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="what-drives-us">
+        <h2>What Drive Us?</h2>
+        <div class="features">
+            <div class="feature-box">
+                <img src="images/human&dog.png" alt="Icon 1">
+                <p>Companionship First</p>
+            </div>
+            <div class="feature-box">
+                <img src="images/trust.png" alt="Icon 2">
+                <p>Trust & Safety</p>
+            </div>
+            <div class="feature-box">
+                <img src="images/convenience.png" alt="Icon 3">
+                <p>Convenience</p>
+            </div>
+            <div class="feature-box">
+                <img src="images/bulb.png" alt="Icon 4">
+                <p>Innovation</p>
+            </div>
+            <div class="feature-box">
+                <img src="images/love.png" alt="Icon 5">
+                <p>Life Long Commitment</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="humans-of-pettify">
+        <h2>Humans of Pettify</h2>
+        <div class="team">
+            <div class="team-member">
+                <img src="images/darey.jpg" alt="Team Member 1">
+                <p>Emmanuel Oluwadare</p>
+                <p>CPO / CO-FOUNDER</p>
+                <a href="https://www.linkedin.com/in/oluwadare-emmanuel-4a0b75270/" target="_blank">
+                    <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
+                </a>
+            </div>
+            <div class="team-member">
+                <img src="images/daniel.jpg" alt="Team Member 2">
+                <p>Omole Daniel</p>
+                <p>CTO / CO-FOUNDER</p>
+                <a href="https://www.linkedin.com/in/daniel-omole-34401521a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                    <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
+                </a>
+            </div>
+            <div class="team-member">
+                <img src="images/darey.jpg" alt="Team Member 3">
+                <p>Emmanuel Oluwadare</p>
+                <p>GROWTH</p>
+                <a href="https://www.linkedin.com/in/emmanuel-oluwadare" target="_blank">
+                    <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
+                </a>
+            </div>
+            <div class="last-team-member">
+                <img src="images/daniel.jpg" alt="Team Member 4">
+                <p>Daniel Omole</p>
+                <p>OPERATIONS</p>
+                <a href="https://www.linkedin.com/in/daniel-omole-34401521a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                    <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="faqs" id="FAQS"> 
+        <h2>We’ve Got Answers</h2>
+        <div class="faq-container">
+            <div class="questions">
+                <div class="question active">What is Pettify?</div>
+                <div class="question">How do I sign up for Pettify?</div>
+                <div class="question">How do I buy a pet on Pettify?</div>
+                <div class="question">How do I list a pet for sale?</div>
+                <div class="question">Is it safe to buy pets through Pettify?</div>
+                <div class="question">What payment methods are accepted?</div>
+                <div class="question">Can I get a refund for my purchase?</div>
+                <div class="question">How do I contact customer support?</div>
+            </div>
+            <div class="answers">
+                <div class="answer active">Pettify is an online marketplace for pet lovers, trusted breeders, pet vendors, and veterinarians. You can buy & sell pets, pet accessories, book vet appointments and many more.</div>
+                <div class="answer">Buyers - Download the Pettify app from Google Play & App Store. Breeders & Vets - Sign up on www.pettify.co to create an account. Simply provide your email or Google sign in to get started.</div>
+                <div class="answer">Download the Pettify mobile app from Google Play or App store. Browse the available pets listed by trusted breeders and sellers on the mobile app. Once you find the right companion, you can make the purchase and enter your delivery address for your pet to be delivered.</div>
+                <div class="answer">If you’re a breeder or vendor, you can sign up on the Pettify web app at www.pettify.co and start listing pets for sale. Provide detailed descriptions such as category, breed, description, age and vaccination details and clear beautiful pet photos to attract eager buyers.</div>
+                <div class="answer">Pettify vets sellers and provides a safe platform to connect with breeders, but we recommend always verifying the seller and ensuring the pet’s health records before making any purchase.</div>
+                <div class="answer">Pettify supports various payment methods such as direct transfers or payments via debit/credit cards through Paystack.</div>
+                <div class="answer">Refund policies are determined by Pettify only if the received Pet was in bad condition or false pet delivery. We can also refund canceled Vet appointments. Please contact Pettify through email hello@pettify.co directly for any refund requests or help.</div>
+                <div class="answer">If you have any questions or issues, you can contact Pettify support via email at hello@pettify.co or through the app’s support section and social media channels.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Sellers Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p>“Before Pettify, selling pets was slow, and I relied only on word-of-mouth. Now, I get orders from serious buyers almost every day from the platform. My sales have tripled in just a few months!”</p>
+                    <h4>– Chinedu, Lagos</h4>
+                </div>
+                <div class="testimonial">
+                    <p>“I used to struggle with reaching the right customers for my kittens, but Pettify changed that. The platform makes selling so easy, and I’ve expanded my business faster than I expected.”</p>
+                    <h4>– Aisha, Abuja</h4>
+                </div>
+                <div class="testimonial">
+                    <p>“Since I listed my pet accessories on Pettify, I’ve seen a huge increase in sales. People now trust me more because of the platform, and I’ve gained customers from different states.”</p>
+                    <h4>– Tunde, Ibadan</h4>
+                </div>
+                <div class="testimonial">
+                    <p>“I was skeptical at first, but Pettify has helped me connect with genuine buyers who are actually ready to purchase. I no longer waste time on unserious inquiries.”</p>
+                    <h4>– Kemi, Port Harcourt</h4>
+                </div>
+                <div class="testimonial">
+                    <p>“Selling my imported puppies used to be stressful because of limited reach, but Pettify has made it seamless. More visibility, more customers, and more revenue. I withdraw my money seamlessly too—my business is growing!”</p>
+                    <h4>– Mike, Enugu</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div>
+                <h3>Pettify</h3>
+            </div>
+            <div>
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#FAQS">FAQs</a></li>
+                    <li><a href="#pricing-link" id="footer-pricing-link">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="social-icons">
+                    <li><a href="https://www.linkedin.com/company/pettify/" target="_blank">
+                        <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
+                    </a></li>
+                    <li><a href="#INSTAGRAM" target="_blank">
+                        <img src="images/instagram-icon.png" alt="Instagram" class="media-icon">
+                    </a></li>
+                    <li><a href="#tiktok" target="_blank">
+                        <img src="images/tiktok-icon.png" alt="Tiktok" class="media-icon">
+                    </a></li>
+                    <li><a href="#x" target="_blank">
+                        <img src="images/x-icon.png" alt="X" class="media-icon">
+                    </a></li>
+                    <li><a href="#facebook" target="_blank">
+                        <img src="images/facebook-icon.png" alt="Facebook" class="media-icon">
+                    </a></li>
+                </ul>
+                <p>Phone/WhatsApp: +2347018590284</p>
+                <p>Email: hello@pettify.co</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025– Pettify Global Technologies LTD.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
