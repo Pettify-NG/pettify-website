@@ -645,7 +645,7 @@ footer {
 
 .testimonial-slider {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 20px;
     justify-content: center;
     align-items: stretch;
@@ -694,7 +694,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center; /* Center content */
+    text-align: center; 
 }
 
 .vendor-content h2 {
@@ -708,23 +708,23 @@ footer {
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the list items horizontally */
+    align-items: center; 
     gap: 12px;
 }
 
 .steps-list li {
     display: flex;
-    align-items: center; /* Ensures text and icon align properly */
+    align-items: center; 
     font-size: 1.1rem;
     color: #ED770B;
-    gap: 12px; /* Space between icon and text */
+    gap: 12px;
 }
 
 .steps-list li i {
     color: orange;
     font-size: 1.4rem;
-    width: 24px; /* Ensures uniform width */
-    text-align: center; /* Centers icon inside its space */
+    width: 24px;
+    text-align: center; 
 }
 
 .demo-button {
@@ -740,9 +740,9 @@ footer {
     margin-top: 20px;
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between icon and text */
+    gap: 8px; 
     margin-left: auto;
-    margin-right: auto; /* Center the button */
+    margin-right: auto; 
 }
 
 .demo-button:hover {
@@ -1147,17 +1147,17 @@ footer {
     
     .steps-list li {
         display: flex;
-        align-items: center; /* Ensures text and icon align properly */
+        align-items: center; 
         font-size: 1.1rem;
         color: #ED770B;
-        gap: 12px; /* Space between icon and text */
+        gap: 12px; 
     }
     
     .steps-list li i {
         color: orange;
         font-size: 1.4rem;
-        width: 24px; /* Ensures uniform width */
-        text-align: center; /* Centers icon inside its space */
+        width: 24px;
+        text-align: center; 
     }
       
     .demo-button {
