@@ -676,7 +676,94 @@ footer {
     color: #ED770B;
 }
 
-/* Large screens - Arrange in two rows */
+.vendor-frame {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+}
+
+.vendor-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; /* Center content */
+}
+
+.vendor-content h2 {
+    font-size: 2rem;
+    color: #ED770B;
+    margin-bottom: 20px;
+}
+
+.steps-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the list items horizontally */
+    gap: 12px;
+}
+
+.steps-list li {
+    display: flex;
+    align-items: center; /* Ensures text and icon align properly */
+    font-size: 1.1rem;
+    color: #ED770B;
+    gap: 12px; /* Space between icon and text */
+}
+
+.steps-list li i {
+    color: orange;
+    font-size: 1.4rem;
+    width: 24px; /* Ensures uniform width */
+    text-align: center; /* Centers icon inside its space */
+}
+
+.demo-button {
+    background-color: #ED770B;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: fit-content;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    margin-left: auto;
+    margin-right: auto; /* Center the button */
+}
+
+.demo-button:hover {
+    background-color: darkorange;
+}
+
+/* .vendor-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vendor-image img {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+} */
+
 @media (min-width: 1024px) {
     .testimonial-slider {
         display: grid;
@@ -709,7 +796,7 @@ footer {
     }
 }
 
-/* Mobile layout stays as it is */
+/* Mobile layout */
 @media (max-width: 768px) {
     .testimonial-slider {
         display: flex;
@@ -966,8 +1053,6 @@ footer {
         text-align: center;
     }
 
-
-
     .company-container {
         justify-content: flex-end;
         flex-direction: column;
@@ -1031,5 +1116,78 @@ footer {
 
     .social-icons {
         justify-content: center;
+    }
+
+    .vendor-frame {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .vendor-content,
+    .vendor-image {
+        width: 100%;
+    }
+
+    .vendor-content {
+        padding: 30px 20px;
+    }
+
+    .vendor-content h2 {
+        font-size: 2rem;
+    }
+
+    .steps-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .steps-list li {
+        display: flex;
+        align-items: center; /* Ensures text and icon align properly */
+        font-size: 1.1rem;
+        color: #ED770B;
+        gap: 12px; /* Space between icon and text */
+    }
+    
+    .steps-list li i {
+        color: orange;
+        font-size: 1.4rem;
+        width: 24px; /* Ensures uniform width */
+        text-align: center; /* Centers icon inside its space */
+    }
+      
+    .demo-button {
+        width: 90%;
+        max-width: 300px;
+        /* width: fit-content; */
+        margin: 20px auto 0;
+    }
+
+    /* .vendor-image {
+        height: 300px;
+    }
+
+    .vendor-image img {
+        width: 80%;
+    } */
+
+}
+
+@media screen and (max-width: 480px) {
+    .vendor-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .steps-list li {
+        font-size: 0.9rem;
+    }
+
+    .demo-button {
+        padding: 12px 20px;
+        font-size: 0.9rem;
     }
 }
