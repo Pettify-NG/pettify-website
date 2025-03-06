@@ -708,8 +708,11 @@ footer {
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: flex-start; /* Change from center to flex-start */
     gap: 12px;
+    /* Add this to center the list itself */
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .steps-list li {
@@ -718,12 +721,13 @@ footer {
     font-size: 1.1rem;
     color: #ED770B;
     gap: 12px;
+    width: 100%; /* Ensure full width */
 }
 
 .steps-list li i {
     color: orange;
     font-size: 1.4rem;
-    width: 24px;
+    min-width: 24px; /* Use min-width instead of width */
     text-align: center; 
 }
 
@@ -776,7 +780,7 @@ footer {
 
 @media (max-width: 1024px) {
     .hero h2 {
-        font-size: 50px;
+        font-size: 45px;
         color: #ED770B;
         margin-bottom: 15px;
         line-height: 1.0;
@@ -1163,8 +1167,11 @@ footer {
     .demo-button {
         width: 90%;
         max-width: 300px;
-        /* width: fit-content; */
+        width: fit-content;
         margin: 20px auto 0;
+        margin-left: auto;
+        margin-right: auto; 
+        
     }
 
     /* .vendor-image {
@@ -1211,5 +1218,7 @@ footer {
         font-size: 0.9rem;
         margin-left: auto;
         margin-right: auto; 
+        width: fit-content;
+
     }
 }

@@ -121,30 +121,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Testimonial Slider (Auto-Slide on Mobile)
+    // Testimonial Slider (Smooth Loop Animation)
     const slider = document.querySelector(".testimonial-slider");
     let index = 0;
     let interval;
-    
+
     function nextSlide() {
         index++;
         if (index >= slider.children.length) {
-            index = 0;
+            // Instead of immediately jumping back to index 0, animate smoothly
+            slider.style.transition = "transform 0.5s ease";
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            
+            // After the transition completes, quickly reset without animation
+            setTimeout(() => {
+                slider.style.transition = "none";
+                index = 0;
+                slider.style.transform = `translateX(0)`;
+                // Small delay before re-enabling transitions for next slide
+                setTimeout(() => {
+                    slider.style.transition = "transform 0.5s ease";
+                }, 50);
+            }, 500);
+            return;
         }
+        
+        // Normal slide transition
+        slider.style.transition = "transform 0.5s ease";
         slider.style.transform = `translateX(-${index * 100}%)`;
     }
-    
+
     function startSlider() {
         if (window.innerWidth < 784) {
+            // Add initial transition setting
+            slider.style.transition = "transform 0.5s ease";
             if (!interval) {
                 interval = setInterval(nextSlide, 4000); 
             }
         } else {
             clearInterval(interval);
             interval = null;
+            // Reset to first slide when switching to desktop
+            index = 0;
+            slider.style.transform = "translateX(0)";
         }
     }
-    
+
     startSlider();
     window.addEventListener("resize", startSlider);
 
@@ -163,5 +185,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
         lastWidth = currentWidth;
     });
-
 });
