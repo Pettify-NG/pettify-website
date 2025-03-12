@@ -195,10 +195,10 @@ body {
     max-width: 800px;
 }
 
-.responsive-vetImage {
+/* .responsive-vetImage {
     max-width: 300px;
     height: auto;
-}
+} */
 
 .responsive-laptopImage {
     max-width: 500px;
@@ -243,13 +243,13 @@ body {
     width: fit-content;
 }
 
-.vendor-active-btn button {
+/* .vendor-active-btn button {
     font-size: 25px;
 }
 
 .vet-active-btn button {
     font-size: 25px;
-}
+} */
 
 button .download-icon {
     width: 20px;
@@ -841,8 +841,9 @@ footer {
     }
 
     .download-active-btn,
-    .vendor-active-btn,
-    .vet-active-btn {
+    .vendor-active-btn
+    /* .vet-active-btn { */
+    {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -992,9 +993,9 @@ footer {
         cursor: not-allowed;
     }
 
-    .responsive-vetImage {
+    /* .responsive-vetImage {
         max-width: 400px;
-    }
+    } */
 
     .responsive-laptopImage {
         max-width: 400px;
@@ -1046,8 +1047,9 @@ footer {
 
     .active-text,
     .app-download,
-    .laptop-view,
-    .vet-image {
+    .laptop-view
+    /* .vet-image  */
+    {
         max-width: 100%;
         text-align: center;
     }
