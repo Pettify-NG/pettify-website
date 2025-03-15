@@ -874,10 +874,6 @@ footer {
         font-size: 2rem;
     }
 
-    .hero p {
-        font-size: 1rem;
-    }
-
     .cta-button {
         background-color: #ED770B;
         text-decoration: none;
@@ -1017,12 +1013,11 @@ footer {
 
     .hero h2,
     .download h2 {
-        font-size: 35px;
+        font-size: 30px;
         color: #ED770B;
         font-weight: bold;
     }
 
-    .hero p,
     .download p {
         padding: 10px;
         font-size: 19px;
