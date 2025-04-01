@@ -464,12 +464,12 @@ button:disabled {
     flex-shrink: 0;
     padding: 20px;
 }
-
-/* Founder's slide */
 .founder-container {
     display: flex;
     gap: 20px;
     width: 100%;
+    flex-wrap: wrap; 
+    justify-content: center;
 }
 
 .company-bio {
@@ -480,8 +480,22 @@ button:disabled {
 }
 
 .company-story {
-    flex: 2;
-    line-height: 1.5;
+    flex: 1;
+    max-width: 600px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: justify;
+}
+
+.company-story-container {
+    display: flex;
+    flex-direction: row; /* Default: Left-Right layout */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 .responsive-company-image {
@@ -794,9 +808,8 @@ footer {
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Change from center to flex-start */
+    align-items: flex-start;
     gap: 12px;
-    /* Add this to center the list itself */
     width: fit-content;
     margin: 0 auto;
 }
@@ -807,13 +820,13 @@ footer {
     font-size: 1.1rem;
     color: #ED770B;
     gap: 12px;
-    width: 100%; /* Ensure full width */
+    width: 100%; 
 }
 
 .steps-list li i {
     color: orange;
     font-size: 1.4rem;
-    min-width: 24px; /* Use min-width instead of width */
+    min-width: 24px; 
     text-align: center; 
 }
 
@@ -1145,6 +1158,10 @@ footer {
         text-align: center;
     }
 
+    .company {
+        padding: 0;
+    }
+
     .company h1 {
         font-size: 35px;
     }
@@ -1157,26 +1174,60 @@ footer {
     }
     .responsive-company-image {
         width: 100%;
-        max-width: 250px;
+        /* max-width: 250px; */
+        height: auto;
     }
     .founder-container {
+        display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: left;
+        padding: 5px;
+        gap: 20px;
     }
+    .company-bio {
+        order: 1; 
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+    }
+    
     .company-story {
-        text-align: center;
-        font-size: 20px;
+        order: 2; 
+        /* max-width: 100%; */
+        width: 80%;
+        height: fit-content;
+        text-align: left;
+        padding: 15px;
+        margin-top: 0;
     }
+    
     .company-media-icon {
         width: 35px;
         height: 35px;
-        justify-content: center;
-        align-items: center;
     }
     .team-members-container {
         flex-direction: column;
         align-items: center;
+        gap: 20px;
+    }
+
+    .team-slide {
+        flex-direction: column;
+        align-items: center;
         gap: 30px;
+    }
+    .team-member {
+        margin: 0 auto;
+    }
+
+    .scroll-indicator {
+        text-align: center;
+        margin-top: 35px;
+        color: #ED770B;
+        font-size: 16px;
+        font-weight: bold;
+        animation: pulse 2s infinite;
     }
 
     .footer-bottom,
@@ -1190,21 +1241,6 @@ footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
-    }
-
-    .company h1 {
-        font-size: 35px;
-    }
-
-    
-
-    .team-slide {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-    .team-member {
-        margin: 0 auto;
     }
 
     .questions {
