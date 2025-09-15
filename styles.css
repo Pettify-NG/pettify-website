@@ -929,7 +929,7 @@ footer {
 .popup-left {
     flex: 1;
     padding: 60px 40px 40px;
-    background: linear-gradient(135deg, #ED770B 0%, #FF8C42 100%);
+    background: linear-gradient(135deg, #ED770B 0%, #323231 100%);
     color: white;
     display: flex;
     flex-direction: column;
@@ -944,7 +944,7 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/images/pettify.png');
+    /* background: url('/images/pettify.png'); */
     opacity: 0.3;
 }
 
@@ -1083,7 +1083,7 @@ footer {
 
 /* Vendor slide specific styles */
 .vendor-slide .popup-left {
-    background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%);
+    background: linear-gradient(135deg, #323231 0%, #e97406 100%);
 }
 
 .vendor-slide .btn-primary {
@@ -1680,3 +1680,11 @@ footer {
 
     }
 }
+
+const shakeCSS = `
+@keyframes gentleShake {
+    0%, 100% { transform: scale(1) translateY(0) rotate(0deg); }
+    25% { transform: scale(1.02) translateY(-2px) rotate(0.5deg); }
+    75% { transform: scale(1.02) translateY(-2px) rotate(-0.5deg); }
+}
+`;

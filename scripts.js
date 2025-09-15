@@ -1,48 +1,42 @@
-// Popup functionality
+// Popup functionality - BRUTAL AD VERSION (Shows every time!)
 let currentSlide = 0;
 const slides = document.querySelectorAll('.popup-slide');
 const dots = document.querySelectorAll('.nav-dot');
 
-// Show popup when page loads
+// Show popup when page loads - NO COOKIE RESTRICTIONS
 window.addEventListener('load', function() {
-    // Check if popup should be shown (not shown in last 24 hours)
-    if (!checkPopupCookie()) {
-        setTimeout(() => {
-            const popupOverlay = document.getElementById('popupOverlay');
-            if (popupOverlay) {
-                popupOverlay.classList.add('active');
-            }
-        }, 1500); // Show popup 1.5 seconds after page load
-    }
+    setTimeout(() => {
+        const popupOverlay = document.getElementById('popupOverlay');
+        if (popupOverlay) {
+            popupOverlay.classList.add('active');
+        }
+    }, 1500); // Show popup 1.5 seconds after EVERY page load
 });
 
-// Close popup functionality
+// Close popup functionality - NO COOKIE SETTING
 const closeBtn = document.getElementById('closeBtn');
 const popupOverlay = document.getElementById('popupOverlay');
 
 if (closeBtn) {
     closeBtn.addEventListener('click', function() {
-        setPopupCookie();
-        closePopup();
+        closePopup(); // Just close, no cookie setting
     });
 }
 
 if (popupOverlay) {
     popupOverlay.addEventListener('click', function(e) {
         if (e.target === this) {
-            setPopupCookie();
-            closePopup();
+            closePopup(); // Just close, no cookie setting
         }
     });
 }
 
-// Close popup with Escape key
+// Close popup with Escape key - NO COOKIE SETTING
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         const popupOverlay = document.getElementById('popupOverlay');
         if (popupOverlay && popupOverlay.classList.contains('active')) {
-            setPopupCookie();
-            closePopup();
+            closePopup(); // Just close, no cookie setting
         }
     }
 });
@@ -84,18 +78,7 @@ function goToSlide(index) {
     if (dots[currentSlide]) dots[currentSlide].classList.add('active');
 }
 
-// Cookie functions to prevent showing popup too frequently
-function setPopupCookie() {
-    const expiryTime = new Date();
-    expiryTime.setTime(expiryTime.getTime() + (24 * 60 * 60 * 1000)); // 24 hours
-    document.cookie = `pettifyPopupShown=true; expires=${expiryTime.toUTCString()}; path=/`;
-}
-
-function checkPopupCookie() {
-    return document.cookie.split(';').some((item) => item.trim().startsWith('pettifyPopupShown='));
-}
-
-// Auto-advance slides every 10 seconds (optional - you can remove this if you don't want auto-advance)
+// Auto-advance slides every 8 seconds (more aggressive timing)
 let autoSlideInterval = setInterval(() => {
     const slides = document.querySelectorAll('.popup-slide');
     const popupOverlay = document.getElementById('popupOverlay');
@@ -105,18 +88,50 @@ let autoSlideInterval = setInterval(() => {
         if (currentSlide === slides.length - 1) {
             setTimeout(() => {
                 goToSlide(0);
-            }, 5000);
+            }, 4000); // Shorter wait time before cycling back
         }
     }
-}, 10000);
+}, 8000); // Faster auto-advance
 
 // Pause auto-advance when user interacts with popup
 const popupContainer = document.querySelector('.popup-container');
 if (popupContainer) {
     popupContainer.addEventListener('click', () => {
         clearInterval(autoSlideInterval);
+        // Restart auto-advance after 5 seconds of no interaction
+        setTimeout(() => {
+            autoSlideInterval = setInterval(() => {
+                const slides = document.querySelectorAll('.popup-slide');
+                const popupOverlay = document.getElementById('popupOverlay');
+                
+                if (popupOverlay && popupOverlay.classList.contains('active')) {
+                    nextSlide();
+                    if (currentSlide === slides.length - 1) {
+                        setTimeout(() => {
+                            goToSlide(0);
+                        }, 4000);
+                    }
+                }
+            }, 8000);
+        }, 5000);
     });
 }
+
+// Optional: Add a subtle shake animation when popup appears (more attention-grabbing)
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        const popupContainer = document.querySelector('.popup-container');
+        if (popupContainer) {
+            popupContainer.style.animation = 'gentleShake 0.5s ease-in-out';
+        }
+    }, 2000);
+});
+
+
+// Inject the shake CSS
+const styleSheet = document.createElement('style');
+styleSheet.textContent = shakeCSS;
+document.head.appendChild(styleSheet);
 
 
 document.addEventListener("DOMContentLoaded", () => {
