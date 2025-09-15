@@ -1,3 +1,124 @@
+// Popup functionality
+let currentSlide = 0;
+const slides = document.querySelectorAll('.popup-slide');
+const dots = document.querySelectorAll('.nav-dot');
+
+// Show popup when page loads
+window.addEventListener('load', function() {
+    // Check if popup should be shown (not shown in last 24 hours)
+    if (!checkPopupCookie()) {
+        setTimeout(() => {
+            const popupOverlay = document.getElementById('popupOverlay');
+            if (popupOverlay) {
+                popupOverlay.classList.add('active');
+            }
+        }, 1500); // Show popup 1.5 seconds after page load
+    }
+});
+
+// Close popup functionality
+const closeBtn = document.getElementById('closeBtn');
+const popupOverlay = document.getElementById('popupOverlay');
+
+if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+        setPopupCookie();
+        closePopup();
+    });
+}
+
+if (popupOverlay) {
+    popupOverlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+            setPopupCookie();
+            closePopup();
+        }
+    });
+}
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const popupOverlay = document.getElementById('popupOverlay');
+        if (popupOverlay && popupOverlay.classList.contains('active')) {
+            setPopupCookie();
+            closePopup();
+        }
+    }
+});
+
+function closePopup() {
+    const popupOverlay = document.getElementById('popupOverlay');
+    if (popupOverlay) {
+        popupOverlay.classList.remove('active');
+    }
+}
+
+// Slide navigation functions
+function nextSlide() {
+    const slides = document.querySelectorAll('.popup-slide');
+    if (currentSlide < slides.length - 1) {
+        goToSlide(currentSlide + 1);
+    }
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+    }
+}
+
+function goToSlide(index) {
+    const slides = document.querySelectorAll('.popup-slide');
+    const dots = document.querySelectorAll('.nav-dot');
+    
+    if (slides.length === 0 || dots.length === 0) return;
+    
+    // Remove active class from current slide and dot
+    if (slides[currentSlide]) slides[currentSlide].classList.remove('active');
+    if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+    
+    // Add active class to new slide and dot
+    currentSlide = index;
+    if (slides[currentSlide]) slides[currentSlide].classList.add('active');
+    if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+}
+
+// Cookie functions to prevent showing popup too frequently
+function setPopupCookie() {
+    const expiryTime = new Date();
+    expiryTime.setTime(expiryTime.getTime() + (24 * 60 * 60 * 1000)); // 24 hours
+    document.cookie = `pettifyPopupShown=true; expires=${expiryTime.toUTCString()}; path=/`;
+}
+
+function checkPopupCookie() {
+    return document.cookie.split(';').some((item) => item.trim().startsWith('pettifyPopupShown='));
+}
+
+// Auto-advance slides every 10 seconds (optional - you can remove this if you don't want auto-advance)
+let autoSlideInterval = setInterval(() => {
+    const slides = document.querySelectorAll('.popup-slide');
+    const popupOverlay = document.getElementById('popupOverlay');
+    
+    if (popupOverlay && popupOverlay.classList.contains('active')) {
+        nextSlide();
+        if (currentSlide === slides.length - 1) {
+            setTimeout(() => {
+                goToSlide(0);
+            }, 5000);
+        }
+    }
+}, 10000);
+
+// Pause auto-advance when user interacts with popup
+const popupContainer = document.querySelector('.popup-container');
+if (popupContainer) {
+    popupContainer.addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+    });
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
     // FAQ Toggle Functionality
     const questions = document.querySelectorAll(".question");

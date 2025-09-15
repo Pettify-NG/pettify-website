@@ -10,6 +10,86 @@
         <link rel="stylesheet" href="styles.css">
     </head>
 <body>
+    <!-- Popup Overlay -->
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup-container">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        
+        <!-- Buyers Slide -->
+        <div class="popup-slide active" id="buyersSlide">
+            <div class="popup-content">
+                <div class="popup-left">
+                    <div class="popup-logo"></div>
+                    <h2 class="popup-title">Find Your Next Best Friend in One Tap</h2>
+                    <p class="popup-subtitle">Thousands of healthy, adorable pets are waiting for you on the Pettify app.</p>
+                    
+                    <ul class="popup-features">
+                        <li>Browse verified sellers & vaccine-certified pets</li>
+                        <li>Easy delivery options to your doorstep</li>
+                        <li>Safe & secure payment methods</li>
+                        <li>24/7 customer support</li>
+                    </ul>
+                    
+                    <div class="popup-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" class="popup-btn btn-primary">
+                            Download App
+                        </a>
+                        <!-- <button class="popup-btn btn-secondary" onclick="nextSlide()">
+                            I'm a Seller
+                        </button> -->
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <img src="images/buyers-preview.png" alt="Pet buyers using Pettify app" class="popup-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
+                        Buyer App Preview<br>
+                        <small>(Add your buyer image here)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vendors Slide -->
+        <div class="popup-slide vendor-slide" id="vendorsSlide">
+            <div class="popup-content">
+                <div class="popup-left">
+                    <div class="popup-logo"></div>
+                    <h2 class="popup-title">Grow Your Pet Business Today</h2>
+                    <p class="popup-subtitle">Join thousands of successful breeders and pet sellers on Nigeria's #1 pet marketplace.</p>
+                    
+                    <ul class="popup-features">
+                        <li>List unlimited pets & accessories</li>
+                        <li>Reach customers nationwide</li>
+                        <li>Secure payment processing</li>
+                        <li>Real-time sales analytics</li>
+                    </ul>
+                    
+                    <div class="popup-buttons">
+                        <a href="https://dashboard.pettify.co/register" target="_blank" class="popup-btn btn-primary">
+                            Start Selling
+                        </a>
+                        <!-- <button class="popup-btn btn-secondary" onclick="prevSlide()">
+                            I'm a Buyer
+                        </button> -->
+                    </div>
+                </div>
+                <div class="popup-right">
+                    <img src="images/vendor-preview.png" alt="Vendor dashboard preview" class="popup-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
+                        Vendor Dashboard Preview<br>
+                        <small>(Add your vendor image here)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation dots -->
+        <div class="popup-nav">
+            <div class="nav-dot active" onclick="goToSlide(0)"></div>
+            <div class="nav-dot" onclick="goToSlide(1)"></div>
+        </div>
+    </div>
+</div>
     <header>
         <div class="navbar">
             <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
