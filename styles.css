@@ -929,7 +929,7 @@ footer {
 .popup-left {
     flex: 1;
     padding: 60px 40px 40px;
-    background: linear-gradient(135deg, #ED770B 0%, #323231 100%);
+    background: linear-gradient(135deg, #ED770B 0%, #FF8C42 100%);
     color: white;
     display: flex;
     flex-direction: column;
@@ -944,7 +944,6 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    /* background: url('/images/pettify.png'); */
     opacity: 0.3;
 }
 
@@ -958,11 +957,19 @@ footer {
     justify-content: center;
     margin-bottom: 20px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    background-image: url('images/pettify.png');
+    background-size: 80px 80px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.popup-logo::after {
-    content: '🐾';
-    font-size: 28px;
+.popup-logo img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    content: url("/images/pettify.png");
 }
 
 .popup-title {
@@ -1083,11 +1090,13 @@ footer {
 
 /* Vendor slide specific styles */
 .vendor-slide .popup-left {
-    background: linear-gradient(135deg, #323231 0%, #e97406 100%);
+    color: #ED770B;
+    background: linear-gradient(135deg, #eaeae8 0%, #ffffff 100%);
 }
 
 .vendor-slide .btn-primary {
-    color: #2C3E50;
+    color: white;
+    background: #ED770B
 }
 
 /* Navigation dots */
