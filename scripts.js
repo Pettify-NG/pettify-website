@@ -1,42 +1,40 @@
-// Popup functionality - BRUTAL AD VERSION (Shows every time!)
+// ===== POPUP FUNCTIONALITY =====
 let currentSlide = 0;
-const slides = document.querySelectorAll('.popup-slide');
-const dots = document.querySelectorAll('.nav-dot');
 
-// Show popup when page loads - NO COOKIE RESTRICTIONS
+// Show popup when page loads
 window.addEventListener('load', function() {
     setTimeout(() => {
         const popupOverlay = document.getElementById('popupOverlay');
         if (popupOverlay) {
             popupOverlay.classList.add('active');
         }
-    }, 1500); // Show popup 1.5 seconds after EVERY page load
+    }, 1500);
 });
 
-// Close popup functionality - NO COOKIE SETTING
+// Close popup functionality
 const closeBtn = document.getElementById('closeBtn');
 const popupOverlay = document.getElementById('popupOverlay');
 
 if (closeBtn) {
     closeBtn.addEventListener('click', function() {
-        closePopup(); // Just close, no cookie setting
+        closePopup();
     });
 }
 
 if (popupOverlay) {
     popupOverlay.addEventListener('click', function(e) {
         if (e.target === this) {
-            closePopup(); // Just close, no cookie setting
+            closePopup();
         }
     });
 }
 
-// Close popup with Escape key - NO COOKIE SETTING
+// Close popup with Escape key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         const popupOverlay = document.getElementById('popupOverlay');
         if (popupOverlay && popupOverlay.classList.contains('active')) {
-            closePopup(); // Just close, no cookie setting
+            closePopup();
         }
     }
 });
@@ -68,17 +66,15 @@ function goToSlide(index) {
     
     if (slides.length === 0 || dots.length === 0) return;
     
-    // Remove active class from current slide and dot
     if (slides[currentSlide]) slides[currentSlide].classList.remove('active');
     if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
     
-    // Add active class to new slide and dot
     currentSlide = index;
     if (slides[currentSlide]) slides[currentSlide].classList.add('active');
     if (dots[currentSlide]) dots[currentSlide].classList.add('active');
 }
 
-// Auto-advance slides every 8 seconds (more aggressive timing)
+// Auto-advance slides
 let autoSlideInterval = setInterval(() => {
     const slides = document.querySelectorAll('.popup-slide');
     const popupOverlay = document.getElementById('popupOverlay');
@@ -88,17 +84,16 @@ let autoSlideInterval = setInterval(() => {
         if (currentSlide === slides.length - 1) {
             setTimeout(() => {
                 goToSlide(0);
-            }, 4000); // Shorter wait time before cycling back
+            }, 4000);
         }
     }
-}, 8000); // Faster auto-advance
+}, 8000);
 
-// Pause auto-advance when user interacts with popup
+// Pause auto-advance when user interacts
 const popupContainer = document.querySelector('.popup-container');
 if (popupContainer) {
     popupContainer.addEventListener('click', () => {
         clearInterval(autoSlideInterval);
-        // Restart auto-advance after 5 seconds of no interaction
         setTimeout(() => {
             autoSlideInterval = setInterval(() => {
                 const slides = document.querySelectorAll('.popup-slide');
@@ -117,7 +112,7 @@ if (popupContainer) {
     });
 }
 
-// Optional: Add a subtle shake animation when popup appears (more attention-grabbing)
+// Shake animation
 window.addEventListener('load', function() {
     setTimeout(() => {
         const popupContainer = document.querySelector('.popup-container');
@@ -127,13 +122,7 @@ window.addEventListener('load', function() {
     }, 2000);
 });
 
-
-// Inject the shake CSS
-const styleSheet = document.createElement('style');
-styleSheet.textContent = shakeCSS;
-document.head.appendChild(styleSheet);
-
-
+// ===== MAIN FUNCTIONALITY (Wait for DOM) =====
 document.addEventListener("DOMContentLoaded", () => {
     // FAQ Toggle Functionality
     const questions = document.querySelectorAll(".question");
@@ -148,19 +137,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Tab Navigation
+    // Tab Navigation - FIXED VERSION
     const tabs = document.querySelectorAll(".tab");
     const sections = document.querySelectorAll(".tab-content section");
 
     tabs.forEach((tab) => {
         tab.addEventListener("click", function () {
-            tabs.forEach((tab) => tab.classList.remove("active"));
+            // Remove active from all tabs
+            tabs.forEach((t) => t.classList.remove("active"));
+            
+            // Remove active from all sections
             sections.forEach((section) => {
                 section.classList.remove("active-tab");
                 section.classList.add("inactive-tab");
             });
+            
+            // Add active to clicked tab
             this.classList.add("active");
-            const target = document.querySelector(this.dataset.target);
+            
+            // Show target section
+            const targetSelector = this.dataset.target;
+            const target = document.querySelector(targetSelector);
+            
             if (target) {
                 target.classList.add("active-tab");
                 target.classList.remove("inactive-tab");
@@ -168,22 +166,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Mobile Menu Toggle
+    // Mobile Menu Toggle - FIXED VERSION
     const hamburger = document.getElementById("hamburger");
     const navbarMenu = document.getElementById("navbar-menu");
     const closeButton = document.getElementById("close-button");
 
     if (hamburger && navbarMenu) {
-        hamburger.addEventListener("click", () => {
-            navbarMenu.classList.toggle("active");
+        hamburger.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navbarMenu.classList.add("active");
         });
     }
 
     if (closeButton && navbarMenu) {
-        closeButton.addEventListener("click", () => {
+        closeButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             navbarMenu.classList.remove("active");
         });
     }
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+        if (navbarMenu && 
+            navbarMenu.classList.contains("active") && 
+            !navbarMenu.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+            navbarMenu.classList.remove("active");
+        }
+    });
 
     // Active Navigation Link Highlight
     document.querySelectorAll(".navbar a").forEach((link) => {
@@ -233,17 +245,18 @@ document.addEventListener("DOMContentLoaded", () => {
     function scrollToDownload() {
         const downloadSection = document.querySelector(".download");
         if (downloadSection) {
-            navbarMenu.classList.remove("active");
+            if (navbarMenu) {
+                navbarMenu.classList.remove("active");
+            }
             downloadSection.scrollIntoView({ behavior: "smooth" });
         }
     }
 
-    const ctaButtons = document.querySelectorAll(".cta-button");
-    const ctaButton = document.querySelectorAll(".bcta-button");
+    // Make scrollToDownload globally accessible
+    window.scrollToDownload = scrollToDownload;
+
+    const ctaButtons = document.querySelectorAll(".cta-button, .bcta-button");
     ctaButtons.forEach((button) => {
-        button.addEventListener("click", scrollToDownload);
-    });
-    ctaButton.forEach((button) => {
         button.addEventListener("click", scrollToDownload);
     });
 
@@ -251,72 +264,74 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.querySelectorAll(".navbar-menu a");
     navLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
-            if (window.innerWidth <= 768 && !pricingDropdown.contains(e.target) && !pricingLink.contains(e.target)) {
-                navbarMenu.classList.remove("active");
+            if (window.innerWidth <= 768 && 
+                pricingDropdown && 
+                !pricingDropdown.contains(e.target) && 
+                pricingLink && 
+                !pricingLink.contains(e.target)) {
+                if (navbarMenu) {
+                    navbarMenu.classList.remove("active");
+                }
             }
         });
     });
 
-    // Testimonial Slider (Smooth Loop Animation)
+    // Testimonial Slider
     const slider = document.querySelector(".testimonial-slider");
-    let index = 0;
-    let interval;
+    if (slider) {
+        let index = 0;
+        let interval;
 
-    function nextSlide() {
-        index++;
-        if (index >= slider.children.length) {
-            // Instead of immediately jumping back to index 0, animate smoothly
+        function nextSlide() {
+            index++;
+            if (index >= slider.children.length) {
+                slider.style.transition = "transform 0.5s ease";
+                slider.style.transform = `translateX(-${index * 100}%)`;
+                
+                setTimeout(() => {
+                    slider.style.transition = "none";
+                    index = 0;
+                    slider.style.transform = `translateX(0)`;
+                    setTimeout(() => {
+                        slider.style.transition = "transform 0.5s ease";
+                    }, 50);
+                }, 500);
+                return;
+            }
+            
             slider.style.transition = "transform 0.5s ease";
             slider.style.transform = `translateX(-${index * 100}%)`;
-            
-            // After the transition completes, quickly reset without animation
-            setTimeout(() => {
-                slider.style.transition = "none";
+        }
+
+        function startSlider() {
+            if (window.innerWidth < 784) {
+                slider.style.transition = "transform 0.5s ease";
+                if (!interval) {
+                    interval = setInterval(nextSlide, 4000); 
+                }
+            } else {
+                clearInterval(interval);
+                interval = null;
                 index = 0;
-                slider.style.transform = `translateX(0)`;
-                // Small delay before re-enabling transitions for next slide
-                setTimeout(() => {
-                    slider.style.transition = "transform 0.5s ease";
-                }, 50);
-            }, 500);
-            return;
-        }
-        
-        // Normal slide transition
-        slider.style.transition = "transform 0.5s ease";
-        slider.style.transform = `translateX(-${index * 100}%)`;
-    }
-
-    function startSlider() {
-        if (window.innerWidth < 784) {
-            // Add initial transition setting
-            slider.style.transition = "transform 0.5s ease";
-            if (!interval) {
-                interval = setInterval(nextSlide, 4000); 
+                slider.style.transform = "translateX(0)";
             }
-        } else {
-            clearInterval(interval);
-            interval = null;
-            // Reset to first slide when switching to desktop
-            index = 0;
-            slider.style.transform = "translateX(0)";
         }
+
+        startSlider();
+        window.addEventListener("resize", startSlider);
     }
 
-    startSlider();
-    window.addEventListener("resize", startSlider);
-
-    // Auto Refresh Page on Mobile <-> Desktop Switch
+    // Auto Refresh on Viewport Change
     let lastWidth = window.innerWidth;
 
     window.addEventListener("resize", function () {
         let currentWidth = window.innerWidth;
 
         if (
-            (lastWidth < 768 && currentWidth >= 1024) || // Mobile to Desktop
-            (lastWidth >= 1024 && currentWidth < 768)   // Desktop to Mobile
+            (lastWidth < 768 && currentWidth >= 1024) ||
+            (lastWidth >= 1024 && currentWidth < 768)
         ) {
-            location.reload(); // Reload page
+            location.reload();
         }
 
         lastWidth = currentWidth;
