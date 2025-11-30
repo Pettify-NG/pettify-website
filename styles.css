@@ -1322,13 +1322,17 @@ footer {
 
     .navbar {
         position: fixed;
-        top: 10;
+        top: 0;
         left: 0;
         width: 100%;
-        background-color: #3C3D37;
+        background-color: #FFFBEC80;
+        backdrop-filter: blur(10px);
         z-index: 1000;
         padding: 10px 20px;
         box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .navbar-menu {
@@ -1347,6 +1351,7 @@ footer {
 
     .navbar-menu.active {
         display: flex;
+        
     }
 
     .navbar ul {

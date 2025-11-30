@@ -1,166 +1,1175 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Buy & Sell Pets in Nigeria | No.1 Pet Marketplace | Find Pet Sellers Near You</title>
-        <link rel="icon" href="images/pettify.png" type="image/png" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pettify - Nigeria's #1 Pet Marketplace</title>
+    <link rel="icon" href="images/pettify.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ED770B;
+            --primary-dark: #d96a09;
+            --primary-light: #ff8c2e;
+            --bg-cream: #FFFBEC;
+            --text-dark: #2C2C2C;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 251, 236, 0.9);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(255, 251, 236, 0.95);
+        }
+
+        .logo {
+            height: 45px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(237, 119, 11, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(237, 119, 11, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(237, 119, 11, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: slideUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-checklist {
+            list-style: none;
+            margin: 2rem 0;
+            animation: slideUp 0.8s ease 0.4s backwards;
+        }
+
+        .hero-checklist li {
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-checklist li::before {
+            content: '✓';
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            animation: slideUp 0.8s ease 0.6s backwards;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(237, 119, 11, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(237, 119, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideUp 0.8s ease 0.4s backwards;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.03) rotate(1deg);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: white;
+            padding: 3rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, white 0%, var(--bg-cream) 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(237, 119, 11, 0.15);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .testimonials-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #fff 0%, var(--bg-cream) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 5rem 5%;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -200px;
+            left: -100px;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #2C2C2C;
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+        }
+
+        /* Tab Section Styles */
+        .download {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            background: var(--bg-cream);
+            padding: 0.5rem;
+            border-radius: 50px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tab {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(237, 119, 11, 0.3);
+        }
+
+        .tab-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .active-tab {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .inactive-tab {
+            display: none;
+        }
+
+        .active-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .active-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .download-active-btn,
+        .vendor-active-btn {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .app-btn,
+        .vendor-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(237, 119, 11, 0.3);
+            text-decoration: none;
+        }
+
+        .app-btn:hover:not(:disabled),
+        .vendor-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(237, 119, 11, 0.4);
+        }
+
+        .app-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .responsive-appPreview,
+        .responsive-laptopImage {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        /* Company Section Styles */
+        .company {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, white 0%, var(--bg-cream) 100%);
+        }
+
+        .team-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2rem;
+            padding: 2rem 0;
+            scroll-behavior: smooth;
+        }
+
+        .team-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .team-slider::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .team-slider::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .team-slide {
+            min-width: 100%;
+            scroll-snap-align: start;
+        }
+
+        .founder-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .company-bio {
+            text-align: center;
+        }
+
+        .company-bio h2 {
+            color: var(--primary);
+            margin: 1rem 0 0.5rem;
+        }
+
+        .company-bio h3 {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .responsive-company-image {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .company-story {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .company-story p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        .co-founders-slide {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+
+        .team-members-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .team-member {
+            text-align: center;
+            color: white;
+        }
+
+        .team-member h2 {
+            color: white !important;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .team-member h3 {
+            color: rgba(255,255,255,0.9) !important;
+            margin-bottom: 1rem;
+        }
+
+        .team-member-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .media-icon {
+            font-size: 35px;
+            color: white;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--primary);
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        /* Pricing Dropdown */
+        .pricing-dropdown-wrapper {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            z-index: 1000;
+            min-width: 400px;
+            max-width: 500px;
+            margin-top: 1rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .dropdown-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .dropdown-content h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .dropdown-content h4 {
+            color: var(--primary);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .dropdown-content p {
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-section {
+            background: var(--bg-cream);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .disclaimer {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+
+        /* FAQ Styles */
+        .faqs {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .faq-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .questions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .question {
+            padding: 1.2rem 1.5rem;
+            background: var(--bg-cream);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .question:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .question.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .answers {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+        }
+
+        .answer {
+            display: none;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .answer.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Vendor Frame Styles */
+        .vendor-frame {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
+            padding: 5rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+        }
+
+        .vendor-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            margin: 2rem auto;
+            max-width: 400px;
+        }
+
+        .steps-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .steps-list i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .demo-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(237, 119, 11, 0.3);
+        }
+
+        .demo-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(237, 119, 11, 0.4);
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 251, 236, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.4s ease;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+
+            .active-tab {
+                grid-template-columns: 1fr;
+            }
+
+            .founder-container {
+                grid-template-columns: 1fr;
+            }
+
+            .team-members-container {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-container {
+                grid-template-columns: 1fr;
+            }
+
+            .dropdown-content {
+                position: fixed;
+                left: 5%;
+                right: 5%;
+                top: 70px;
+                transform: none;
+                min-width: unset;
+                width: 90%;
+                max-height: calc(100vh - 90px);
+                overflow-y: auto;
+                margin: 0;
+                padding: 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .dropdown-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .dropdown-content h4 {
+                font-size: 1.1rem;
+            }
+
+            .dropdown-content p {
+                font-size: 0.95rem;
+            }
+
+            .vendor-frame {
+                padding: 3rem 2rem;
+            }
+
+            .tabs {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
-    <!-- Popup Overlay -->
-<div class="popup-overlay" id="popupOverlay">
-    <div class="popup-container">
-        <button class="close-btn" id="closeBtn">&times;</button>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
         
-        <!-- Buyers Slide -->
-        <div class="popup-slide active" id="buyersSlide">
-            <div class="popup-content">
-                <div class="popup-left">
-                    <div class="popup-logo"></div>
-                    <h2 class="popup-title">Find Your Next Best Friend in One Tap</h2>
-                    <p class="popup-subtitle">Thousands of healthy, adorable pets are waiting for you on the Pettify app.</p>
-                    
-                    <ul class="popup-features">
-                        <li>Browse verified sellers & vaccine-certified pets</li>
-                        <li>Easy delivery options to your doorstep</li>
-                        <li>Safe & secure payment methods</li>
-                        <li>24/7 customer support</li>
-                    </ul>
-                    
-                    <div class="popup-buttons">
-                        <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" class="popup-btn btn-primary">
-                            Download App
-                        </a>
-                        <!-- <button class="popup-btn btn-secondary" onclick="nextSlide()">
-                            I'm a Seller
-                        </button> -->
+        <ul class="nav-links">
+            <li><a href="listings.html">View Listings</a></li>
+            <li><a href="#features">Features</a></li>
+            <li class="pricing-dropdown-wrapper">
+                <a href="#" id="pricing-link">Pricing</a>
+                <div id="pricing-dropdown" class="dropdown-content">
+                    <h3>Our transaction fee</h3>
+                    <p>Using Pettify is free for LIFE. We only make money when you start making money. We charge a little transaction fee. This helps us keep the lights on and cover payment processor fees. Don't worry about any monthly fees or any hidden fee.</p>
+                    <div class="pricing-section">
+                        <h4>For Vendors/Breeders/Pet sellers:</h4>
+                        <p>We charge 9% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
                     </div>
-                </div>
-                <div class="popup-right">
-                    <img src="images/buyers-preview.png" alt="Pet buyers using Pettify app" class="popup-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none;">
-                        Buyer App Preview<br>
-                        <small>(Add your buyer image here)</small>
+                    <!-- <div class="pricing-section">
+                        <h4>For Vets:</h4>
+                        <p>We charge 4% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
+                    </div> -->
+                    <div class="pricing-section">
+                        <h4>For Buyers:</h4>
+                        <p>We charge 1% of product/pet/accessories and vet booking as service fee. No other fee is required.</p>
                     </div>
+                    <p class="disclaimer"><strong>Disclaimer:</strong> Depending on the seller, delivery fee may apply when you want to purchase. This does not come to us as Pettify do not determine the delivery fee of the seller. Some sellers may offer free delivery while some don't.</p>
                 </div>
-            </div>
-        </div>
+            </li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <a href="https://dashboard.pettify.co/register"><button class="cta-btn">Get Started</button></a>
+        </ul>
 
-        <!-- Vendors Slide -->
-        <div class="popup-slide vendor-slide" id="vendorsSlide">
-            <div class="popup-content">
-                <div class="popup-left">
-                    <div class="popup-logo"></div>
-                    <h2 class="popup-title">Grow Your Pet Business Today</h2>
-                    <p class="popup-subtitle">Join thousands of successful breeders and pet sellers on Nigeria's #1 pet marketplace.</p>
-                    
-                    <ul class="popup-features">
-                        <li>List unlimited pets & accessories</li>
-                        <li>Reach customers nationwide</li>
-                        <li>Secure payment processing</li>
-                        <li>Real-time sales analytics</li>
-                    </ul>
-                    
-                    <div class="popup-buttons">
-                        <a href="https://dashboard.pettify.co/register" target="_blank" class="popup-btn btn-primary">
-                            Start Selling
-                        </a>
-                        <!-- <button class="popup-btn btn-secondary" onclick="prevSlide()">
-                            I'm a Buyer
-                        </button> -->
-                    </div>
-                </div>
-                <div class="popup-right">
-                    <img src="images/vendor-preview.png" alt="Vendor dashboard preview" class="popup-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none;">
-                        Vendor Dashboard Preview<br>
-                        <small>(Add your vendor image here)</small>
-                    </div>
-                </div>
-            </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+    </nav>
 
-        <!-- Navigation dots -->
-        <div class="popup-nav">
-            <div class="nav-dot active" onclick="goToSlide(0)"></div>
-            <div class="nav-dot" onclick="goToSlide(1)"></div>
-        </div>
-    </div>
-</div>
-    <header>
-        <div class="navbar">
-            <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
-            <nav>
-                <div class="hamburger" id="hamburger">&#9776;</div>
-                <div class="navbar-menu" id="navbar-menu">
-                    <div class="menu-header">
-                        <div class="close-button" id="close-button">&times;</div>
-                        <img src="images/nav_logo.png" alt="Pettify Logo" class="nav-logo">
-                        <button class="cta-button" onclick="scrollToDownload()">Create Account</button>
-                    </div>
-                    <div style="height: 1px; background-color: #ED770B; margin: 20px 0;"></div>
-                    <ul>
-                        <li>
-                            <a href="#" id="pricing-link">Pricing</a>
-                            <div id="pricing-dropdown" class="dropdown-content">
-                                <h1>Our transaction fee</h1>
-                                <p>Using Pettify is free for LIFE. We only make money when you start making money. We charge a little transaction fee. This helps us keep the lights on and cover payment processor fees. Don't worry about any monthly fees or any hidden fee.</p>
-                                <div>
-                                    <h2>For Vendors/Breeders/Pet sellers:</h2>
-                                    <p>We charge 9% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
-                                </div>
-                                <div>
-                                    <h2>For Vets:</h2>
-                                    <p>We charge 4% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
-                                </div>
-                                <div>
-                                    <h2>For Buyers:</h2>
-                                    <p>We charge 1% of product/pet/accessories and vet booking as service fee. No other fee is required.</p>
-                                </div>
-                                <p class="disclaimer"><strong>Disclaimer:</strong> Depending on the seller, delivery fee may apply when you want to purchase. This does not come to us as Pettify do not determine the delivery fee of the seller. Some sellers may offer free delivery while some don't.</p>
-                            </div>
-                        </li>
-                        <li><a href="#company">Company</a></li>
-                        <li><a href="#FAQS">FAQs</a></li>
-                        <!-- <li><a href="#blog">Blog</a></li> -->
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- <a href="signup.html" class="cta-button-desktop"> -->
-                <button class="bcta-button" onclick="scrollToDownload()">Create a Free Account</button>
-            </a>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h2>Buy & Sell Pets With Ease</h2>
-                <p>
-                    Pettify is Nigeria's leading online marketplace for pets and pet accessories.
-                </p>
-                <ul class="hero-questions">
-                    <li>Are you a breeder or vendor looking to grow your business?</li>
-                    <li>A remote worker or creative in search of a loyal work buddy?</li>
-                    <li>A family looking for the perfect new best friend?</li>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Buy & Sell Pets With Ease</h1>
+                <p>Nigeria's leading online marketplace connecting pet lovers with trusted breeders and vendors.</p>
+                
+                <ul class="hero-checklist">
+                    <li>Perfect for breeders looking to grow their business</li>
+                    <li>Find your ideal companion from verified sellers</li>
+                    <li>Safe, secure, and stress-free pet transactions</li>
                 </ul>
-                <p>With Pettify, buying and selling pets is easy, safe, and stress-free.</p>
+
+                <div class="hero-buttons">
+                    <a href="listings.html"><button class="btn-primary">Browse Pets</button></a>
+                    <a href="https://dashboard.pettify.co/register" target="_blank"><button class="btn-secondary">Start Selling</button></a>
+                </div>
             </div>
+
             <div class="hero-image">
-                <img src="images/hero_image.jpg" alt="Woman with a dog" class="responsive-womanImage">
+                <img src="images/hero_image.jpg" alt="Woman with pet">
             </div>
         </div>
     </section>
 
+    <!-- Stats Section -->
+  <section class="stats">
+    <!-- <div class="stat-item">
+        <span class="stat-number">2K+</span>
+        <span class="stat-label">Active Buyers Daily</span>
+    </div> -->
+    <div class="stat-item">
+        <span class="stat-number">100+</span>
+        <span class="stat-label">Trusted Sellers</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Pets Listed</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Verified Listings</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">Customer Support</span>
+    </div>
+</section>
+
+    <!-- Tab Section -->
     <section class="download">
         <div class="tabs">
             <button class="tab active" data-target="#customers">Customers</button>
             <button class="tab" data-target="#vendors">Vendors</button>
-            <!-- <button class="tab" data-target="#vet">Vet</button> -->
         </div>
 
         <div class="tab-content">
@@ -170,14 +1179,12 @@
                     <h2>Download the App</h2>
                     <p>Ready to find your pawfect companion? Download the Pettify app on Google Play and shop with trusted breeders and sellers near you. Your next best friend is just a click away.</p>
                     <div class="download-active-btn">
-                        <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank">
-                            <button>
-                                <img src="images/google-play.png" alt="Google Play" class="download-icon" />
-                                Download Now on Google Play
-                            </button>
-                        </a>
-                        <button disabled>
-                            <img src="images/app-store.png" alt="App Store" class="download-icon" />
+                        <button class="app-btn" onclick="window.open('https://play.google.com/store/apps/details?id=com.pettify.app', '_blank')">
+                            <i class="fab fa-google-play"></i>
+                            Download Now on Google Play
+                        </button>
+                        <button class="app-btn" disabled>
+                            <i class="fab fa-app-store"></i>
                             Coming Soon on App Store
                         </button>
                     </div>
@@ -193,36 +1200,19 @@
                     <h2>Create a free account</h2>
                     <p>Are you a breeder or pet vendor? Join Pettify today to list your pets, pet accessories and connect with thousands of eager buyers. It's easy, secure and the best way to reach pet lovers near you.</p>
                     <div class="vendor-active-btn">
-                        <a href="https://dashboard.pettify.co/register" target="_blank">
-                            <button>Create a free account</button>
-                        </a>                        
+                        <button class="vendor-btn" onclick="window.open('https://dashboard.pettify.co/register', '_blank')">Create a free account</button>
                     </div>
                 </div>
                 <div class="laptop-view">
                     <img src="images/laptop-preview.png" alt="vendor preview" class="responsive-laptopImage">
                 </div>
             </section>
-    
-            <!-- Vet Section -->
-            <!-- <section id="vet" class="inactive-tab">
-                <div class="active-text">
-                    <h2>Create a free account</h2>
-                    <p>Are a licensed veterinarian? Join Pettify today to list your services and connect with pet owners looking to care for their pet. It's easy, secure, and the best way to reach pet lovers near you.</p>
-                    <div class="vet-active-btn">
-                        <button>Create a free account</button>
-                    </div>
-                </div>
-                <div class="vet-image">
-                    <img src="images/vet-doctor.png" alt="vet preview" class="responsive-vetImage">
-                </div>
-            </section> -->
         </div>
     </section>
 
-    <div style="height: 1px; background-color: #ED770B; margin: 20px 0;"></div>
-
+    <!-- Company/Team Section -->
     <section class="company" id="company">
-        <h1>Why Pettify?</h1>
+        <h1 class="section-title">Why Pettify?</h1>
         
         <div class="team-slider">
             <!-- Slide 1: Founder's Story -->
@@ -230,19 +1220,19 @@
                 <div class="founder-container">
                     <div class="company-bio">
                         <h2>Founder's Story</h2>
-                        <img src="images/titi.jpg" alt="company Titilayo Sunday" class="responsive-company-image">
+                        <img src="images/titi.jpg" alt="Titilayo Sunday" class="responsive-company-image">
                         <h2>Titilayo Sunday</h2>
                         <h3>CEO / FOUNDER</h3>
-                        <a href="https://www.linkedin.com/in/thetitilayo?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-                            <img src="images/orange-linkedin-icon.png" alt="LinkedIn" class="company-media-icon">
+                        <a href="https://www.linkedin.com/in/thetitilayo" target="_blank">
+                            <i class="fab fa-linkedin" style="font-size: 35px; color: var(--primary);"></i>
                         </a>
                     </div>
                     <div class="company-story">
                         <p>
-                            I grew up with dogs—my dad was a local breeder, and our first family pet, Jet, was more than just a dog; he was my childhood companion. But in 2002, Jet wandered off and never came back. Since then, I’ve searched for a pet like him—a companion that feels like family.
+                            I grew up with dogs—my dad was a local breeder, and our first family pet, Jet, was more than just a dog; he was my childhood companion. But in 2002, Jet wandered off and never came back. Since then, I've searched for a pet like him—a companion that feels like family.
                         </p>
                         <p>
-                            Finding the right pet shouldn’t be difficult, but traditional methods are slow, limited, and inconvenient. The process often involves long searches, word-of-mouth recommendations, or settling for fewer choices due to lack of accessibility. That’s why we built Pettify—a platform that connects pet lovers with trusted breeders and vendors nearby, eliminating unnecessary hassle.
+                            Finding the right pet shouldn't be difficult, but traditional methods are slow, limited, and inconvenient. The process often involves long searches, word-of-mouth recommendations, or settling for fewer choices due to lack of accessibility. That's why we built Pettify—a platform that connects pet lovers with trusted breeders and vendors nearby, eliminating unnecessary hassle.
                         </p>
                         <p>
                             Whether you're a remote worker needing a loyal companion or a family looking for the perfect pet, Pettify makes the experience simple, safe, and stress-free. Our platform provides variety, reliability, and ease, ensuring you find not just any pet, but the right one for your home and lifestyle.
@@ -251,7 +1241,6 @@
                             My journey started with Jet. Now, through Pettify, we help others find their own Jets—pets that bring love, loyalty, and companionship into our lives.
                         </p>
                     </div>
-                    
                 </div>
             </div>
     
@@ -262,15 +1251,15 @@
                         <h2>Emmanuel Oluwadare</h2>
                         <h3>CPO / CO-FOUNDER</h3>
                         <a href="https://www.linkedin.com/in/oluwadare-emmanuel-4a0b75270/" target="_blank">
-                            <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
+                            <i class="fab fa-linkedin media-icon"></i>
                         </a>
                     </div>
                     <div class="team-member">
                         <img src="images/daniel.jpg" alt="Omole Daniel" class="team-member-img">
                         <h2>Omole Daniel</h2>
                         <h3>CTO / CO-FOUNDER</h3>
-                        <a href="https://www.linkedin.com/in/daniel-omole-34401521a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-                            <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
+                        <a href="https://www.linkedin.com/in/daniel-omole-34401521a" target="_blank">
+                            <i class="fab fa-linkedin media-icon"></i>
                         </a>
                     </div>
                 </div>
@@ -282,37 +1271,48 @@
             <span>Scroll right to see team →</span>
         </div>
     </section>
-    
 
-    <section class="what-drives-us">
-        <h2>What Drives Us?</h2>
-        <div class="features">
-            <div class="feature-box">
-                <img src="images/human&dog.png" alt="Icon 1">
-                <p>Companionship First</p>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">What Drives Us?</h2>
+        <p class="section-subtitle">Everything you need to buy or sell pets safely and conveniently</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="images/dependability (1).png" alt="Trust" class="feature-icon">
+                <h3>Companionship First</h3>
+                <p>We believe every pet deserves a loving home and every owner deserves the perfect companion.</p>
             </div>
-            <div class="feature-box">
-                <img src="images/trust.png" alt="Icon 2">
-                <p>Trust & Safety</p>
+
+            <div class="feature-card">
+                <img src="images/trust.png" alt="Safety" class="feature-icon">
+                <h3>Trust & Safety</h3>
+                <p>All sellers are verified and pets come with health certifications for your peace of mind.</p>
             </div>
-            <div class="feature-box">
-                <img src="images/convenience.png" alt="Icon 3">
-                <p>Convenience</p>
+
+            <div class="feature-card">
+                <img src="images/convenience.png" alt="Convenience" class="feature-icon">
+                <h3>Convenience</h3>
+                <p>Find and purchase pets from the comfort of your home with seamless delivery options.</p>
             </div>
-            <div class="feature-box">
-                <img src="images/bulb.png" alt="Icon 4">
-                <p>Innovation</p>
+
+            <div class="feature-card">
+                <img src="images/creativity.png" alt="Innovation" class="feature-icon">
+                <h3>Innovation</h3>
+                <p>Leveraging technology to make pet transactions safer, faster, and more accessible.</p>
             </div>
-            <div class="feature-box">
-                <img src="images/love.png" alt="Icon 5">
-                <p>Life Long Commitment</p>
+
+            <div class="feature-card">
+                <img src="images/agreement.png" alt="Commitment" class="feature-icon">
+                <h3>Lifelong Commitment</h3>
+                <p>Supporting pet owners and sellers throughout their entire journey with us.</p>
             </div>
         </div>
     </section>
 
-
-    <section class="faqs" id="FAQS"> 
-        <h2>We’ve Got Answers</h2>
+    <!-- FAQ Section -->
+    <section class="faqs" id="faqs"> 
+        <h2 class="section-title">We've Got Answers</h2>
         <div class="faq-container">
             <div class="questions">
                 <div class="question active">What is Pettify?</div>
@@ -328,43 +1328,39 @@
                 <div class="answer active">Pettify is an online marketplace for pet lovers, trusted breeders, pet vendors, and veterinarians. You can buy & sell pets, pet accessories, book vet appointments and many more.</div>
                 <div class="answer">Buyers - Download the Pettify app from Google Play & App Store. Breeders & Vets - Sign up on www.pettify.co to create an account. Simply provide your email or Google sign in to get started.</div>
                 <div class="answer">Download the Pettify mobile app from Google Play or App store. Browse the available pets listed by trusted breeders and sellers on the mobile app. Once you find the right companion, you can make the purchase and enter your delivery address for your pet to be delivered.</div>
-                <div class="answer">If you’re a breeder or vendor, you can sign up on the Pettify web app at www.pettify.co and start listing pets for sale. Provide detailed descriptions such as category, breed, description, age and vaccination details and clear beautiful pet photos to attract eager buyers.</div>
-                <div class="answer">Pettify vets sellers and provides a safe platform to connect with breeders, but we recommend always verifying the seller and ensuring the pet’s health records before making any purchase.</div>
+                <div class="answer">If you're a breeder or vendor, you can sign up on the Pettify web app at www.pettify.co and start listing pets for sale. Provide detailed descriptions such as category, breed, description, age and vaccination details and clear beautiful pet photos to attract eager buyers.</div>
+                <div class="answer">Pettify vets sellers and provides a safe platform to connect with breeders, but we recommend always verifying the seller and ensuring the pet's health records before making any purchase.</div>
                 <div class="answer">Pettify supports various payment methods such as direct transfers or payments via debit/credit cards through Paystack.</div>
                 <div class="answer">Refund policies are determined by Pettify only if the received Pet was in bad condition or false pet delivery. We can also refund canceled Vet appointments. Please contact Pettify through email hello@pettify.co directly for any refund requests or help.</div>
-                <div class="answer">If you have any questions or issues, you can contact Pettify support via email at hello@pettify.co or through the app’s support section and social media channels.</div>
+                <div class="answer">If you have any questions or issues, you can contact Pettify support via email at hello@pettify.co or through the app's support section and social media channels.</div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
-        <h2>What Our Sellers Say</h2>
-        <div class="testimonial-container">
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <p>“Before Pettify, selling pets was slow, and I relied only on word-of-mouth. Now, I get orders from serious buyers almost every day from the platform. My sales have tripled in just a few months!”</p>
-                    <h4>– Chinedu, Lagos</h4>
-                </div>
-                <div class="testimonial">
-                    <p>“I used to struggle with reaching the right customers for my kittens, but Pettify changed that. The platform makes selling so easy, and I’ve expanded my business faster than I expected.”</p>
-                    <h4>– Aisha, Abuja</h4>
-                </div>
-                <div class="testimonial">
-                    <p>“Since I listed my pet accessories on Pettify, I’ve seen a huge increase in sales. People now trust me more because of the platform, and I’ve gained customers from different states.”</p>
-                    <h4>– Tunde, Ibadan</h4>
-                </div>
-                <div class="testimonial">
-                    <p>“I was skeptical at first, but Pettify has helped me connect with genuine buyers who are actually ready to purchase. I no longer waste time on unserious inquiries.”</p>
-                    <h4>– Kemi, Port Harcourt</h4>
-                </div>
-                <div class="testimonial">
-                    <p>“Selling my imported puppies used to be stressful because of limited reach, but Pettify has made it seamless. More visibility, more customers, and more revenue. I withdraw my money seamlessly too—my business is growing!”</p>
-                    <h4>– Mike, Enugu</h4>
-                </div>
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">What Our Sellers Say</h2>
+        <p class="section-subtitle">Trusted by thousands of pet lovers across Nigeria</p>
+
+        <div class="testimonials-slider">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Before Pettify, selling pets was slow. Now, I get orders from serious buyers almost every day. My sales have tripled!"</p>
+                <p class="testimonial-author">– Chinedu, Lagos</p>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The platform makes selling so easy, and I've expanded my business faster than I expected. Highly recommended!"</p>
+                <p class="testimonial-author">– Aisha, Abuja</p>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Since listing my accessories on Pettify, I've seen a huge increase in sales. People trust me more because of the platform."</p>
+                <p class="testimonial-author">– Tunde, Ibadan</p>
             </div>
         </div>
     </section>
 
+    <!-- Get Started Section -->
     <section class="vendor-frame">
         <div class="vendor-content">
             <h2>Get started in few steps</h2>
@@ -374,75 +1370,147 @@
                 <li><i class="fas fa-check-circle"></i> List your pets & accessories</li>
                 <li><i class="fas fa-check-circle"></i> Withdraw your earnings</li>
             </ul>
-            <a href="https://www.coachli.co/pettify" class="demo-button">
+            <a href="https://www.coachli.co/pettify" class="demo-button" target="_blank">
                 <i class="fas fa-arrow-right"></i> Book a free demo call
             </a>            
         </div>
-        <!-- <div class="vendor-image">
-            <img src="images/dark_guy.png" alt="Vendor with pet">
-        </div> -->
     </section>
-    
 
+    <!-- CTA Section -->
+    <!-- <section class="cta-section">
+        <h2>Ready to Find Your Perfect Pet?</h2>
+        <p>Join thousands of happy pet owners and trusted sellers on Nigeria's #1 pet marketplace</p>
+        <div class="cta-buttons">
+            <button class="btn-white">Download App</button>
+            <button class="btn-white">Create Seller Account</button>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
     <footer id="contact">
-        <div class="footer-container">
-            <div>
+        <div class="footer-content">
+            <div class="footer-section">
                 <h3>Pettify</h3>
+                <p>Nigeria's leading pet marketplace connecting buyers with trusted sellers nationwide.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
-            <div>
+
+            <div class="footer-section">
                 <h3>Product</h3>
                 <ul>
-                    <li><a href="#FAQS">FAQs</a></li>
-                    <li><a href="#pricing-link" id="footer-pricing-link">Pricing</a></li>
+                    <li><a href="listings.html">Listings</a></li>
+                    <li><a href="#prcing-link">Pricing</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                    <!-- <li><a href="#">Support</a></li> -->
                 </ul>
             </div>
-            <div>
+
+            <!-- <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div> -->
+
+            <div class="footer-section">
                 <h3>Legal</h3>
                 <ul>
                     <li><a href="terms.html">Terms of Use</a></li>
                     <li><a href="policy.html">Privacy Policy</a></li>
+                    <!-- <li><a href="#">Cookie Policy</a></li> -->
                 </ul>
-            </div>
-            <div>
-                <ul class="social-icons">
-                    <li><a href="https://wa.me/message/RXRR5VZCQAEVB1" target="_blank">
-                        <img src="images/whatsapp.png" alt="Whatsapp" class="media-icon">
-                    </a></li>
-                    <li><a href="https://www.linkedin.com/company/pettify/" target="_blank">
-                        <img src="images/linkedin-icon.png" alt="LinkedIn" class="media-icon">
-                    </a></li>
-                    <li><a href="https://www.instagram.com/usepettify/" target="_blank">
-                        <img src="images/instagram-icon.png" alt="Instagram" class="media-icon">
-                    </a></li>
-                    <li>
-                        <a href="https://www.tiktok.com/@usepettify" target="_blank">
-                          <img src="images/tiktok-icon.png" alt="Tiktok" class="media-icon">
-                        </a>
-                      </li>                      
-                    <li><a href="#x" target="_blank">
-                        <img src="images/x-icon.png" alt="X" class="media-icon">
-                    </a></li>
-                    <li><a href="#facebook" target="_blank">
-                        <img src="images/facebook-icon.png" alt="Facebook" class="media-icon">
-                    </a></li>
-                </ul>
-                <!-- <p>
-                    <a href="tel:+2347018590284" class="contact-link">
-                        <img src="images/phone.png" alt="Phone" class="media-icon"> 
-                    </a>
-                
-                    <a href="mailto:hellopettify@gmail.com" class="contact-link">
-                        <img src="images/mail.png" alt="Mail" class="media-icon"> 
-                    </a>
-                </p> -->
             </div>
         </div>
+
         <div class="footer-bottom">
-            <p>&copy; 2025– Pettify Global Technologies LTD.</p>
+            <p>&copy; 2025 Pettify Global Technologies LTD. All rights reserved.</p>
         </div>
     </footer>
-    
 
-    <script src="scripts.js"></script>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                
+                // Remove active class from all tabs and sections
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.active-tab, .inactive-tab').forEach(section => {
+                    section.classList.remove('active-tab');
+                    section.classList.add('inactive-tab');
+                });
+                
+                // Add active class to clicked tab and target section
+                this.classList.add('active');
+                const targetSection = document.querySelector(target);
+                targetSection.classList.remove('inactive-tab');
+                targetSection.classList.add('active-tab');
+            });
+        });
+
+        // Pricing dropdown
+        const pricingLink = document.getElementById('pricing-link');
+        const pricingDropdown = document.getElementById('pricing-dropdown');
+        
+        pricingLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            pricingDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.pricing-dropdown-wrapper')) {
+                pricingDropdown.classList.remove('active');
+            }
+        });
+
+        // FAQ functionality
+        document.querySelectorAll('.question').forEach((question, index) => {
+            question.addEventListener('click', function() {
+                // Remove active class from all questions and answers
+                document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+                document.querySelectorAll('.answer').forEach(a => a.classList.remove('active'));
+                
+                // Add active class to clicked question and corresponding answer
+                this.classList.add('active');
+                document.querySelectorAll('.answer')[index].classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-// ===== POPUP FUNCTIONALITY =====
+// ===== UPDATED POPUP FUNCTIONALITY =====
 let currentSlide = 0;
 
 // Show popup when page loads
