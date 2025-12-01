@@ -653,7 +653,7 @@
 
         .responsive-appPreview,
         .responsive-laptopImage {
-            width: 100%;
+            width: 50%;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
@@ -1106,7 +1106,9 @@
             </li>
             <li><a href="#testimonials">Reviews</a></li>
             <li><a href="#contact">Contact</a></li>
-            <a href="https://dashboard.pettify.co/register"><button class="cta-btn">Get Started</button></a>
+            <a href="#download" onclick="event.preventDefault(); document.querySelector('#download').scrollIntoView({ behavior: 'smooth' });">
+                <button class="cta-btn">Get Started</button>
+            </a>
         </ul>
 
         <div class="hamburger" onclick="toggleMenu()">
@@ -1166,7 +1168,7 @@
 </section>
 
     <!-- Tab Section -->
-    <section class="download">
+    <section class="download" id="download">
         <div class="tabs">
             <button class="tab active" data-target="#customers">Customers</button>
             <button class="tab" data-target="#vendors">Vendors</button>
