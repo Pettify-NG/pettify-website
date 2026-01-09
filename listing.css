@@ -702,14 +702,41 @@ footer {
         font-size: 1rem;
     }
 
-.media-icon {
-    width: 35px;
-    height: 35px;
-    margin-top: 2px;
+    .media-icon {
+        width: 35px;
+        height: 35px;
+        margin-top: 2px;
+    }
+ 
 }
 
-    
+/* Mobile-responsive button text */
+.btn-text-mobile {
+    display: none;
 }
+
+@media (max-width: 480px) {
+    .btn-text-full {
+        display: none;
+    }
+    
+    .btn-text-mobile {
+        display: inline;
+    }
+    
+    /* Override modal button styles on mobile */
+    .modal-body .buy-now-btn {
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
+        white-space: nowrap;
+    }
+    
+    /* Keep grid buttons compact too */
+    .pet-card .buy-now-btn {
+        padding: 10px 16px !important;
+        font-size: 0.9rem !important;
+    }
+}`;
 
 const shakeCSS = `
 @keyframes gentleShake {
