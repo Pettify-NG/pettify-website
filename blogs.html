@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Pet Care Articles | Pettify</title>
+    <meta name="description" content="Discover expert pet care tips, training guides, nutrition advice, and stories on the Pettify Blog.">
+    <link rel="icon" href="images/pettify.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo-link">
+            <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listings.html">View Listings</a></li>
+            <li><a href="blogs.html" class="active">Blog</a></li>
+            <li><a href="index.html#pricing-link">Pricing</a></li>
+            <li><a href="index.html#testimonials">Reviews</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <a href="index.html#download">
+                <button class="cta-btn">Get Started</button>
+            </a>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <h1>Pettify <span>Pet Care Blog</span></h1>
+        <p>Expert advice, nutrition tips, training guides, and stories to help keep your furry companions happy & healthy.</p>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="blog-container">
+
+        <!-- Search and Filters Section -->
+        <div class="filters-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="blogSearchInput" placeholder="Search blog posts, guides, topics...">
+            </div>
+
+            <div class="filter-group" id="categoryFilterGroup">
+                <button class="filter-btn active" data-category="all">All Articles</button>
+                <button class="filter-btn" data-category="Pet Care">Pet Care</button>
+                <button class="filter-btn" data-category="Health & Wellness">Health</button>
+                <button class="filter-btn" data-category="Nutrition">Nutrition</button>
+                <button class="filter-btn" data-category="Training">Training</button>
+                <button class="filter-btn" data-category="Guides">Guides</button>
+            </div>
+        </div>
+
+        <!-- Results Counter -->
+        <div class="results-info">
+            <span id="resultsCount">Loading articles...</span>
+        </div>
+
+        <!-- Loading State Spinner -->
+        <div id="loadingContainer" class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>Loading pet care articles...</p>
+        </div>
+
+        <!-- Error Container -->
+        <div id="errorContainer" class="error-container" style="display: none;"></div>
+
+        <!-- Empty State Container -->
+        <div id="noResults" class="no-results" style="display: none;">
+            <i class="fas fa-newspaper" style="font-size: 3.5rem; color: #E2E8F0; margin-bottom: 1rem;"></i>
+            <h3>No articles found</h3>
+            <p style="color: #666; margin-top: 0.5rem;">Try adjusting your search terms or selecting a different category.</p>
+        </div>
+
+        <!-- Blogs Cards Grid -->
+        <div id="blogsGrid" class="blog-grid"></div>
+
+        <!-- Pagination Controls -->
+        <div id="paginationContainer" class="pagination" style="display: none;"></div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: #2C2C2C; color: white; padding: 4rem 5% 2rem; margin-top: 4rem;">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; padding-bottom: 3rem; border-bottom: 1px solid #444;">
+            <div>
+                <img src="images/web_logo.png" alt="Pettify" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
+                <p style="color: #aaa; font-size: 0.95rem;">Nigeria's leading pet marketplace connecting buyers with trusted sellers nationwide.</p>
+            </div>
+
+            <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Quick Links</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.6rem;"><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="listings.html" style="color: #ccc; text-decoration: none;">Listings</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="blogs.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Blog</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="terms.html" style="color: #ccc; text-decoration: none;">Terms of Service</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="policy.html" style="color: #ccc; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Connect With Us</h4>
+                <p style="color: #ccc; margin-bottom: 1rem;">Have questions or feedback? Contact our support team anytime.</p>
+                <div style="display: flex; gap: 1rem; font-size: 1.3rem;">
+                    <a href="#" style="color: var(--primary);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: var(--primary);"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: var(--primary);"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: #888; margin-top: 2rem; font-size: 0.9rem;">
+            &copy; 2026 Pettify Technologies Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const API_BASE_URL = 'https://pettify-backend.onrender.com/api/v1';
+        let allBlogs = [];
+        let filteredBlogs = [];
+        let selectedCategory = 'all';
+        let searchQuery = '';
+        let currentPage = 1;
+        const limitPerPage = 9;
+
+        async function fetchBlogs() {
+            const loadingContainer = document.getElementById('loadingContainer');
+            const errorContainer = document.getElementById('errorContainer');
+            const blogsGrid = document.getElementById('blogsGrid');
+
+            loadingContainer.style.display = 'block';
+            errorContainer.style.display = 'none';
+            blogsGrid.innerHTML = '';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs?limit=50`);
+                if (!response.ok) {
+                    throw new Error(`Server returned HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Blogs fetched:', data);
+
+                if (data.success && Array.isArray(data.blogs)) {
+                    allBlogs = data.blogs;
+                } else if (Array.isArray(data.data)) {
+                    allBlogs = data.data;
+                } else {
+                    allBlogs = [];
+                }
+
+                filterAndRenderBlogs();
+
+            } catch (err) {
+                console.error('Error fetching blogs:', err);
+                loadingContainer.style.display = 'none';
+                errorContainer.style.display = 'block';
+                errorContainer.innerHTML = `
+                    <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #ED770B; margin-bottom: 1rem;"></i>
+                    <h3>Unable to load blog posts</h3>
+                    <p style="color: #666; margin: 0.5rem 0 1.5rem;">${err.message || 'Please check your connection and try again.'}</p>
+                    <button onclick="fetchBlogs()" class="cta-btn">Try Again</button>
+                `;
+            }
+        }
+
+        function decodeHtmlEntities(str) {
+            if (!str) return '';
+            const txt = document.createElement('textarea');
+            txt.innerHTML = str;
+            let decoded = txt.value;
+            if (decoded.includes('&lt;') || decoded.includes('&gt;')) {
+                txt.innerHTML = decoded;
+                decoded = txt.value;
+            }
+            return decoded;
+        }
+
+        function stripHtmlTags(html) {
+            if (!html) return '';
+            const decoded = decodeHtmlEntities(html);
+            return decoded.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+        }
+
+        function filterAndRenderBlogs() {
+            const loadingContainer = document.getElementById('loadingContainer');
+            const noResults = document.getElementById('noResults');
+            const blogsGrid = document.getElementById('blogsGrid');
+            const resultsCount = document.getElementById('resultsCount');
+
+            loadingContainer.style.display = 'none';
+
+            // Filter logic
+            filteredBlogs = allBlogs.filter(blog => {
+                const matchesCategory = (selectedCategory === 'all') || 
+                    (blog.category && blog.category.toLowerCase() === selectedCategory.toLowerCase());
+                
+                const q = searchQuery.toLowerCase().trim();
+                const cleanExcerpt = stripHtmlTags(blog.excerpt || blog.content || '').toLowerCase();
+                const matchesSearch = !q || 
+                    (blog.title && blog.title.toLowerCase().includes(q)) ||
+                    cleanExcerpt.includes(q) ||
+                    (blog.category && blog.category.toLowerCase().includes(q));
+
+                return matchesCategory && matchesSearch;
+            });
+
+            resultsCount.textContent = `Showing ${filteredBlogs.length} ${filteredBlogs.length === 1 ? 'article' : 'articles'}`;
+
+            if (filteredBlogs.length === 0) {
+                noResults.style.display = 'block';
+                blogsGrid.innerHTML = '';
+                document.getElementById('paginationContainer').style.display = 'none';
+                return;
+            }
+
+            noResults.style.display = 'none';
+
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredBlogs.length / limitPerPage);
+            if (currentPage > totalPages) currentPage = 1;
+
+            const startIndex = (currentPage - 1) * limitPerPage;
+            const paginatedBlogs = filteredBlogs.slice(startIndex, startIndex + limitPerPage);
+
+            // Render blog cards
+            blogsGrid.innerHTML = paginatedBlogs.map(blog => createBlogCardMarkup(blog)).join('');
+
+            renderPagination(totalPages);
+        }
+
+        function createBlogCardMarkup(blog) {
+            const coverImg = blog.coverImage || 'images/pettify.png';
+            const category = blog.category || 'Pet Care';
+            const title = blog.title || 'Untitled Post';
+            const cleanExcerpt = stripHtmlTags(blog.excerpt || blog.content || 'Read the latest updates and guides from Pettify.');
+            const author = (blog.author && blog.author.username) ? blog.author.username : 'Pettify Team';
+            
+            const dateStr = blog.createdAt 
+                ? new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                : 'Recent';
+
+            const readTime = computeReadTime(blog.excerpt || blog.content || '');
+            const slug = blog.slug || blog._id;
+
+            return `
+                <article class="blog-card" onclick="window.location.href='blog-details.html?slug=${encodeURIComponent(slug)}'">
+                    <div class="blog-card-img-wrapper">
+                        <span class="category-badge">${escapeHtml(category)}</span>
+                        <img src="${escapeHtml(coverImg)}" alt="${escapeHtml(title)}" onerror="this.onerror=null; this.src='images/pettify.png';">
+                    </div>
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">${escapeHtml(title)}</h2>
+                        <p class="blog-card-excerpt">${escapeHtml(cleanExcerpt)}</p>
+                        <div class="blog-card-footer">
+                            <div class="author-info">
+                                <i class="fas fa-user-circle" style="color: var(--primary);"></i>
+                                <span>${escapeHtml(author)}</span>
+                            </div>
+                            <div class="read-time">
+                                <i class="far fa-clock"></i>
+                                <span>${readTime} min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function computeReadTime(text) {
+            const cleanText = stripHtmlTags(text);
+            const words = cleanText.split(/\s+/).length;
+            const minutes = Math.ceil(words / 180);
+            return minutes < 1 ? 1 : minutes;
+        }
+
+        function renderPagination(totalPages) {
+            const container = document.getElementById('paginationContainer');
+            if (totalPages <= 1) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'flex';
+            let html = `
+                <button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `
+                    <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>
+                `;
+            }
+
+            html += `
+                <button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            filterAndRenderBlogs();
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Event Listeners for Search & Category Buttons
+        document.getElementById('blogSearchInput').addEventListener('input', function(e) {
+            searchQuery = e.target.value;
+            currentPage = 1;
+            filterAndRenderBlogs();
+        });
+
+        document.getElementById('categoryFilterGroup').addEventListener('click', function(e) {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('#categoryFilterGroup .filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                selectedCategory = e.target.dataset.category;
+                currentPage = 1;
+                filterAndRenderBlogs();
+            }
+        });
+
+        // Initial fetch
+        fetchBlogs();
+    </script>
+</body>
+</html>

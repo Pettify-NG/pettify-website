@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post | Pettify</title>
+    <link rel="icon" href="images/pettify.png" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo-link">
+            <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listings.html">View Listings</a></li>
+            <li><a href="blogs.html" class="active">Blog</a></li>
+            <li><a href="index.html#pricing-link">Pricing</a></li>
+            <li><a href="index.html#testimonials">Reviews</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <a href="index.html#download">
+                <button class="cta-btn">Get Started</button>
+            </a>
+        </ul>
+    </nav>
+
+    <!-- Main Detail Container -->
+    <main class="blog-detail-container">
+
+        <!-- Back Button -->
+        <a href="blogs.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to All Blogs</span>
+        </a>
+
+        <!-- Loading State Spinner -->
+        <div id="loadingContainer" class="loading-container" style="padding: 6rem 0;">
+            <div class="loading-spinner"></div>
+            <p>Loading article details...</p>
+        </div>
+
+        <!-- Error State Container -->
+        <div id="errorContainer" class="error-container" style="display: none; padding: 4rem 0;"></div>
+
+        <!-- Main Article Post Wrapper -->
+        <article id="articleWrapper" style="display: none;">
+            
+            <!-- Article Header -->
+            <header class="blog-detail-header">
+                <span id="articleCategory" class="blog-detail-category">Pet Care</span>
+                <h1 id="articleTitle" class="blog-detail-title">Loading...</h1>
+                
+                <div class="blog-detail-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-user-circle" style="color: var(--primary);"></i>
+                        <span id="articleAuthor">Pettify Team</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="far fa-calendar-alt" style="color: var(--primary);"></i>
+                        <span id="articleDate">Date</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="far fa-clock" style="color: var(--primary);"></i>
+                        <span id="articleReadTime">3 min read</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="far fa-eye" style="color: var(--primary);"></i>
+                        <span id="articleViews">0 views</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Hero Cover Image -->
+            <div class="blog-hero-image-wrapper">
+                <img id="articleCoverImage" src="images/pettify.png" alt="Cover Image" onerror="this.onerror=null; this.src='images/pettify.png';">
+            </div>
+
+            <!-- Rich HTML Body Content -->
+            <div id="articleContent" class="blog-article-content"></div>
+
+            <!-- Article Tags -->
+            <div id="tagsContainer" class="blog-tags-container" style="display: none;">
+                <span class="tag-label"><i class="fas fa-tags" style="color: var(--primary); margin-right: 0.4rem;"></i> Tags:</span>
+                <div id="tagsList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+            </div>
+
+            <!-- Social Share Bar -->
+            <div class="share-section">
+                <h4>Share this post:</h4>
+                <div class="share-buttons">
+                    <a id="shareWhatsapp" href="#" target="_blank" class="share-btn" title="Share on WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a id="shareTwitter" href="#" target="_blank" class="share-btn" title="Share on X (Twitter)">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a id="shareFacebook" href="#" target="_blank" class="share-btn" title="Share on Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <button id="shareCopy" class="share-btn" onclick="copyArticleLink()" title="Copy Link">
+                        <i class="fas fa-link"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Related Articles Section -->
+            <section class="related-blogs-section">
+                <h3>You Might Also Like</h3>
+                <div id="relatedGrid" class="blog-grid"></div>
+            </section>
+
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: #2C2C2C; color: white; padding: 4rem 5% 2rem; margin-top: 4rem;">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; padding-bottom: 3rem; border-bottom: 1px solid #444;">
+            <div>
+                <img src="images/web_logo.png" alt="Pettify" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
+                <p style="color: #aaa; font-size: 0.95rem;">Nigeria's leading pet marketplace connecting buyers with trusted sellers nationwide.</p>
+            </div>
+
+            <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Quick Links</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.6rem;"><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="listings.html" style="color: #ccc; text-decoration: none;">Listings</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="blogs.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Blog</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="terms.html" style="color: #ccc; text-decoration: none;">Terms of Service</a></li>
+                    <li style="margin-bottom: 0.6rem;"><a href="policy.html" style="color: #ccc; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Connect With Us</h4>
+                <p style="color: #ccc; margin-bottom: 1rem;">Have questions or feedback? Contact our support team anytime.</p>
+                <div style="display: flex; gap: 1rem; font-size: 1.3rem;">
+                    <a href="#" style="color: var(--primary);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: var(--primary);"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: var(--primary);"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: #888; margin-top: 2rem; font-size: 0.9rem;">
+            &copy; 2026 Pettify Technologies Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const API_BASE_URL = 'https://pettify-backend.onrender.com/api/v1';
+
+        async function initBlogDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('slug');
+
+            const loadingContainer = document.getElementById('loadingContainer');
+            const errorContainer = document.getElementById('errorContainer');
+            const articleWrapper = document.getElementById('articleWrapper');
+
+            if (!slug) {
+                loadingContainer.style.display = 'none';
+                errorContainer.style.display = 'block';
+                errorContainer.innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3.5rem; color: #ED770B; margin-bottom: 1rem;"></i>
+                    <h2>Article Not Found</h2>
+                    <p style="color: #666; margin: 0.5rem 0 1.5rem;">No blog post identifier was specified.</p>
+                    <a href="blogs.html" class="cta-btn">Back to Blog</a>
+                `;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs/${encodeURIComponent(slug)}`);
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('This blog post could not be found or has been removed.');
+                    }
+                    throw new Error(`Server error (${response.status})`);
+                }
+
+                const result = await response.json();
+                console.log('Blog detail result:', result);
+
+                const blog = result.data || result.blog;
+                if (!blog) {
+                    throw new Error('Invalid blog response format.');
+                }
+
+                renderBlogDetail(blog);
+                fetchRelatedBlogs(blog.category, blog._id);
+
+            } catch (err) {
+                console.error('Error loading article:', err);
+                loadingContainer.style.display = 'none';
+                errorContainer.style.display = 'block';
+                errorContainer.innerHTML = `
+                    <i class="fas fa-exclamation-circle" style="font-size: 3.5rem; color: #ED770B; margin-bottom: 1rem;"></i>
+                    <h2>Oops! Something went wrong</h2>
+                    <p style="color: #666; margin: 0.5rem 0 1.5rem;">${err.message}</p>
+                    <a href="blogs.html" class="cta-btn">Back to All Blogs</a>
+                `;
+            }
+        }
+
+        // Decode HTML entities if the backend returns escaped string (e.g. &lt;p&gt;)
+        function decodeHtmlEntities(str) {
+            if (!str) return '';
+            const txt = document.createElement('textarea');
+            txt.innerHTML = str;
+            let decoded = txt.value;
+            // Handle double-encoded HTML strings
+            if (decoded.includes('&lt;') || decoded.includes('&gt;')) {
+                txt.innerHTML = decoded;
+                decoded = txt.value;
+            }
+            return decoded;
+        }
+
+        // Clean & normalize WYSIWYG Rich Text HTML
+        function cleanAndFormatRichText(rawHtml) {
+            if (!rawHtml) return '';
+            
+            // 1. Decode escaped HTML entities (&lt;p&gt; -> <p>)
+            let html = decodeHtmlEntities(rawHtml);
+            
+            // 2. Unwrap multiple sequential nested <p> tags (e.g. <p><p><p> -> <p>)
+            html = html.replace(/(?:<p\b[^>]*>\s*)+/gi, '<p>');
+            html = html.replace(/(?:\s*<\/p>)+/gi, '</p>');
+            
+            // 3. Remove empty paragraphs (<p></p>, <p>&nbsp;</p>, <p> </p>)
+            html = html.replace(/<p>\s*(?:&nbsp;|\s)*<\/p>/gi, '');
+
+            // 4. Parse through DOMParser to build clean DOM tree structure
+            try {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Remove empty P nodes from DOM tree
+                doc.querySelectorAll('p').forEach(p => {
+                    if (!p.textContent.trim() && p.children.length === 0) {
+                        p.remove();
+                    }
+                });
+                return doc.body.innerHTML;
+            } catch (e) {
+                return html;
+            }
+        }
+
+        function renderBlogDetail(blog) {
+            document.getElementById('loadingContainer').style.display = 'none';
+            document.getElementById('articleWrapper').style.display = 'block';
+
+            document.title = `${blog.title || 'Blog Post'} | Pettify`;
+
+            document.getElementById('articleCategory').textContent = blog.category || 'Pet Care';
+            document.getElementById('articleTitle').textContent = blog.title || 'Untitled Post';
+            
+            const author = (blog.author && blog.author.username) ? blog.author.username : 'Pettify Team';
+            document.getElementById('articleAuthor').textContent = author;
+
+            const dateStr = blog.createdAt 
+                ? new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                : 'Recently Published';
+            document.getElementById('articleDate').textContent = dateStr;
+
+            const readTime = computeReadTime(blog.content || blog.excerpt || '');
+            document.getElementById('articleReadTime').textContent = `${readTime} min read`;
+
+            document.getElementById('articleViews').textContent = `${blog.views || 1} views`;
+
+            const coverImg = blog.coverImage || 'images/pettify.png';
+            const imgEl = document.getElementById('articleCoverImage');
+            imgEl.src = coverImg;
+            imgEl.alt = blog.title || 'Cover image';
+
+            // Clean & Render HTML content
+            const contentEl = document.getElementById('articleContent');
+            if (blog.content) {
+                contentEl.innerHTML = cleanAndFormatRichText(blog.content);
+            } else if (blog.excerpt) {
+                contentEl.innerHTML = cleanAndFormatRichText(blog.excerpt);
+            } else {
+                contentEl.innerHTML = `<p>No content available for this post.</p>`;
+            }
+
+            // Tags rendering
+            if (Array.isArray(blog.tags) && blog.tags.length > 0) {
+                const tagsContainer = document.getElementById('tagsContainer');
+                const tagsList = document.getElementById('tagsList');
+                tagsContainer.style.display = 'flex';
+                tagsList.innerHTML = blog.tags.map(tag => `<span class="tag-pill">#${escapeHtml(tag)}</span>`).join('');
+            }
+
+            // Setup share links
+            const currentUrl = encodeURIComponent(window.location.href);
+            const shareText = encodeURIComponent(`Check out this article on Pettify: "${blog.title}"`);
+
+            document.getElementById('shareWhatsapp').href = `https://api.whatsapp.com/send?text=${shareText}%20${currentUrl}`;
+            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${shareText}&url=${currentUrl}`;
+            document.getElementById('shareFacebook').href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+        }
+
+        async function fetchRelatedBlogs(category, currentBlogId) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/blogs?limit=4`);
+                if (!response.ok) return;
+
+                const data = await response.json();
+                const blogs = data.blogs || data.data || [];
+                
+                const related = blogs.filter(b => b._id !== currentBlogId).slice(0, 3);
+                const relatedGrid = document.getElementById('relatedGrid');
+
+                if (related.length === 0) {
+                    document.querySelector('.related-blogs-section').style.display = 'none';
+                    return;
+                }
+
+                relatedGrid.innerHTML = related.map(b => {
+                    const cover = b.coverImage || 'images/pettify.png';
+                    const title = b.title || 'Untitled Post';
+                    const cat = b.category || 'Pet Care';
+                    const slug = b.slug || b._id;
+                    const cleanExcerpt = stripHtmlTags(b.excerpt || b.content || '');
+
+                    return `
+                        <article class="blog-card" onclick="window.location.href='blog-details.html?slug=${encodeURIComponent(slug)}'">
+                            <div class="blog-card-img-wrapper">
+                                <span class="category-badge">${escapeHtml(cat)}</span>
+                                <img src="${escapeHtml(cover)}" alt="${escapeHtml(title)}" onerror="this.onerror=null; this.src='images/pettify.png';">
+                            </div>
+                            <div class="blog-card-content">
+                                <h3 class="blog-card-title">${escapeHtml(title)}</h3>
+                                <p class="blog-card-excerpt">${escapeHtml(cleanExcerpt)}</p>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+
+            } catch (e) {
+                console.log('Error loading related blogs:', e);
+            }
+        }
+
+        function stripHtmlTags(html) {
+            if (!html) return '';
+            const decoded = decodeHtmlEntities(html);
+            return decoded.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+        }
+
+        function computeReadTime(text) {
+            const cleanText = stripHtmlTags(text);
+            const words = cleanText.split(/\s+/).length;
+            const minutes = Math.ceil(words / 180);
+            return minutes < 1 ? 1 : minutes;
+        }
+
+        function copyArticleLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btn = document.getElementById('shareCopy');
+                const orig = btn.innerHTML;
+                btn.innerHTML = `<i class="fas fa-check" style="color: green;"></i>`;
+                setTimeout(() => { btn.innerHTML = orig; }, 2000);
+            }).catch(err => {
+                alert('Copied URL to clipboard!');
+            });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        initBlogDetails();
+    </script>
+</body>
+</html>
