@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn about Pettify — Nigeria's leading pet marketplace connecting buyers with verified sellers, licensed vets, and nationwide delivery.">
+  <title>About Us | Pettify</title>
+  <link rel="icon" href="images/pettify.webp" type="image/png" />
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="global-shell.css">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --paper: #F6F3EC;
+      --ink: #14110F;
+      --ink-2: #221D18;
+      --ink-soft: #5B5349;
+      --orange: #ED770B;
+      --orange-deep: #C96208;
+      --orange-tint: #FCE9D6;
+      --green: #1E7245;
+      --green-tint: #E6F0E9;
+      --line: rgba(20, 17, 15, 0.1);
+      --display: 'Outfit', sans-serif;
+      --body: 'Satoshi', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--white);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .about-hero {
+      background: var(--white);
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .about-hero .wrap {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--body);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange-deep);
+      background: var(--orange-tint);
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+    }
+
+    .about-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(36px, 4.8vw, 56px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .about-hero h1 span {
+      color: var(--orange);
+    }
+
+    .about-hero p {
+      font-size: clamp(16px, 1.8vw, 18.5px);
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin: 0 auto 36px;
+      max-width: 58ch;
+    }
+
+    /* Stats Row Redesign */
+    .about-stats {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 32px 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .about-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 0;
+        padding: 28px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    .stat-box {
+      padding: 0 16px;
+      position: relative;
+      text-align: center;
+    }
+
+    .stat-box:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: var(--line);
+    }
+
+    @media (max-width: 768px) {
+      .stat-box:nth-child(2)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stat-box::after {
+        display: none !important;
+      }
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--orange-deep);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      margin-bottom: 12px;
+      border: 1px solid var(--line);
+    }
+
+    .stat-box b {
+      display: block;
+      font-family: var(--display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+
+    .stat-box b span {
+      color: var(--orange);
+      font-size: 0.85em;
+      font-weight: 700;
+    }
+
+    .stat-box p {
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-weight: 500;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    /* Story Section */
+    .story-section {
+      padding: 88px 0;
+      background: var(--white);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .story-copy h2 {
+      font-family: var(--display);
+      font-size: clamp(28px, 3.8vw, 42px);
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .story-copy p {
+      font-size: 16px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .story-img-card {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .story-img-card img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Core Principles */
+    .principles-section {
+      padding: 80px 0;
+      background: var(--white);
+      border-top: 1px solid var(--line);
+    }
+
+    .sec-head {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 52px;
+    }
+
+    .sec-head h2 {
+      font-family: var(--display);
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .sec-head p {
+      font-size: 15.5px;
+      color: var(--ink-soft);
+    }
+
+    /* Bento Principles Layout */
+    .bento-principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .bento-principles {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .bento-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--orange);
+    }
+
+    /* Bento Card 1: Verified Sellers (Spans 2 Columns) */
+    .bento-card--large {
+      grid-column: span 2;
+      background: var(--paper);
+    }
+
+    @media (max-width: 900px) {
+      .bento-card--large,
+      .bento-card--span2 {
+        grid-column: span 1 !important;
+      }
+    }
+
+    .bento-card--span2 {
+      grid-column: span 2;
+    }
+
+    .bento-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+
+    .bento-tag--orange {
+      background: var(--orange-tint);
+      color: var(--orange-deep);
+    }
+
+    .bento-tag--green {
+      background: var(--green-tint);
+      color: var(--green);
+    }
+
+    .bento-tag--dark {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+    }
+
+    .bento-card h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .bento-card p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    /* Bento Card 2: Dark Safe Delivery Card */
+    .bento-card--dark {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    .bento-card--dark h3 {
+      color: var(--white);
+    }
+
+    .bento-card--dark p {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* Bento Card 3 & 4: White Cards */
+    .bento-card--white {
+      background: var(--white);
+    }
+
+    .bento-footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-soft);
+    }
+
+    .bento-card--dark .bento-footer {
+      border-top-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* App CTA Banner */
+    .app-cta-banner {
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 28px;
+      padding: 52px 48px;
+      margin: 64px auto 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .app-cta-copy h3 {
+      font-family: var(--display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .app-cta-copy p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 15px;
+      max-width: 44ch;
+      line-height: 1.6;
+    }
+
+    .app-cta-banner a {
+      text-decoration: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="wrap">
+      <div class="about-badge">
+        <i class="fa-solid fa-paw"></i>
+        <span>Our Mission</span>
+      </div>
+      <h1>Connecting Pet Lovers with <span>Verified Sellers Nationwide.</span></h1>
+      <p>Pettify was built to simplify pet ownership in Nigeria — creating a safe, transparent marketplace for buying, selling, healthcare, and pet care essentials.</p>
+
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-icon"><i class="fa-solid fa-paw"></i></div>
+          <b>500<span>+</span></b>
+          <p>Listed Pets</p>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon"><i class="fa-solid fa-user-shield"></i></div>
+          <b>100<span>%</span></b>
+          <p>Verified Sellers</p>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <b>36 <span>States</span></b>
+          <p>Nationwide Delivery</p>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+          <b>4.9 <span>★</span></b>
+          <p>Customer Rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="story-section">
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="story-copy">
+          <h2>Why We Built Pettify</h2>
+          <p>Finding a healthy, purebred pet or genuine pet supplies in Nigeria used to mean dealing with unverified social media posts, safety doubts, and uncertain delivery.</p>
+          <p>We created Pettify to solve this problem. Every seller on Pettify goes through an identity verification process, every listing is inspected, and every purchase is backed by our secure platform.</p>
+          <p>Whether you're looking for a new puppy, cat supplies, or expert vet guidance, Pettify brings everything together into one reliable place.</p>
+        </div>
+
+        <div class="story-img-card">
+          <img src="images/hero-redesign.webp" alt="Pettify happy dog owner holding Golden Retriever puppy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Principles Section (Bento Grid) -->
+  <section class="principles-section">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>What We Stand For</h2>
+        <p>The core values that guide how we build our marketplace and serve pet lovers across Nigeria.</p>
+      </div>
+
+      <div class="bento-principles">
+        
+        <!-- Bento 1: Verified Sellers (Featured Wide Card) -->
+        <div class="bento-card bento-card--large">
+          <div>
+            <span class="bento-tag bento-tag--orange"><i class="fa-solid fa-user-shield"></i> Identity Checked</span>
+            <h3>Verified Sellers Only</h3>
+            <p>Every breeder, kennel, and merchant on Pettify undergoes a thorough identity & business verification process before listing pets or accessories on our platform.</p>
+          </div>
+          <div class="bento-footer">
+            <span>Strict Verification Protocol</span>
+            <i class="fa-solid fa-shield-halved" style="color: var(--orange); font-size: 16px;"></i>
+          </div>
+        </div>
+
+        <!-- Bento 2: Safe Delivery (Dark Accent Card) -->
+        <div class="bento-card bento-card--dark">
+          <div>
+            <span class="bento-tag bento-tag--dark"><i class="fa-solid fa-truck-fast"></i> 36 States</span>
+            <h3>Safe Delivery</h3>
+            <p>We partner with vetted pet logistics professionals to ensure comfortable, stress-free nationwide transport for your pet.</p>
+          </div>
+          <div class="bento-footer">
+            <span>Nationwide Logistics</span>
+            <i class="fa-solid fa-arrow-right" style="color: var(--orange); font-size: 16px;"></i>
+          </div>
+        </div>
+
+        <!-- Bento 3: Veterinary Oversight (White Card) -->
+        <div class="bento-card bento-card--white">
+          <div>
+            <span class="bento-tag bento-tag--green"><i class="fa-solid fa-stethoscope"></i> VCN Certified</span>
+            <h3>Veterinary Oversight</h3>
+            <p>We collaborate with licensed veterinarians to advocate for proper health checks, deworming, and vaccination records for every pet.</p>
+          </div>
+          <div class="bento-footer">
+            <span>VCN Licensed Vets</span>
+            <i class="fa-solid fa-notes-medical" style="color: var(--green); font-size: 16px;"></i>
+          </div>
+        </div>
+
+        <!-- Bento 4: Transparent Community (Wide Card) -->
+        <div class="bento-card bento-card--white bento-card--span2">
+          <div>
+            <span class="bento-tag bento-tag--orange"><i class="fa-solid fa-comments"></i> Direct Chat & Reviews</span>
+            <h3>Transparent Community</h3>
+            <p>Direct buyer-seller messaging, verified buyer reviews, and clear pricing ensure complete transparency and peace of mind on every single listing.</p>
+          </div>
+          <div class="bento-footer">
+            <span>100% Honest Marketplace</span>
+            <i class="fa-solid fa-star" style="color: var(--orange); font-size: 16px;"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- App Download Banner -->
+      <div class="app-cta-banner">
+        <div class="app-cta-copy">
+          <h3>Ready to find your companion?</h3>
+          <p>Download the Pettify mobile app to browse listings, chat with sellers, and manage your pet care.</p>
+        </div>
+        <a href="#" data-app-modal data-modal-context="account" class="btn btn--orange" style="white-space:nowrap; padding: 14px 28px; font-size: 15px; text-decoration: none !important;">Download app</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Shell Script -->
+  <script src="global-shell.js"></script>
+</body>
+</html>

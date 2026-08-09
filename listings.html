@@ -1,393 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Pets | Pettify Marketplace</title>
-    <link rel="icon" href="images/pettify.png" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="listing.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse pets and accessories from Pettify sellers across Nigeria.">
+  <title>Browse Listings | Pettify</title>
+  <link rel="icon" href="images/favicon.ico">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="listing.css">
+  <link rel="stylesheet" href="global-shell.css">
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <button class="back-button-mobile" onclick="window.location.href='/'">
-                <i class="fas fa-arrow-left"></i> Back
-            </button>
-        </div>
-    </header>
+  <section class="page-heading">
+    <div class="page-wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>All Listings</span></nav>
+      <div class="heading-row"><div><h1>Browse pets &amp; accessories</h1><p>Every listing below is from a <strong>verified</strong> Pettify seller.</p></div></div>
+    </div>
+  </section>
 
-    <section class="listings-hero">
-        <h1>Find Your Perfect Companion</h1>
-        <p>Browse our verified listings of healthy, adorable pets waiting for their forever home</p>
+  <main class="marketplace page-wrap">
+    <aside class="filter-panel" id="filter-panel" aria-label="Listing filters">
+      <div class="filter-mobile-head"><div><span>Filters</span></div><button id="filter-close" type="button" aria-label="Close filters">×</button></div>
+      <div class="filter-title"><div><span>Filters</span></div><button id="clear-filters" type="button">Clear all</button></div>
+      <div class="filter-scroll">
+      <fieldset class="filter-block"><legend>Category</legend><div class="category-filters" id="category-filters">
+        <button class="active" type="button" data-category="all"><span class="cat-emoji">🐾</span><span>All listings</span><small id="count-all">—</small></button>
+        <button type="button" data-category="dogs"><span class="cat-emoji">🐕</span><span>Dogs</span><small id="count-dogs">—</small></button>
+        <button type="button" data-category="cats"><span class="cat-emoji">🐈</span><span>Cats</span><small id="count-cats">—</small></button>
+        <button type="button" data-category="others"><span class="cat-emoji">🕊️</span><span>Other pets</span><small id="count-others">—</small></button>
+        <button type="button" data-category="accessories"><span class="cat-emoji">🦴</span><span>Accessories</span><small id="count-accessories">—</small></button>
+      </div></fieldset>
+      <fieldset class="filter-block"><legend>Price range</legend>
+        <div class="range-values"><span id="price-min-label">₦0</span><span id="price-max-label">Any</span></div>
+        <div class="range-wrap"><span class="range-track"></span><span class="range-fill" id="price-range-fill"></span><input id="price-min" type="range" min="0" max="100" value="0" aria-label="Minimum price"><input id="price-max" type="range" min="0" max="100" value="100" aria-label="Maximum price"></div>
+      </fieldset>
+      <fieldset class="filter-block"><legend>Gender</legend><div class="check-row"><label><input type="checkbox" name="gender" value="male"><i class="fa-solid fa-mars" aria-hidden="true"></i><span>Male</span></label><label><input type="checkbox" name="gender" value="female"><i class="fa-solid fa-venus" aria-hidden="true"></i><span>Female</span></label></div></fieldset>
+      <fieldset class="filter-block last-filter"><legend>Location</legend><div class="custom-select" id="location-select">
+  <button class="custom-select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+    <i class="fa-solid fa-location-dot trigger-icon" aria-hidden="true"></i>
+    <span class="custom-select-value" data-default="Anywhere in Nigeria">Anywhere in Nigeria</span>
+    <i class="fa-solid fa-chevron-down custom-select-arrow" aria-hidden="true"></i>
+  </button>
+  <ul class="custom-select-options" role="listbox" id="location-filter-options">
+    <div class="custom-select-search-wrap">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input type="text" class="custom-select-search-input" placeholder="Search locations...">
+    </div>
+    <li role="option" data-value="" class="selected">Anywhere in Nigeria</li>
+  </ul>
+</div></fieldset>
+      </div>
+      <button class="apply-mobile" id="apply-mobile" type="button">Show results</button>
+    </aside>
+
+    <section class="results-area" aria-live="polite">
+      <div class="results-toolbar"><div><span id="results-count">Loading listings…</span><small id="active-filter-copy">Pets and essentials available now</small></div><div class="toolbar-actions"><label class="toolbar-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="search-input" type="search" placeholder="Search breeds, pets, locations, accessories..."></label><button class="mobile-filter-trigger" id="filter-open" type="button"><i class="fa-solid fa-sliders" aria-hidden="true"></i> <span>Filter</span></button><div class="custom-select sort-wrapper" id="sort-wrapper">
+  <button class="custom-select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+    <span class="custom-select-label">Sort</span>
+    <span class="custom-select-value" data-default="Recommended">Recommended</span>
+    <i class="fa-solid fa-chevron-down custom-select-arrow" aria-hidden="true"></i>
+  </button>
+  <ul class="custom-select-options" role="listbox" id="sort-select-options">
+    <li role="option" data-value="recommended" class="selected">Recommended</li>
+    <li role="option" data-value="newest">Newest</li>
+    <li role="option" data-value="price-low">Price: low to high</li>
+    <li role="option" data-value="price-high">Price: high to low</li>
+  </ul>
+</div></div></div>
+      <div class="active-filters" id="active-filters"></div>
+      <div class="loading-state" id="loading-state"><span></span><p>Finding available listings…</p></div>
+      <div class="listing-grid" id="listings-grid"></div>
+      <div class="empty-state" id="empty-state" hidden><div><i class="fa-solid fa-magnifying-glass"></i></div><h2>No close matches yet</h2><p>Try clearing a filter or widening your price range.</p><button type="button" id="empty-reset">Reset filters</button></div>
+      <div class="error-state" id="error-state" hidden><div>!</div><h2>We couldn’t load listings</h2><p>Please check your connection and try again.</p><button type="button" id="retry-load">Try again</button></div>
     </section>
+  </main>
 
-    <div class="listings-container">
-        <div class="filters-section">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search by breed, location...">
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="filter-group">
-                <button class="filter-btn active" data-filter="all">All Pets</button>
-                <button class="filter-btn" data-filter="dogs">Dogs</button>
-                <button class="filter-btn" data-filter="cats">Cats</button>
-                <button class="filter-btn" data-filter="others">Others</button>
-                <button class="filter-btn" data-filter="accessories">Accessories</button>
-            </div>
-        </div>
+  <div class="filter-backdrop" id="filter-backdrop"></div>
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="listing-drawer" id="listing-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+    <div class="drawer-grip"></div><div class="drawer-header"><span>Listing details</span><button class="drawer-close" id="drawer-close" type="button" aria-label="Close listing details"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div><div id="drawer-content"></div>
+  </aside>
 
-        <div class="results-info">
-            <span id="resultsCount">Loading...</span>
-        </div>
+  <div class="app-modal" id="app-modal" aria-hidden="true">
+    <button class="app-backdrop" type="button" data-close-app aria-label="Close"></button>
+    <section class="app-card" role="dialog" aria-modal="true" aria-labelledby="app-title" tabindex="-1"><button class="app-close" type="button" data-close-app aria-label="Close">×</button><span class="app-badge">The complete Pettify experience</span><h2 id="app-title">Continue in the Pettify app.</h2><p id="app-copy">Message verified sellers, manage purchases and keep every detail in one secure place.</p><div class="app-actions"><div><a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener"><span>▶</span><small>GET IT ON<b>Google Play</b></small></a><a href="https://apps.apple.com/ng/app/pettify/id6757312160" target="_blank" rel="noopener"><span>●</span><small>DOWNLOAD ON THE<b>App Store</b></small></a></div><figure><img src="images/pettify-app-qr.webp" alt="QR code to download Pettify"><figcaption>Scan to download</figcaption></figure></div></section>
+  </div>
 
-        <div id="loadingContainer" class="loading-container">
-            <div class="loading-spinner"></div>
-            <p>Loading amazing pets for you...</p>
-        </div>
-
-        <div id="errorContainer" class="error-container" style="display: none;"></div>
-
-        <div id="listingsGrid" class="listings-grid"></div>
-
-        <div id="noResults" class="no-results" style="display: none;">
-            <i class="fas fa-search" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
-            <h3>No pets found</h3>
-            <p>Try adjusting your filters or search terms</p>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="petModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div class="modal-images" id="modalImages"></div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
-    </div>
-
-    <script src="scripts.js"></script>
-    <script>
-        let allPets = [];
-        let filteredPets = [];
-        let petsByCategory = { dogs: [], cats: [], others: [], accessories: [] };
-
-        async function fetchListings() {
-            try {
-                const response = await fetch('https://pettify-backend.onrender.com/api/v1/listings');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const result = await response.json();
-                console.log('API Response:', result);
-                
-                if (!result.success || !result.data) {
-                    throw new Error('Invalid response format');
-                }
-                
-                petsByCategory.dogs = result.data.dogs || [];
-                petsByCategory.cats = result.data.cats || [];
-                petsByCategory.others = result.data.others || [];
-                petsByCategory.accessories = result.data.accessories || [];
-                
-                allPets = [
-                    ...petsByCategory.dogs,
-                    ...petsByCategory.cats,
-                    ...petsByCategory.others,
-                    ...petsByCategory.accessories
-                ].filter(pet => !pet.isDeleted && pet.quantity > 0);
-                
-                filteredPets = [...allPets];
-                console.log('Total pets loaded:', allPets.length);
-                renderListings();
-                
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('loadingContainer').style.display = 'none';
-                document.getElementById('errorContainer').innerHTML = `
-                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
-                    <h3>Oops! Something went wrong</h3>
-                    <p>We couldn't load the listings.</p>
-                    <p style="color: #999; font-size: 0.9rem; margin-top: 10px;">
-                        <strong>Error:</strong> ${error.message}
-                    </p>
-                    <button onclick="location.reload()" style="margin-top: 20px; padding: 12px 24px; background: #ED770B; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
-                        Try Again
-                    </button>
-                `;
-                document.getElementById('errorContainer').style.display = 'block';
-            }
-        }
-
-        // Filter button functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                
-                if (filter === 'all') {
-                    filteredPets = [...allPets];
-                } else {
-                    filteredPets = petsByCategory[filter].filter(pet => !pet.isDeleted && pet.quantity > 0);
-                }
-                
-                renderListings();
-            });
-        });
-
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const term = e.target.value.toLowerCase();
-            
-            filteredPets = allPets.filter(pet => 
-                (pet.breed && pet.breed.toLowerCase().includes(term)) ||
-                (pet.name && pet.name.toLowerCase().includes(term)) ||
-                (getLocation(pet.location).toLowerCase().includes(term))
-            );
-            
-            renderListings();
-        });
-
-        function calculateAge(dateOfBirth) {
-            if (!dateOfBirth) return 'Age unknown';
-            
-            const birth = new Date(dateOfBirth);
-            const today = new Date();
-            
-            if (isNaN(birth.getTime())) return 'Age unknown';
-            
-            const totalMonths = (today.getFullYear() - birth.getFullYear()) * 12 + (today.getMonth() - birth.getMonth());
-            
-            if (totalMonths < 1) return 'Less than 1 month';
-            if (totalMonths < 12) return `${totalMonths} month${totalMonths > 1 ? 's' : ''}`;
-            
-            const years = Math.floor(totalMonths / 12);
-            const months = totalMonths % 12;
-            
-            if (months === 0) return `${years} year${years > 1 ? 's' : ''}`;
-            return `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}`;
-        }
-
-        function formatPrice(price) {
-            return `₦${Number(price).toLocaleString()}`;
-        }
-
-        function getLocation(locationObj) {
-            if (!locationObj) return 'Nigeria';
-            if (typeof locationObj === 'string') return locationObj;
-            if (locationObj.lga) return locationObj.lga;
-            if (locationObj.state) return locationObj.state;
-            return 'Nigeria';
-        }
-
-        async function shareListing(petId, event) {
-            event.stopPropagation();
-            
-            const pet = allPets.find(p => p._id === petId);
-            if (!pet) return;
-            
-            const shareUrl = `${window.location.origin}/listings.html?pet=${petId}`;
-            const shareText = `Check out this ${pet.breed} on Pettify! ${formatPrice(pet.price)}`;
-            
-            try {
-                if (navigator.share) {
-                    await navigator.share({
-                        title: `${pet.breed} - ${pet.gender}`,
-                        text: shareText,
-                        url: shareUrl
-                    });
-                } else {
-                    await navigator.clipboard.writeText(shareUrl);
-                    alert('Link copied to clipboard!');
-                }
-            } catch (err) {
-                console.log('Share failed:', err);
-            }
-        }
-
-        function renderListings() {
-            const grid = document.getElementById('listingsGrid');
-            const loadingContainer = document.getElementById('loadingContainer');
-            const noResults = document.getElementById('noResults');
-            const resultsCount = document.getElementById('resultsCount');
-
-            loadingContainer.style.display = 'none';
-
-            if (filteredPets.length === 0) {
-                grid.innerHTML = '';
-                noResults.style.display = 'block';
-                resultsCount.textContent = 'No items found';
-                return;
-            }
-
-            noResults.style.display = 'none';
-            resultsCount.textContent = `Showing ${filteredPets.length} item${filteredPets.length !== 1 ? 's' : ''}`;
-
-            grid.innerHTML = filteredPets.map(pet => {
-                const images = pet.pet_images || pet.accessoryImages || [];
-                const petImage = images[0] || 'images/placeholder-pet.jpg';
-                const genderIcon = pet.gender && pet.gender.toLowerCase() === 'male' ? 'mars' : 'venus';
-                const isAccessory = pet.category !== 'dogs' && pet.category !== 'cats' && pet.category !== 'others';
-                
-                return `
-                    <div class="pet-card" onclick="openModal('${pet._id}')">
-                        <div class="pet-image-container">
-                            <img src="${petImage}" alt="${pet.breed || pet.name || 'Product'}" class="pet-image" onerror="this.src='images/placeholder-pet.jpg'">
-                            ${!isAccessory && pet.vaccine_status !== undefined ? `
-                            <div class="vaccine-badge ${!pet.vaccine_status ? 'not-vaccinated' : ''}">
-                                <i class="fas fa-syringe"></i>
-                                ${pet.vaccine_status ? 'Vaccinated' : 'Not Vaccinated'}
-                            </div>
-                            ` : ''}
-                            <div class="share-btn" onclick="shareListing('${pet._id}', event)">
-                                <i class="fas fa-share-alt"></i>
-                            </div>
-                        </div>
-                        <div class="pet-info">
-                            <div class="pet-header">
-                                <h3 class="pet-name">${pet.breed || pet.name || 'Product'}</h3>
-                                ${!isAccessory && pet.gender ? `<span class="pet-gender"><i class="fas fa-${genderIcon}"></i></span>` : ''}
-                            </div>
-                            <p class="pet-breed">
-                                ${isAccessory 
-                                    ? (pet.category || 'Accessory') 
-                                    : `${pet.gender || ''} ${pet.gender ? '•' : ''} ${calculateAge(pet.date_of_birth)}`
-                                }
-                            </p>
-                            
-                            <div class="pet-details">
-                                <div class="detail-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>${getLocation(pet.location)}</span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-box"></i>
-                                    <span>${pet.quantity} available</span>
-                                </div>
-                            </div>
-
-                            <div class="pet-footer">
-                                <div class="pet-price">${formatPrice(pet.price)}</div>
-                                <button class="buy-now-btn" onclick="buyNow(event)">
-                                    <span class="btn-text-full">Buy Now</span>
-                                    <span class="btn-text-mobile">Buy</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function openModal(petId) {
-            const pet = allPets.find(p => p._id === petId);
-            if (!pet) return;
-
-            const modal = document.getElementById('petModal');
-            const modalImages = document.getElementById('modalImages');
-            const modalBody = document.getElementById('modalBody');
-
-            const images = pet.pet_images || pet.accessoryImages || [];
-            const mainImage = images[0] || 'images/placeholder-pet.jpg';
-            const genderIcon = pet.gender && pet.gender.toLowerCase() === 'male' ? 'mars' : 'venus';
-            const isAccessory = pet.category !== 'dogs' && pet.category !== 'cats' && pet.category !== 'others';
-            
-            modalImages.innerHTML = `<img src="${mainImage}" alt="${pet.breed || pet.name || 'Product'}" class="modal-image" onerror="this.src='images/placeholder-pet.jpg'">`;
-            
-            modalBody.innerHTML = `
-                <div class="pet-header">
-                    <h2 class="pet-name">${pet.breed || pet.name || 'Product'}</h2>
-                    ${!isAccessory && pet.gender ? `<span class="pet-gender" style="font-size: 2rem;"><i class="fas fa-${genderIcon}"></i></span>` : ''}
-                </div>
-                <p style="color: #666; font-size: 1.1rem; margin-bottom: 20px;">
-                    ${isAccessory 
-                        ? (pet.category || 'Pet Accessory') 
-                        : `${pet.gender || ''} ${pet.gender ? '•' : ''} ${calculateAge(pet.date_of_birth)}`
-                    }
-                </p>
-                
-                ${!isAccessory && pet.vaccine_status !== undefined ? `
-                <div class="vaccine-badge ${!pet.vaccine_status ? 'not-vaccinated' : ''}" style="position: static; margin-bottom: 20px;">
-                    <i class="fas fa-syringe"></i>
-                    ${pet.vaccine_status ? 'Vaccinated' : 'Not Vaccinated'}
-                </div>
-                ` : ''}
-
-                <h3 style="margin-top: 25px; margin-bottom: 15px;">Description</h3>
-                <p style="color: #555; line-height: 1.6; margin-bottom: 25px; white-space: pre-wrap;">${pet.description || 'No description provided.'}</p>
-
-                <h3 style="margin-bottom: 15px;">Details</h3>
-                <div style="display: grid; gap: 15px; margin-bottom: 25px;">
-                    <div class="detail-item" style="font-size: 1rem;">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span><strong>Location:</strong> ${getLocation(pet.location)}</span>
-                    </div>
-                    <div class="detail-item" style="font-size: 1rem;">
-                        <i class="fas fa-box"></i>
-                        <span><strong>Quantity Available:</strong> ${pet.quantity}</span>
-                    </div>
-                </div>
-
-                <div class="pet-footer" style="border: none; padding-top: 25px;">
-                    <div class="pet-price" style="font-size: 2rem;">${formatPrice(pet.price)}</div>
-                    <button class="buy-now-btn" style="padding: 15px 30px; font-size: 1.1rem;" onclick="buyNow(event)">
-                        <span class="btn-text-full">Buy Now on Pettify</span>
-                        <span class="btn-text-mobile">Buy Now</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            `;
-
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('petModal').classList.remove('active');
-        }
-
-        document.getElementById('petModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-        });
-
-        // SMART PLATFORM DETECTION
-        function buyNow(event) {
-            event.stopPropagation();
-            
-            // Detect platform
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            
-            // Check for iOS devices (iPhone, iPad, iPod)
-            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            
-            // Check for Mac devices (including MacBooks browsing on Safari)
-            const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent);
-            
-            // Check for Android devices
-            const isAndroid = /android/i.test(userAgent);
-            
-            // Redirect to appropriate store
-            if (isIOS || isMac) {
-                // iOS devices or Mac users go to App Store
-                window.open('https://apps.apple.com/ng/app/pettify/id6757312160', '_blank');
-            } else if (isAndroid) {
-                // Android devices go to Play Store
-                window.open('https://play.google.com/store/apps/details?id=com.pettify.app', '_blank');
-            } else {
-                // For other platforms, default to Play Store
-                window.open('https://play.google.com/store/apps/details?id=com.pettify.app', '_blank');
-            }
-        }
-
-        fetchListings();
-    </script>
+  <footer><div class="page-wrap footer-inner"><a href="index.html"><img src="images/web_logo.webp" alt="Pettify"></a><p>Made for pet lovers across Nigeria.</p><div><a href="terms.html">Terms</a><a href="policy.html">Privacy</a><a href="mailto:hello@pettify.co">Contact</a></div></div></footer>
+  <script src="global-shell.js"></script>
+  <script src="listings.js"></script>
 </body>
 </html>

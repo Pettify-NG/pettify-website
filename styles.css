@@ -958,7 +958,7 @@ footer {
     margin-bottom: 20px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     overflow: hidden;
-    background-image: url('images/pettify.png');
+    background-image: url('images/pettify.webp');
     background-size: 80px 80px;
     background-repeat: no-repeat;
     background-position: center;
@@ -969,7 +969,7 @@ footer {
     height: 40px;
     object-fit: contain;
     display: block;
-    content: url("/images/pettify.png");
+    content: url("images/pettify.webp");
 }
 
 .popup-title {
@@ -1695,10 +1695,154 @@ footer {
     }
 }
 
-const shakeCSS = `
-@keyframes gentleShake {
-    0%, 100% { transform: scale(1) translateY(0) rotate(0deg); }
-    25% { transform: scale(1.02) translateY(-2px) rotate(0.5deg); }
-    75% { transform: scale(1.02) translateY(-2px) rotate(-0.5deg); }
+/* ==========================================================================
+   ULTRA-FLUID ANIMATIONS & SCROLL REVEAL SUITE
+   ========================================================================== */
+
+/* 1. Scroll Reveal Base Classes */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
-`;
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-fade-in {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.reveal-fade-in.is-visible {
+  opacity: 1;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger Delays for Grids */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* 2. Hero Floating Animations */
+@keyframes floatHeroCard {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.8deg); }
+}
+
+@keyframes pulseBadgeGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(237, 119, 11, 0.25); }
+  50% { box-shadow: 0 0 0 10px rgba(237, 119, 11, 0); }
+}
+
+.hero-mosaic:hover .hero-mosaic-col {
+  animation-play-state: paused;
+}
+
+.hero-proof-stack {
+  animation: pulseBadgeGlow 3s ease-in-out infinite;
+}
+
+/* 3. Card & Button Interactive Micro-animations */
+.lcard {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+}
+
+.lcard:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  box-shadow: 0 20px 40px -12px rgba(20, 17, 15, 0.12) !important;
+}
+
+.lcard-img img {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.lcard:hover .lcard-img img {
+  transform: scale(1.06) !important;
+}
+
+/* Button Shimmer Sweep Effect */
+.btn--orange, .btn-primary, .btn-secondary {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.25s ease !important;
+}
+
+.btn--orange::before, .btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn--orange:hover::before, .btn-primary:hover::before {
+  left: 150%;
+}
+
+.btn--orange:active, .btn-primary:active {
+  transform: scale(0.96) translateY(0) !important;
+}
+
+/* Smooth Accordion Height Expansion */
+.faq-card .faq-a {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, padding 0.35s ease;
+}
+
+.faq-card.open .faq-a {
+  max-height: 300px;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll, .reveal-scale, .reveal-slide-left, .reveal-slide-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero-mosaic-col, .hero-proof-stack {
+    animation: none !important;
+  }
+}
