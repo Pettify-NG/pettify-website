@@ -153,16 +153,22 @@
   .hero-proof p{font-size:13.5px;color:var(--ink-soft);line-height:1.45;}
   .hero-proof p b{color:var(--ink);font-weight:700;}
 
-  .hero-mosaic{position:relative;display:flex;gap:14px;height:600px;overflow:hidden;mask-image:linear-gradient(to bottom, transparent 0%, black 4%, black 92%, transparent 100%);-webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 4%, black 92%, transparent 100%);}
-  .hero-mosaic-col{display:flex;flex-direction:column;gap:14px;padding-bottom:14px;flex:1;will-change:transform;}
-  .hero-mosaic-col img{width:100%;border-radius:18px;object-fit:cover;display:block;}
+  .hero-mosaic{--mosaic-gap:14px;--mosaic-half-gap:7px;position:relative;display:flex;gap:var(--mosaic-gap);height:600px;overflow:hidden;isolation:isolate;}
+  .hero-mosaic::before,.hero-mosaic::after{content:'';position:absolute;z-index:2;left:0;right:0;height:32px;pointer-events:none;}
+  .hero-mosaic::before{top:0;background:linear-gradient(to bottom,var(--white),transparent);}
+  .hero-mosaic::after{bottom:0;background:linear-gradient(to top,var(--white),transparent);}
+  .hero-mosaic-col{display:flex;flex:0 0 calc(50% - var(--mosaic-half-gap));flex-direction:column;gap:var(--mosaic-gap);padding-bottom:var(--mosaic-gap);will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden;}
+  .hero-mosaic-col img{width:100%;border-radius:18px;object-fit:cover;display:block;flex:none;}
   .hero-mosaic-col:nth-child(1) img{height:260px;}
   .hero-mosaic-col:nth-child(2) img{height:220px;}
   .hero-mosaic-col:nth-child(1){animation:mosaicScrollDown 22s linear infinite;}
   .hero-mosaic-col:nth-child(2){animation:mosaicScrollUp 20s linear infinite;margin-top:-80px;}
+  .hero-mosaic.is-js-animated .hero-mosaic-col{animation:none;}
 
-  @keyframes mosaicScrollDown{0%{transform:translate3d(0,0,0);}100%{transform:translate3d(0,-50%,0);}}
-  @keyframes mosaicScrollUp{0%{transform:translate3d(0,-50%,0);}100%{transform:translate3d(0,0,0);}}
+  @keyframes mosaicScrollDown{0%{transform:translate3d(0,0,0);}100%{transform:translate3d(0,-1096px,0);}}
+  @keyframes mosaicScrollUp{0%{transform:translate3d(0,-936px,0);}100%{transform:translate3d(0,0,0);}}
+  @keyframes mosaicScrollDownMobile{0%{transform:translate3d(0,0,0);}100%{transform:translate3d(0,-840px,0);}}
+  @keyframes mosaicScrollUpMobile{0%{transform:translate3d(0,-720px,0);}100%{transform:translate3d(0,0,0);}}
 
   @media (max-width:960px){
     .hero{padding:48px 0 0;}
@@ -173,10 +179,11 @@
     .hero{padding:36px 0 0;}
     .hero-copy h1{font-size:34px;}
     .hero-ctas .btn{width:100%;justify-content:center;}
-    .hero-mosaic{height:300px;gap:10px;}
-    .hero-mosaic-col{gap:10px;padding-bottom:10px;}
+    .hero-mosaic{--mosaic-gap:10px;--mosaic-half-gap:5px;height:300px;}
     .hero-mosaic-col img{border-radius:14px;}
+    .hero-mosaic-col:nth-child(1){animation-name:mosaicScrollDownMobile;}
     .hero-mosaic-col:nth-child(1) img{height:200px;}
+    .hero-mosaic-col:nth-child(2){animation-name:mosaicScrollUpMobile;}
     .hero-mosaic-col:nth-child(2) img{height:170px;}
   }
 
@@ -492,13 +499,13 @@
       <span>hello@pettify.co</span>
       <span>+234 701 859 0284</span>
     </div>
-    <div><a href="blogs.html">Pet Care Blog</a></div>
+    <div><a href="blogs">Pet Care Blog</a></div>
   </div>
 </div>
 
 <header class="main">
   <div class="wrap header-row">
-    <a href="index.html" class="logo" aria-label="Pettify home">
+    <a href="/" class="logo" aria-label="Pettify home">
       <img class="brand-logo" src="images/web_logo.webp" alt="Pettify">
     </a>
     <form class="search-bar" id="site-search" role="search">
@@ -506,10 +513,10 @@
         <button class="search-cat" id="category-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="category-menu">All categories <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
         <div class="category-menu" id="category-menu" role="menu" aria-label="Pet categories">
           <div class="category-menu-title">What are you looking for?</div>
-          <a class="category-option" href="listings.html?category=dogs" role="menuitem"><span class="category-emoji">🐶</span><span><b>Dogs</b><small>Puppies and adult dogs</small></span><span class="category-arrow">→</span></a>
-          <a class="category-option" href="listings.html?category=cats" role="menuitem"><span class="category-emoji">🐱</span><span><b>Cats</b><small>Kittens and adult cats</small></span><span class="category-arrow">→</span></a>
-          <a class="category-option" href="listings.html?category=others" role="menuitem"><span class="category-emoji">🐦</span><span><b>Other pets</b><small>Birds, rabbits and more</small></span><span class="category-arrow">→</span></a>
-          <a class="category-option" href="listings.html?category=accessories" role="menuitem"><span class="category-emoji">🦴</span><span><b>Accessories</b><small>Food, toys and essentials</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=dogs" role="menuitem"><span class="category-emoji">🐶</span><span><b>Dogs</b><small>Puppies and adult dogs</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=cats" role="menuitem"><span class="category-emoji">🐱</span><span><b>Cats</b><small>Kittens and adult cats</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=others" role="menuitem"><span class="category-emoji">🐦</span><span><b>Other pets</b><small>Birds, rabbits and more</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=accessories" role="menuitem"><span class="category-emoji">🦴</span><span><b>Accessories</b><small>Food, toys and essentials</small></span><span class="category-arrow">→</span></a>
           <a class="category-option" href="#app" role="menuitem"><span class="category-emoji">🩺</span><span><b>Vet care</b><small>Book trusted professionals</small></span><span class="category-arrow">→</span></a>
         </div>
       </div>
@@ -530,19 +537,19 @@
 
 <div class="navrow" id="global-navigation">
   <div class="mobile-menu-head">
-    <a class="mobile-brand" href="index.html"><img src="images/nav_logo.webp" alt=""><span>Pettify</span></a>
+    <a class="mobile-brand" href="/"><img src="images/nav_logo.webp" alt=""><span>Pettify</span></a>
     <button class="menu-close" type="button" aria-label="Close navigation">×</button>
   </div>
   <div class="wrap">
     <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="listings.html">Listings</a>
-      <a href="listings.html?category=dogs">Dogs</a>
-      <a href="listings.html?category=cats">Cats</a>
-      <a href="listings.html?category=accessories">Accessories</a>
-      <a href="vet-booking.html">Vet Booking</a>
-      <a href="#steps">Sell on Pettify</a>
-      <a href="blogs.html">Blog</a>
+      <a href="/">Home</a>
+      <a href="listings">Listings</a>
+      <a href="listings?category=dogs">Dogs</a>
+      <a href="listings?category=cats">Cats</a>
+      <a href="listings?category=accessories">Accessories</a>
+      <a href="vet-booking">Vet Booking</a>
+      <a href="https://dashboard.pettify.co/register" target="_blank" rel="noopener">List your pet</a>
+      <a href="blogs">Blog</a>
       <a href="#why">About Us</a>
       <a href="mailto:hello@pettify.co">Contact</a>
     </nav>
@@ -577,8 +584,8 @@
       <h1>Find Healthy <em>Verified Pets</em> Near You.</h1>
       <p class="lede">Every breeder and vendor on Pettify is background-checked and health-verified — so you can discover and adopt with complete confidence.</p>
       <div class="hero-ctas">
-        <a href="listings.html" class="btn btn--orange">Browse pets &nbsp;→</a>
-        <a href="#" class="btn btn--outline" data-app-modal data-modal-context="sell">Sell your pet</a>
+        <a href="listings" class="btn btn--orange">Browse pets &nbsp;→</a>
+        <a href="https://dashboard.pettify.co/register" class="btn btn--outline" target="_blank" rel="noopener">List your pet</a>
       </div>
       <div class="hero-proof">
         <div class="hero-proof-stack">
@@ -621,25 +628,25 @@
   <div class="wrap">
     <div class="cats-head reveal-on-scroll">
       <h2>Shop by category</h2>
-      <a href="listings.html" class="eyebrow">View all listings →</a>
+      <a href="listings" class="eyebrow">View all listings →</a>
     </div>
     <div class="cat-scroll reveal-scale">
-      <a class="cat-tile" href="listings.html?category=dogs">
+      <a class="cat-tile" href="listings?category=dogs">
         <img src="images/hero-redesign.webp" alt="Dogs available on Pettify" data-category-image="dogs">
         <span class="cat-count" data-category-count="dogs">Loading…</span>
         <div class="cat-label"><b>Dogs</b><span>Puppies & adults</span></div>
       </a>
-      <a class="cat-tile" href="listings.html?category=cats">
+      <a class="cat-tile" href="listings?category=cats">
         <img src="images/pettify.webp" alt="Cats available on Pettify" data-category-image="cats">
         <span class="cat-count" data-category-count="cats">Loading…</span>
         <div class="cat-label"><b>Cats</b><span>Kittens & adults</span></div>
       </a>
-      <a class="cat-tile" href="listings.html?category=others">
+      <a class="cat-tile" href="listings?category=others">
         <img src="images/pettify.webp" alt="Other pets available on Pettify" data-category-image="others">
         <span class="cat-count" data-category-count="others">Loading…</span>
         <div class="cat-label"><b>Other pets</b><span>Birds, rabbits & more</span></div>
       </a>
-      <a class="cat-tile" href="listings.html?category=accessories">
+      <a class="cat-tile" href="listings?category=accessories">
         <img src="images/buyers-preview.webp" alt="Pet accessories available on Pettify" data-category-image="accessories">
         <span class="cat-count" data-category-count="accessories">Loading…</span>
         <div class="cat-label"><b>Accessories</b><span>Food, leashes & more</span></div>
@@ -663,7 +670,7 @@
       <div class="listing-state">Loading the latest Pettify listings…</div>
     </div>
     <div class="listings-more reveal-on-scroll">
-      <a href="listings.html" class="btn btn--ink">See all listings</a>
+      <a href="listings" class="btn btn--ink">See all listings</a>
     </div>
   </div>
 </section>
@@ -805,7 +812,7 @@
     <div class="app-copy reveal-slide-right">
       <span class="eyebrow">The app</span>
       <h2>Browse and buy from your phone.</h2>
-      <p>The full buying experience — browsing, chat, payment and delivery tracking — lives in the Pettify app. The website is where sellers run their shop.</p>
+      <p>The full buying experience — browsing, chat, payment and delivery tracking — lives in the Pettify app. A dedicated vendor app is coming soon, but for now, sellers manage their listings via our secure web dashboard.</p>
       <div class="store-btns">
         <a href="https://play.google.com/store/apps/details?id=com.pettify.app" class="store-btn" target="_blank" rel="noopener"><b><i class="fa-brands fa-google-play"></i></b><span><small>Get it on</small><b>Google Play</b></span></a>
         <a href="https://apps.apple.com/ng/app/pettify/id6757312160" class="store-btn" target="_blank" rel="noopener"><b><i class="fa-brands fa-apple"></i></b><span><small>Download on the</small><b>App Store</b></span></a>
@@ -838,8 +845,8 @@
         <h2>Loved by buyers & sellers across Nigeria!</h2>
         <p class="testi-subtext">Our community's stories highlight the trust, verified health records, and seamless experience behind every pet listing.</p>
         <div class="testi-btn-group">
-          <a href="listings.html" class="btn btn--orange">Browse pets</a>
-          <a href="#" class="btn btn--black-pill" data-app-modal data-modal-context="sell">Sell your pet</a>
+          <a href="listings" class="btn btn--orange">Browse pets</a>
+          <a href="https://dashboard.pettify.co/register" class="btn btn--black-pill" target="_blank" rel="noopener">List your pet</a>
         </div>
       </div>
       
@@ -977,7 +984,7 @@
     </div>
     <div class="foot-cols">
       <div class="foot-col">
-        <a href="index.html" class="logo" style="margin-bottom:14px;">
+        <a href="/" class="logo" style="margin-bottom:14px;">
           <img class="brand-logo" src="images/web_logo.webp" alt="Pettify">
         </a>
         <p>Nigeria's leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
@@ -985,8 +992,8 @@
       <div class="foot-col">
         <h5>Product</h5>
         <ul>
-          <li><a href="listings.html">Listings</a></li>
-          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="listings">Listings</a></li>
+          <li><a href="blogs">Blog</a></li>
           <li><a href="#steps">Pricing</a></li>
           <li><a href="#faq">FAQs</a></li>
         </ul>
@@ -994,8 +1001,8 @@
       <div class="foot-col">
         <h5>Legal</h5>
         <ul>
-          <li><a href="terms.html">Terms of use</a></li>
-          <li><a href="policy.html">Privacy policy</a></li>
+          <li><a href="terms">Terms of use</a></li>
+          <li><a href="policy">Privacy policy</a></li>
         </ul>
       </div>
       <div class="foot-col">

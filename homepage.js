@@ -158,7 +158,7 @@
     const link = document.createElement("a");
     const delayClass = "reveal-delay-" + (((index || 0) % 4) + 1);
     link.className = "lcard reveal-on-scroll " + delayClass;
-    link.href = "listings.html?pet=" + encodeURIComponent(item._id || "");
+    link.href = "listings?pet=" + encodeURIComponent(item._id || "");
     link.setAttribute("aria-label", "View " + (item.name || item.breed || "listing"));
 
     link.addEventListener("click", function (event) {
@@ -259,7 +259,7 @@
         state.className = "listing-state";
         state.append("We could not load live listings just now. ");
         const link = document.createElement("a");
-        link.href = "listings.html";
+        link.href = "listings";
         link.textContent = "Open the full listings page";
         state.appendChild(link);
         grid.replaceChildren(state);
@@ -270,7 +270,7 @@
   function makeBlogCard(post) {
     const link = document.createElement("a");
     link.className = "blog-card";
-    link.href = "blog-details.html?slug=" + encodeURIComponent(post.slug || post._id || "");
+    link.href = "blog-details?slug=" + encodeURIComponent(post.slug || post._id || "");
 
     const imageWrap = document.createElement("div");
     imageWrap.className = "blog-img";
@@ -320,7 +320,7 @@
       if (!posts.length) {
         const link = document.createElement("a");
         link.className = "blog-card is-loading";
-        link.href = "blogs.html";
+        link.href = "blogs";
         link.textContent = "Explore Pettify pet-care articles";
         grid.appendChild(link);
       }
@@ -328,7 +328,7 @@
       console.error("Unable to load homepage blogs:", error);
       const link = document.createElement("a");
       link.className = "blog-card is-loading";
-      link.href = "blogs.html";
+      link.href = "blogs";
       link.textContent = "Open the pet-care blog";
       grid.replaceChildren(link);
     }
@@ -412,7 +412,7 @@
       search.addEventListener("submit", function (event) {
         event.preventDefault();
         const query = new FormData(search).get("search");
-        window.location.href = "listings.html?search=" + encodeURIComponent(String(query || "").trim());
+        window.location.href = "listings?search=" + encodeURIComponent(String(query || "").trim());
       });
     }
 
@@ -538,6 +538,49 @@
     });
   }
 
+  function initHeroMosaicAnimation() {
+    const mosaic = document.querySelector(".hero-mosaic");
+    if (!mosaic || !("requestAnimationFrame" in window)) return;
+
+    const columns = mosaic.querySelectorAll(".hero-mosaic-col");
+    if (columns.length !== 2) return;
+
+    const progress = [0, 0];
+    const durations = [22000, 20000];
+    let lastTimestamp = null;
+
+    mosaic.classList.add("is-js-animated");
+
+    function animate(timestamp) {
+      if (lastTimestamp === null) lastTimestamp = timestamp;
+
+      // Capping the delta prevents iOS from racing to catch up after Safari
+      // pauses rendering during a scroll, tab switch, or power-state change.
+      const elapsed = Math.min(Math.max(timestamp - lastTimestamp, 0), 50);
+      const isMobile = window.innerWidth <= 520;
+      const distances = isMobile ? [840, 720] : [1096, 936];
+
+      progress[0] = (progress[0] + elapsed / durations[0]) % 1;
+      progress[1] = (progress[1] + elapsed / durations[1]) % 1;
+
+      columns[0].style.transform = "translate3d(0," + (-distances[0] * progress[0]).toFixed(3) + "px,0)";
+      columns[1].style.transform = "translate3d(0," + (-distances[1] * (1 - progress[1])).toFixed(3) + "px,0)";
+
+      lastTimestamp = timestamp;
+      window.requestAnimationFrame(animate);
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      lastTimestamp = null;
+    });
+    window.addEventListener("pageshow", function () {
+      lastTimestamp = null;
+    });
+
+    window.requestAnimationFrame(animate);
+  }
+
+  initHeroMosaicAnimation();
   wireInteractions();
   wireTestiFilters();
   loadListings().then(function() {
