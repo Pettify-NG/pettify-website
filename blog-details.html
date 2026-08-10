@@ -19,7 +19,7 @@
     <main class="blog-detail-container">
 
         <!-- Back Button -->
-        <a href="blogs.html" class="back-btn">
+        <a href="blogs" class="back-btn">
             <span>← Back to pet-care articles</span>
         </a>
 
@@ -122,7 +122,7 @@
                     <i class="fas fa-exclamation-triangle" style="font-size: 3.5rem; color: #ED770B; margin-bottom: 1rem;"></i>
                     <h2>Article Not Found</h2>
                     <p style="color: #666; margin: 0.5rem 0 1.5rem;">No blog post identifier was specified.</p>
-                    <a href="blogs.html" class="cta-btn">Back to Blog</a>
+                    <a href="blogs" class="cta-btn">Back to Blog</a>
                 `;
                 return;
             }
@@ -156,7 +156,7 @@
                     <i class="fas fa-exclamation-circle" style="font-size: 3.5rem; color: #ED770B; margin-bottom: 1rem;"></i>
                     <h2>Oops! Something went wrong</h2>
                     <p style="color: #666; margin: 0.5rem 0 1.5rem;">${err.message}</p>
-                    <a href="blogs.html" class="cta-btn">Back to All Blogs</a>
+                    <a href="blogs" class="cta-btn">Back to All Blogs</a>
                 `;
             }
         }
@@ -284,7 +284,7 @@
                     const cleanExcerpt = stripHtmlTags(b.excerpt || b.content || '');
 
                     return `
-                        <article class="blog-card" onclick="window.location.href='blog-details.html?slug=${encodeURIComponent(slug)}'">
+                        <article class="blog-card" onclick="window.location.href='blog-details?slug=${encodeURIComponent(slug)}'">
                             <div class="blog-card-img-wrapper">
                                 <span class="category-badge">${escapeHtml(cat)}</span>
                                 <img src="${escapeHtml(cover)}" alt="${escapeHtml(title)}" onerror="this.onerror=null; this.src='images/pettify.webp';">

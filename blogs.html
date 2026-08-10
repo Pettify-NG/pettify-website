@@ -203,7 +203,7 @@
             const slug = blog.slug || blog._id;
 
             return `
-                <article class="blog-card" onclick="window.location.href='blog-details.html?slug=${encodeURIComponent(slug)}'">
+                <article class="blog-card" onclick="window.location.href='blog-details?slug=${encodeURIComponent(slug)}'">
                     <div class="blog-card-img-wrapper">
                         <span class="category-badge">${escapeHtml(category)}</span>
                         <img src="${escapeHtml(coverImg)}" alt="${escapeHtml(title)}" onerror="this.onerror=null; this.src='images/pettify.webp';">

@@ -10,7 +10,7 @@
   }
 
   const onHome = /(?:^|\/)index\.html$/.test(location.pathname) || /\/$/.test(location.pathname);
-  const pageLink = function (hash) { return onHome ? hash : "index.html" + hash; };
+  const pageLink = function (hash) { return onHome ? hash : "/" + hash; };
 
   const headerHTML = `
 <div class="micro">
@@ -19,13 +19,13 @@
       <span>hello@pettify.co</span>
       <span>+234 701 859 0284</span>
     </div>
-    <div><a href="blogs.html">Pet Care Blog</a></div>
+    <div><a href="blogs">Pet Care Blog</a></div>
   </div>
 </div>
 
 <header class="main">
   <div class="wrap header-row">
-    <a href="index.html" class="logo" aria-label="Pettify home">
+    <a href="/" class="logo" aria-label="Pettify home">
       <img class="brand-logo" src="images/web_logo.webp" alt="Pettify">
     </a>
     <form class="search-bar" id="site-search" role="search">
@@ -33,11 +33,11 @@
         <button class="search-cat" id="category-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="category-menu">All categories <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
         <div class="category-menu" id="category-menu" role="menu" aria-label="Pet categories">
           <div class="category-menu-title">What are you looking for?</div>
-          <a class="category-option" href="listings.html?category=dogs" role="menuitem"><span class="category-emoji">🐶</span><span><b>Dogs</b><small>Puppies and adult dogs</small></span><span class="category-arrow">→</span></a>
-          <a class="category-option" href="listings.html?category=cats" role="menuitem"><span class="category-emoji">🐱</span><span><b>Cats</b><small>Kittens and adult cats</small></span><span class="category-arrow">→</span></a>
-          <a class="category-option" href="listings.html?category=others" role="menuitem"><span class="category-emoji">🐦</span><span><b>Other pets</b><small>Birds, rabbits and more</small></span><span class="category-arrow">→</span></a>
-          <a class="category-option" href="listings.html?category=accessories" role="menuitem"><span class="category-emoji">🦴</span><span><b>Accessories</b><small>Food, toys and essentials</small></span><span class="category-arrow">→</span></a>
-          <a class="category-option" href="vet-booking.html" role="menuitem"><span class="category-emoji">🩺</span><span><b>Vet care</b><small>Book trusted professionals</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=dogs" role="menuitem"><span class="category-emoji">🐶</span><span><b>Dogs</b><small>Puppies and adult dogs</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=cats" role="menuitem"><span class="category-emoji">🐱</span><span><b>Cats</b><small>Kittens and adult cats</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=others" role="menuitem"><span class="category-emoji">🐦</span><span><b>Other pets</b><small>Birds, rabbits and more</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings?category=accessories" role="menuitem"><span class="category-emoji">🦴</span><span><b>Accessories</b><small>Food, toys and essentials</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="vet-booking" role="menuitem"><span class="category-emoji">🩺</span><span><b>Vet care</b><small>Book trusted professionals</small></span><span class="category-arrow">→</span></a>
         </div>
       </div>
       <input class="search-input" name="search" type="search" aria-label="Search listings" placeholder="Search breeds, pets, locations, accessories...">
@@ -57,20 +57,20 @@
 
 <div class="navrow" id="global-navigation">
   <div class="mobile-menu-head">
-    <a class="mobile-brand" href="index.html"><img src="images/nav_logo.webp" alt=""><span>Pettify</span></a>
+    <a class="mobile-brand" href="/"><img src="images/nav_logo.webp" alt=""><span>Pettify</span></a>
     <button class="menu-close" type="button" aria-label="Close navigation">×</button>
   </div>
   <div class="wrap">
     <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="listings.html">Listings</a>
-      <a href="listings.html?category=dogs">Dogs</a>
-      <a href="listings.html?category=cats">Cats</a>
-      <a href="listings.html?category=accessories">Accessories</a>
-      <a href="vet-booking.html">Vet Booking</a>
-      <a href="#" data-app-modal data-modal-context="sell">Sell your pet</a>
-      <a href="blogs.html">Blog</a>
-      <a href="about.html">About Us</a>
+      <a href="/">Home</a>
+      <a href="listings">Listings</a>
+      <a href="listings?category=dogs">Dogs</a>
+      <a href="listings?category=cats">Cats</a>
+      <a href="listings?category=accessories">Accessories</a>
+      <a href="vet-booking">Vet Booking</a>
+      <a href="https://dashboard.pettify.co/register" target="_blank" rel="noopener">List your pet</a>
+      <a href="blogs">Blog</a>
+      <a href="about">About Us</a>
       <a href="https://www.coachli.co/pettify" target="_blank" rel="noopener">Book a Call</a>
     </nav>
     <div class="mobile-menu-extra">
@@ -102,11 +102,11 @@
   <div class="wrap">
     <div class="foot-top">
       <h3>Ready to find your pawfect companion?</h3>
-      <a href="listings.html" class="btn btn--orange">Browse pets</a>
+      <a href="listings" class="btn btn--orange">Browse pets</a>
     </div>
     <div class="foot-cols">
       <div class="foot-col">
-        <a href="index.html" class="logo shell-footer-logo"><img class="brand-logo" src="images/web_logo.webp" alt="Pettify"></a>
+        <a href="/" class="logo shell-footer-logo"><img class="brand-logo" src="images/web_logo.webp" alt="Pettify"></a>
         <p>Nigeria's leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
         <div class="foot-app-stores" style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
           <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener" class="foot-store-btn" aria-label="Get Pettify on Google Play">
@@ -122,17 +122,17 @@
       <div class="foot-col">
         <h5>Product</h5>
         <ul>
-          <li><a href="listings.html">Listings</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="listings">Listings</a></li>
+          <li><a href="blogs">Blog</a></li>
+          <li><a href="about">About us</a></li>
+          <li><a href="contact">Contact us</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h5>Legal</h5>
         <ul>
-          <li><a href="terms.html">Terms of use</a></li>
-          <li><a href="policy.html">Privacy policy</a></li>
+          <li><a href="terms">Terms of use</a></li>
+          <li><a href="policy">Privacy policy</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -273,7 +273,7 @@
         event.preventDefault();
         const input = search.querySelector(".search-input");
         const query = input ? input.value : "";
-        window.location.href = "listings.html?search=" + encodeURIComponent(String(query || "").trim());
+        window.location.href = "listings?search=" + encodeURIComponent(String(query || "").trim());
       });
     }
 
