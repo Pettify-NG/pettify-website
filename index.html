@@ -1,1578 +1,1078 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pettify - Nigeria's #1 Pet Marketplace</title>
-    <link rel="icon" href="images/pettify.png" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #ED770B;
-            --primary-dark: #d96a09;
-            --primary-light: #ff8c2e;
-            --bg-cream: #FFFBEC;
-            --text-dark: #2C2C2C;
-            --text-light: #666;
-        }
-
-        body {
-            font-family: "DM Sans", sans-serif;
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            backdrop-filter: blur(20px);
-            background: rgba(255, 251, 236, 0.9);
-            z-index: 1000;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            padding: 0.7rem 5%;
-            background: rgba(255, 251, 236, 0.95);
-        }
-
-        .logo {
-            height: 45px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .cta-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(237, 119, 11, 0.3);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(237, 119, 11, 0.4);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--primary);
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 5% 4rem;
-            background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(237, 119, 11, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            top: -200px;
-            right: -200px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
-        }
-
-        .hero-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            animation: slideUp 0.8s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            animation: slideUp 0.8s ease 0.2s backwards;
-        }
-
-        .hero-checklist {
-            list-style: none;
-            margin: 2rem 0;
-            animation: slideUp 0.8s ease 0.4s backwards;
-        }
-
-        .hero-checklist li {
-            padding: 1rem 0;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .hero-checklist li::before {
-            content: '✓';
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2.5rem;
-            animation: slideUp 0.8s ease 0.6s backwards;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            border: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(237, 119, 11, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(237, 119, 11, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            border: 2px solid var(--primary);
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .hero-image {
-            position: relative;
-            animation: slideUp 0.8s ease 0.4s backwards;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            transition: transform 0.5s ease;
-        }
-
-        .hero-image:hover img {
-            transform: scale(1.03) rotate(1deg);
-        }
-
-        /* Stats Section */
-        .stats {
-            background: white;
-            padding: 3rem 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            display: block;
-        }
-
-        .stat-label {
-            color: var(--text-light);
-            margin-top: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 5%;
-            background: linear-gradient(to bottom, white 0%, var(--bg-cream) 100%);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(237, 119, 11, 0.15);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .testimonials-slider {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            background: linear-gradient(135deg, #fff 0%, var(--bg-cream) 100%);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .testimonial-author {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            padding: 5rem 5%;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            top: -200px;
-            left: -100px;
-        }
-
-        .cta-section h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-section p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-white {
-            background: white;
-            color: var(--primary);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            border: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .btn-white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-        }
-
-        /* Footer */
-        footer {
-            background: #2C2C2C;
-            color: white;
-            padding: 4rem 5% 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-        }
-
-        .footer-section h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-icons a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #999;
-        }
-
-        /* Tab Section Styles */
-        .download {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            background: var(--bg-cream);
-            padding: 0.5rem;
-            border-radius: 50px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .tab {
-            padding: 0.8rem 2rem;
-            background: transparent;
-            border: none;
-            border-radius: 50px;
-            color: var(--primary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tab.active {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(237, 119, 11, 0.3);
-        }
-
-        .tab-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .active-tab {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .inactive-tab {
-            display: none;
-        }
-
-        .active-text h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .active-text p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .download-active-btn,
-        .vendor-active-btn {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .app-btn,
-        .vendor-btn {
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 15px rgba(237, 119, 11, 0.3);
-            text-decoration: none;
-        }
-
-        .app-btn:hover:not(:disabled),
-        .vendor-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(237, 119, 11, 0.4);
-        }
-
-        .app-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .responsive-appPreview,
-        .responsive-laptopImage {
-            width: 50%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-
-        /* Company Section Styles */
-        .company {
-            padding: 6rem 5%;
-            background: linear-gradient(to bottom, white 0%, var(--bg-cream) 100%);
-        }
-
-        .team-slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 2rem;
-            padding: 2rem 0;
-            scroll-behavior: smooth;
-        }
-
-        .team-slider::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .team-slider::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .team-slider::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        .team-slide {
-            min-width: 100%;
-            scroll-snap-align: start;
-        }
-
-        .founder-container {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .company-bio {
-            text-align: center;
-        }
-
-        .company-bio h2 {
-            color: var(--primary);
-            margin: 1rem 0 0.5rem;
-        }
-
-        .company-bio h3 {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .responsive-company-image {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-
-        .company-story {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        }
-
-        .company-story p {
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-            color: var(--text-dark);
-        }
-
-        .co-founders-slide {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: 20px;
-            padding: 3rem;
-            min-height: 500px;
-            display: flex;
-            align-items: center;
-        }
-
-        .team-members-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            width: 100%;
-        }
-
-        .team-member {
-            text-align: center;
-            color: white;
-        }
-
-        .team-member h2 {
-            color: white !important;
-            margin: 1rem 0 0.5rem;
-        }
-
-        .team-member h3 {
-            color: rgba(255,255,255,0.9) !important;
-            margin-bottom: 1rem;
-        }
-
-        .team-member-img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
-
-        .media-icon {
-            font-size: 35px;
-            color: white;
-        }
-
-        .scroll-indicator {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--primary);
-            font-weight: 600;
-            animation: pulse 2s infinite;
-        }
-
-        /* Pricing Dropdown */
-        .pricing-dropdown-wrapper {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-            z-index: 1000;
-            min-width: 400px;
-            max-width: 500px;
-            margin-top: 1rem;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        .dropdown-content.active {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        .dropdown-content h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .dropdown-content h4 {
-            color: var(--primary);
-            margin: 1.5rem 0 0.5rem;
-        }
-
-        .dropdown-content p {
-            color: var(--text-dark);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .pricing-section {
-            background: var(--bg-cream);
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-        }
-
-        .disclaimer {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-top: 1.5rem;
-        }
-
-        /* FAQ Styles */
-        .faqs {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .faq-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .questions {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .question {
-            padding: 1.2rem 1.5rem;
-            background: var(--bg-cream);
-            border: 2px solid transparent;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .question:hover {
-            border-color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .question.active {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .answers {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-        }
-
-        .answer {
-            display: none;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .answer.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Vendor Frame Styles */
-        .vendor-frame {
-            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
-            padding: 5rem;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
-        }
-
-        .vendor-content h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
-        }
-
-        .steps-list {
-            list-style: none;
-            margin: 2rem auto;
-            max-width: 400px;
-        }
-
-        .steps-list li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            font-size: 1.2rem;
-            color: var(--text-dark);
-        }
-
-        .steps-list i {
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .demo-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(237, 119, 11, 0.3);
-        }
-
-        .demo-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(237, 119, 11, 0.4);
-        }
-
-        /* Mobile Menu */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: rgba(255, 251, 236, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 2rem;
-                transition: left 0.4s ease;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .hero-image {
-                order: -1;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-            }
-
-            .active-tab {
-                grid-template-columns: 1fr;
-            }
-
-            .founder-container {
-                grid-template-columns: 1fr;
-            }
-
-            .team-members-container {
-                grid-template-columns: 1fr;
-            }
-
-            .faq-container {
-                grid-template-columns: 1fr;
-            }
-
-            .dropdown-content {
-                position: fixed;
-                left: 5%;
-                right: 5%;
-                top: 70px;
-                transform: none;
-                min-width: unset;
-                width: 90%;
-                max-height: calc(100vh - 90px);
-                overflow-y: auto;
-                margin: 0;
-                padding: 1.5rem;
-                font-size: 0.95rem;
-            }
-
-            .dropdown-content h3 {
-                font-size: 1.3rem;
-            }
-
-            .dropdown-content h4 {
-                font-size: 1.1rem;
-            }
-
-            .dropdown-content p {
-                font-size: 0.95rem;
-            }
-
-            .vendor-frame {
-                padding: 3rem 2rem;
-            }
-
-            .tabs {
-                max-width: 100%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pettify — Nigeria's Pet Marketplace</title>
+<meta name="description" content="Discover verified pets, trusted sellers, pet accessories and veterinary care on Nigeria's pet marketplace.">
+<link rel="icon" href="images/favicon.ico">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="listing.css">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --paper:#F6F3EC;
+    --ink:#14110F;
+    --ink-2:#221D18;
+    --ink-soft:#5B5349;
+    --orange:#ED770B;
+    --orange-deep:#C96208;
+    --orange-tint:#FCE9D6;
+    --green:#1E7245;
+    --green-tint:#E6F0E9;
+    --line:rgba(20,17,15,0.12);
+    --line-on-dark:rgba(255,255,255,0.14);
+    --display:'Outfit', sans-serif;
+    --body:'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono:'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--body);background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  body.overlay-open{overflow:hidden;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+  @media (max-width:720px){.wrap{padding:0 20px;}}
+  h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-0.01em;line-height:1.05;}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;color:var(--ink-soft);}
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);display:inline-block;flex-shrink:0;}
+  .eyebrow--light{color:rgba(255,255,255,0.7);}
+
+  .tag{position:relative;background:var(--white);border:1.5px solid var(--ink);border-radius:5px 14px 14px 5px;padding:7px 14px 7px 24px;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;}
+  .tag::before{content:'';position:absolute;left:9px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:var(--white);border:1.5px solid var(--ink);}
+  .tag--dark{background:var(--ink);border-color:var(--ink);color:var(--white);}
+  .tag--dark::before{background:var(--ink);border-color:var(--white);}
+  .tag--green{background:var(--green-tint);border-color:var(--green);color:var(--green);}
+  .tag--green::before{background:var(--green-tint);border-color:var(--green);}
+
+  .btn{font-family:var(--body);font-weight:700;font-size:14px;padding:12px 22px;border-radius:100px;display:inline-flex;align-items:center;gap:8px;transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, background .2s;white-space:nowrap;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn--orange{background:var(--orange);color:var(--white);}
+  .btn--orange:hover{box-shadow:0 10px 24px -8px rgba(237,119,11,0.5);}
+  .btn--ink{background:var(--ink);color:var(--white);}
+  .btn--ink:hover{box-shadow:0 10px 24px -8px rgba(20,17,15,0.35);}
+  .btn--outline{background:transparent;border:1.5px solid var(--ink);color:var(--ink);}
+  .btn--outline:hover{background:var(--ink);color:var(--white);}
+  .btn--outline-light{background:transparent;border:1.5px solid rgba(255,255,255,0.4);color:var(--white);}
+  .btn--outline-light:hover{border-color:var(--white);}
+
+  /* ============ MICRO UTILITY BAR ============ */
+  .micro{background:var(--ink-2);color:rgba(255,255,255,0.75);font-family:var(--mono);font-size:11.5px;}
+  .micro .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 32px;gap:16px;}
+  .micro a{transition:color .2s;}
+  .micro a:hover{color:var(--white);}
+  .micro-left{display:flex;gap:18px;}
+  @media (max-width:640px){.micro-left span:last-child{display:none;}}
+
+  /* ============ HEADER ============ */
+  header.main{background:var(--ink);color:var(--white);position:sticky;top:0;z-index:50;}
+  .header-row{display:flex;align-items:center;gap:20px;padding:18px 32px;}
+  .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .logo-mark{width:34px;height:34px;border-radius:5px 12px 12px 5px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;color:var(--white);font-size:16px;flex-shrink:0;}
+  .logo-word{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-0.01em;}
+
+  .search-bar{flex:1;display:flex;align-items:center;background:var(--white);border-radius:100px;height:48px;max-width:640px;position:relative;z-index:5;}
+  .search-category{height:100%;position:relative;flex-shrink:0;}
+  .search-cat{display:flex;align-items:center;gap:7px;padding:0 16px;height:100%;font-size:13.5px;color:var(--ink);border-right:1px solid var(--line);white-space:nowrap;font-weight:600;border-radius:100px 0 0 100px;}
+  .search-cat:hover,.search-cat[aria-expanded="true"]{background:var(--paper);}
+  .search-cat svg{width:12px;height:12px;stroke:var(--ink-soft);flex-shrink:0;}
+  .search-cat[aria-expanded="true"] svg{transform:rotate(180deg);}
+  .category-menu{position:absolute;top:calc(100% + 12px);left:0;width:310px;padding:10px;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:22px;box-shadow:0 28px 60px -18px rgba(20,17,15,.38);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px) scale(.98);transform-origin:top left;transition:opacity .2s,transform .2s,visibility .2s;}
+  .category-menu.open{opacity:1;visibility:visible;pointer-events:auto;transform:none;}
+  .category-menu-title{padding:8px 10px 10px;font-family:var(--display);font-size:13px;color:var(--ink-soft);}
+  .category-option{display:grid;grid-template-columns:42px 1fr 22px;align-items:center;gap:10px;padding:10px;border-radius:14px;transition:background .2s,transform .2s;}
+  .category-option:hover{background:var(--orange-tint);transform:translateX(2px);}
+  .category-emoji{width:42px;height:42px;border-radius:12px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:22px;}
+  .category-option b{display:block;font-family:var(--display);font-size:14px;margin-bottom:2px;}
+  .category-option small{display:block;color:var(--ink-soft);font-size:11px;}
+  .category-arrow{font-size:18px;color:var(--orange);text-align:center;}
+  .search-input{flex:1;border:none;outline:none;padding:0 16px;font-family:var(--body);font-size:14.5px;color:var(--ink);background:transparent;min-width:0;}
+  .search-input::placeholder{color:var(--ink-soft);}
+  .search-go{width:42px;height:42px;margin-right:3px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s;}
+  .search-go:hover{background:var(--orange-deep);}
+  .search-go svg{width:16px;height:16px;stroke:var(--white);}
+  @media (max-width:860px){.search-bar{display:none;}}
+
+  .help-block{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .help-block .ic{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .help-block .ic svg{width:16px;height:16px;stroke:var(--white);}
+  .help-block .txt{font-size:12px;line-height:1.35;}
+  .help-block .txt b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:rgba(255,255,255,0.55);text-transform:uppercase;}
+  .help-block .txt span{font-weight:700;}
+  @media (max-width:1080px){.help-block{display:none;}}
+
+  .icon-cluster{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto;}
+  .icon-btn{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);transition:background .2s;position:relative;}
+  .icon-btn:hover{background:rgba(255,255,255,0.16);}
+  .icon-btn svg{width:16px;height:16px;stroke:var(--white);}
+  .icon-btn .dot{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--orange);border:1.5px solid var(--ink);}
+  .burger{display:none;width:38px;height:38px;align-items:center;justify-content:center;flex-shrink:0;}
+  .burger svg{width:20px;height:20px;stroke:var(--white);}
+  @media (max-width:640px){.burger{display:flex;}.icon-cluster{gap:4px;}}
+
+  .navrow{background:var(--white);border-bottom:1px solid var(--line);}
+  .mobile-menu-head,.mobile-menu-extra{display:none;}
+  .navlinks{display:flex;gap:30px;padding:13px 32px;font-size:13.5px;font-weight:600;overflow-x:auto;scrollbar-width:none;}
+  .navlinks::-webkit-scrollbar{display:none;}
+  .navlinks a{white-space:nowrap;display:flex;align-items:center;gap:5px;opacity:0.8;transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;color:var(--orange-deep);}
+  .navlinks svg{width:10px;height:10px;stroke:currentColor;opacity:0.6;}
+  @media (min-width:641px){
+    header.main,.header-row{height:84px;}
+    .navrow{position:sticky;top:84px;z-index:45;box-shadow:0 10px 28px -24px rgba(20,17,15,.55);}
+  }
+
+  .stripe{background:var(--green);color:var(--white);font-family:var(--mono);font-size:12px;}
+  .stripe .wrap{display:flex;justify-content:space-between;align-items:center;padding:9px 32px;gap:16px;flex-wrap:wrap;}
+  .stripe-left{display:flex;gap:22px;flex-wrap:wrap;}
+  .stripe-left span{display:flex;align-items:center;gap:6px;}
+  .stripe-right{display:flex;gap:18px;}
+  .stripe-right a{opacity:0.9;}
+  .stripe-right a:hover{opacity:1;}
+  @media (max-width:760px){.stripe-left span:nth-child(3),.stripe-right a:nth-child(1){display:none;}}
+
+  /* ============ HERO — split text + image mosaic ============ */
+  .hero{background:var(--white);padding:8px 0 0;position:relative;overflow:hidden;}
+  .hero-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;min-height:560px;}
+  .hero-copy{padding-top:28px;}
+  .hero-copy h1{font-size:clamp(36px,5vw,56px);color:var(--ink);margin:0 0 22px;line-height:1.06;max-width:16ch;}
+  .hero-copy h1 em{font-style:normal;color:var(--orange);}
+  .hero-copy p.lede{font-size:clamp(15px,1.3vw,17px);color:var(--ink-soft);max-width:40ch;line-height:1.65;margin-bottom:34px;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:42px;}
+  .hero-proof{display:flex;align-items:center;gap:14px;}
+  .hero-proof-stack{display:flex;flex-shrink:0;}
+  .hero-proof-stack img{width:36px;height:36px;border-radius:50%;border:2.5px solid var(--white);object-fit:cover;margin-left:-10px;box-shadow:0 2px 8px rgba(20,17,15,.12);}
+  .hero-proof-stack img:first-child{margin-left:0;}
+  .hero-proof p{font-size:13.5px;color:var(--ink-soft);line-height:1.45;}
+  .hero-proof p b{color:var(--ink);font-weight:700;}
+
+  .hero-mosaic{position:relative;display:flex;gap:14px;height:600px;overflow:hidden;mask-image:linear-gradient(to bottom, transparent 0%, black 4%, black 92%, transparent 100%);-webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 4%, black 92%, transparent 100%);}
+  .hero-mosaic-col{display:flex;flex-direction:column;gap:14px;flex:1;}
+  .hero-mosaic-col img{width:100%;border-radius:18px;object-fit:cover;display:block;}
+  .hero-mosaic-col:nth-child(1) img{height:260px;}
+  .hero-mosaic-col:nth-child(2) img{height:220px;}
+  .hero-mosaic-col:nth-child(1){animation:mosaicScrollDown 22s linear infinite;}
+  .hero-mosaic-col:nth-child(2){animation:mosaicScrollUp 20s linear infinite;margin-top:-80px;}
+
+  @keyframes mosaicScrollDown{0%{transform:translateY(0);}100%{transform:translateY(-50%);}}
+  @keyframes mosaicScrollUp{0%{transform:translateY(-50%);}100%{transform:translateY(0);}}
+
+  @media (max-width:960px){
+    .hero{padding:48px 0 0;}
+    .hero-split{grid-template-columns:1fr;gap:40px;min-height:auto;}
+    .hero-mosaic{height:380px;}
+  }
+  @media (max-width:520px){
+    .hero{padding:36px 0 0;}
+    .hero-copy h1{font-size:34px;}
+    .hero-ctas .btn{width:100%;justify-content:center;}
+    .hero-mosaic{height:300px;gap:10px;}
+    .hero-mosaic-col{gap:10px;}
+    .hero-mosaic-col img{border-radius:14px;}
+    .hero-mosaic-col:nth-child(1) img{height:200px;}
+    .hero-mosaic-col:nth-child(2) img{height:170px;}
+  }
+
+  /* ============ CATEGORIES — photo tiles ============ */
+  .cats{background:var(--paper);padding:60px 0;}
+  .cats-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:26px;gap:20px;flex-wrap:wrap;}
+  .cats-head h2{font-size:clamp(22px,2.6vw,28px);}
+  .cat-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;}
+  .cat-scroll::-webkit-scrollbar{display:none;}
+  .cat-tile{position:relative;flex:1 0 172px;width:auto;height:216px;border-radius:20px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+  .cat-tile:hover{transform:translateY(-5px);}
+  .cat-tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .cat-tile:hover img{transform:scale(1.08);}
+  .cat-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,17,15,0) 38%, rgba(20,17,15,0.88) 100%);}
+  .cat-label{position:absolute;left:14px;bottom:14px;color:var(--white);z-index:2;}
+  .cat-label b{font-family:var(--display);font-size:16px;display:block;}
+  .cat-label span{font-family:var(--mono);font-size:10px;opacity:.82;}
+  .cat-count{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.94);color:var(--ink);font-family:var(--mono);font-size:9.5px;padding:4px 8px;border-radius:20px;z-index:2;}
+  @media (max-width:720px){
+    .micro .wrap{padding:7px 20px;}
+    .header-row{padding:14px 20px;gap:10px;}
+    .navlinks{padding:12px 20px;gap:22px;}
+    .stripe .wrap{padding:8px 20px;}
+    .cat-tile{height:204px;}
+  }
+
+  /* ============ LISTINGS ============ */
+  .listings{padding:76px 0 86px;background:var(--white);}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px;gap:20px;flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(26px,3.2vw,36px);max-width:16ch;}
+  .section-head p{color:var(--ink-soft);max-width:38ch;font-size:14.5px;line-height:1.6;}
+  .listing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:900px){.listing-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.listing-grid{grid-template-columns:1fr;}}
+  .lcard{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:border-color .25s, transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;}
+  .lcard:hover{border-color:var(--ink);transform:translateY(-5px);box-shadow:0 20px 36px -22px rgba(20,17,15,0.3);}
+  .lcard-img{position:relative;height:196px;overflow:hidden;background:var(--paper);}
+  .lcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .lcard:hover .lcard-img img{transform:scale(1.06);}
+  .lcard-badge{position:absolute;top:11px;left:11px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.03em;background:var(--white);color:var(--ink);padding:5px 10px;border-radius:20px;border:1px solid var(--line);}
+  .lcard-heart{position:absolute;top:11px;right:11px;width:30px;height:30px;border-radius:50%;background:var(--white);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .lcard-heart svg{width:14px;height:14px;stroke:var(--ink);fill:none;}
+  .lcard-body{padding:16px 18px 18px;}
+  .lcard-body .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;gap:10px;}
+  .lcard-body h4{font-family:var(--display);font-size:17px;font-weight:700;}
+  .lcard-body .breed{font-size:12.5px;color:var(--ink-soft);margin-bottom:13px;}
+  .lcard-foot{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px dashed var(--line);}
+  .lcard-price{font-family:var(--mono);font-weight:700;font-size:14.5px;}
+  .lcard-loc{font-size:11.5px;color:var(--ink-soft);}
+  .listings-more{text-align:center;margin-top:38px;}
+
+  /* ============ WHY PETTIFY — clean trust panel ============ */
+  .why{background:var(--white);padding:104px 0;}
+  .why-header{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end;margin-bottom:42px;}
+  .why-header .eyebrow{margin-bottom:15px;}
+  .why-header h2{font-size:clamp(32px,4.4vw,54px);max-width:16ch;}
+  .why-header>p{color:var(--ink-soft);font-size:15.5px;line-height:1.68;max-width:44ch;}
+  .why-panel{background:var(--paper);border:1px solid var(--line);border-radius:34px;padding:14px;display:grid;grid-template-columns:.94fr 1.06fr;gap:18px;}
+  .why-image{position:relative;min-height:570px;border-radius:25px;overflow:hidden;}
+  .why-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .why-image::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,15,.02) 55%,rgba(20,17,15,.42));}
+  .why-image-note{position:absolute;left:18px;right:18px;bottom:18px;z-index:1;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-radius:17px;padding:15px 17px;display:flex;align-items:center;gap:11px;}
+  .why-image-note .status-dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px var(--green-tint);flex-shrink:0;}
+  .why-image-note b{display:block;font-family:var(--display);font-size:14px;margin-bottom:2px;}
+  .why-image-note span{display:block;color:var(--ink-soft);font-size:11.5px;}
+  .why-content{padding:42px 42px 36px 30px;display:flex;flex-direction:column;}
+  .why-content-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--orange-deep);font-weight:700;margin-bottom:12px;}
+  .why-content h3{font-size:clamp(27px,3vw,37px);max-width:15ch;}
+  .trust-list{margin-top:28px;border-top:1px solid var(--line);}
+  .trust-item{display:grid;grid-template-columns:42px 1fr;gap:15px;padding:21px 0;border-bottom:1px solid var(--line);}
+  .trust-number{width:34px;height:34px;border-radius:50%;background:var(--orange-tint);color:var(--orange-deep);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;}
+  .trust-item h4{font-family:var(--display);font-size:17px;margin-bottom:5px;}
+  .trust-item p{color:var(--ink-soft);font-size:13px;line-height:1.55;max-width:48ch;}
+  .why-assurance{margin-top:auto;padding-top:24px;display:flex;align-items:center;gap:10px;color:var(--green);font-weight:700;font-size:12px;}
+  .why-assurance span{width:28px;height:28px;border-radius:50%;background:var(--green-tint);display:flex;align-items:center;justify-content:center;}
+  @media (max-width:900px){
+    .why-header,.why-panel{grid-template-columns:1fr;}
+    .why-header{gap:18px;}
+    .why-image{min-height:420px;}
+    .why-content{padding:32px 24px 26px;}
+  }
+  @media (max-width:600px){
+    .why{padding:74px 0;}
+    .why-header{margin-bottom:30px;}
+    .why-panel{border-radius:26px;padding:9px;}
+    .why-image{min-height:350px;border-radius:20px;}
+    .why-content{padding:28px 18px 22px;}
+    .trust-item{grid-template-columns:36px 1fr;gap:12px;}
+  }
+
+  /* ============ FOUNDER + TEAM ============ */
+  .founder{background:var(--white);padding:90px 0;}
+  .founder-grid{display:grid;grid-template-columns:0.75fr 1.25fr;gap:56px;align-items:center;}
+  @media (max-width:860px){.founder-grid{grid-template-columns:1fr;gap:34px;}}
+  .founder-photo{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line);}
+  .founder-photo img{width:100%;height:100%;object-fit:cover;}
+  .founder-photo .tag--dark{position:absolute;bottom:14px;left:14px;}
+  .founder-quote{font-family:var(--display);font-size:clamp(21px,2.6vw,30px);line-height:1.36;margin:18px 0 24px;}
+  .founder-name{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);}
+  .founder-name b{color:var(--ink);}
+  .team-strip{margin-top:60px;padding-top:42px;border-top:1px solid var(--line);}
+  .team-eyebrow{margin-bottom:26px;}
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:760px){.team-grid{grid-template-columns:1fr;}}
+  .team-card{display:flex;align-items:center;gap:16px;}
+  .team-card img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:1px solid var(--line);flex-shrink:0;}
+  .team-card h5{font-family:var(--display);font-size:16px;}
+  .team-card .role{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.03em;margin:2px 0 8px;}
+  .team-card a.li{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--orange-deep);font-weight:600;}
+
+  /* ============ DARK BANNER — fees + steps ============ */
+  .banner{background:var(--ink);color:var(--white);padding:86px 0;}
+  .banner-top{max-width:56ch;margin-bottom:48px;}
+  .banner-top h2{font-size:clamp(27px,3.8vw,42px);margin-top:14px;}
+  .banner-top p{color:rgba(255,255,255,0.68);margin-top:14px;font-size:15px;line-height:1.6;}
+  .banner-grid{display:grid;grid-template-columns:0.85fr 1.4fr;gap:48px;}
+  @media (max-width:900px){.banner-grid{grid-template-columns:1fr;gap:36px;}}
+  .fee-cards{display:flex;flex-direction:column;gap:16px;}
+  .fee-card{background:rgba(255,255,255,0.05);border:1px solid var(--line-on-dark);border-radius:var(--radius);padding:26px;}
+  .fee-card .eyebrow{color:var(--orange);margin-bottom:14px;}
+  .fee-card .eyebrow::before{background:var(--orange);}
+  .fee-num{font-family:var(--mono);font-size:clamp(32px,4vw,42px);font-weight:700;margin-bottom:8px;}
+  .fee-card p{color:rgba(255,255,255,0.65);font-size:13.5px;line-height:1.55;}
+  .step-list{display:flex;flex-direction:column;}
+  .step{display:grid;grid-template-columns:48px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line-on-dark);}
+  .step:last-child{border-bottom:1px solid var(--line-on-dark);}
+  .step-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--white);width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step h4{font-family:var(--display);font-size:16.5px;margin-bottom:5px;}
+  .step p{color:rgba(255,255,255,0.62);font-size:13.5px;line-height:1.55;max-width:50ch;}
+  .banner-cta{margin-top:28px;}
+
+  /* ============ APP ============ */
+  .app{background:var(--white);padding:88px 0;}
+  .app-grid{display:grid;grid-template-columns:1fr 0.8fr;gap:48px;align-items:center;}
+  @media (max-width:860px){.app-grid{grid-template-columns:1fr;gap:38px;}}
+  .app-copy h2{font-size:clamp(26px,3.4vw,38px);margin:14px 0 18px;max-width:12ch;}
+  .app-copy p{color:var(--ink-soft);font-size:15px;line-height:1.62;max-width:44ch;margin-bottom:28px;}
+  .store-btns{display:flex;gap:12px;flex-wrap:wrap;}
+  .store-btn{display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--ink);color:var(--ink);padding:11px 18px;border-radius:12px;font-size:13px;}
+  .store-btn small{display:block;font-size:9.5px;opacity:0.65;}
+  .store-btn b{font-family:var(--display);font-size:14px;}
+  .phone-mock{background:var(--ink);border-radius:34px;padding:13px;max-width:250px;margin:0 auto;box-shadow:0 34px 60px -22px rgba(20,17,15,0.4);}
+  .phone-mock .screen{background:var(--white);border-radius:22px;padding:14px;aspect-ratio:9/17.5;display:flex;flex-direction:column;gap:9px;}
+  .phone-mock .screen img{border-radius:11px;height:100px;object-fit:cover;}
+  .phone-row{display:flex;gap:7px;}
+  .phone-row .tag{font-size:10px;padding:5px 9px 5px 18px;}
+  .phone-row .tag::before{width:5px;height:5px;left:7px;}
+
+  /* ============ BLOG ============ */
+  .blog{padding:88px 0;background:var(--paper);}
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:860px){.blog-grid{grid-template-columns:1fr;}}
+  .blog-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, border-color .25s;display:flex;flex-direction:column;}
+  .blog-card:hover{transform:translateY(-5px);border-color:var(--ink);box-shadow:0 20px 36px -22px rgba(20,17,15,0.28);}
+  .blog-img{position:relative;height:180px;overflow:hidden;flex-shrink:0;}
+  .blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .blog-card:hover .blog-img img{transform:scale(1.07);}
+  .blog-cat{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.03em;background:var(--orange);color:var(--white);padding:5px 10px;border-radius:20px;}
+  .blog-body{padding:20px;display:flex;flex-direction:column;flex:1;}
+  .blog-body h4{font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.25;}
+  .blog-body p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;}
+  .blog-meta{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);display:flex;justify-content:space-between;padding-top:14px;border-top:1px dashed var(--line);margin-top:auto;}
+
+  /* ============ EXACT TESTIMONIALS REDESIGN ============ */
+  .testi-redesign{padding:100px 0;background:#FFFFFF;position:relative;}
+  .testi-layout{display:grid;grid-template-columns:1fr 1.35fr;gap:50px;align-items:center;}
+  @media (max-width:980px){.testi-layout{grid-template-columns:1fr;gap:40px;}}
+  
+  /* Left Column */
+  .testi-left{display:flex;flex-direction:column;justify-content:space-between;min-height:440px;}
+  @media (max-width:980px){.testi-left{min-height:auto;}}
+  .testi-pill-eyebrow{display:inline-block;padding:6px 16px;background:#F1F1F4;color:var(--ink-soft);font-size:12px;font-weight:700;border-radius:100px;margin-bottom:20px;}
+  .testi-left h2{font-family:var(--display);font-size:clamp(34px,4vw,50px);font-weight:800;line-height:1.08;letter-spacing:-0.03em;color:var(--ink);margin-bottom:16px;}
+  .testi-subtext{font-size:15px;line-height:1.6;color:var(--ink-soft);max-width:38ch;margin-bottom:24px;}
+  .testi-btn-group{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+  .btn--black-pill{background:#14110F;color:#FFFFFF;padding:12px 24px;border-radius:100px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;transition:transform 0.2s, background 0.2s;}
+  .btn--black-pill:hover{background:#2A2420;transform:translateY(-2px);}
+  
+  .testi-trust-footer{margin-top:36px;padding-top:24px;border-top:1px solid #EBEBEF;}
+  .trust-label{font-size:12px;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:10px;}
+  .trust-badges-row{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;font-weight:600;color:var(--ink);}
+  .trust-badges-row span{background:#F7F7FA;padding:6px 12px;border-radius:8px;border:1px solid #EBEBEF;}
+
+  /* Right Column (Cards Grid) */
+  .testi-cards-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:18px;}
+  @media (max-width:640px){.testi-cards-grid{grid-template-columns:1fr;}}
+
+  /* Outer grey card container matching the user image */
+  .testi-nested-card{background:#F3F3F6;border-radius:20px;padding:12px;display:flex;flex-direction:column;gap:12px;transition:transform 0.3s cubic-bezier(0.2,0.8,0.2,1);}
+  .testi-nested-card:hover{transform:translateY(-4px);}
+
+  /* Inner white elevated quote card */
+  .testi-white-box{background:#FFFFFF;border-radius:16px;padding:22px;border:1px solid #EBEBEF;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .testi-rating-row{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink);}
+  .rating-num{font-size:13px;}
+  .rating-star{color:#F59E0B;}
+  .testi-tag-pill{margin-left:auto;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:0.03em;}
+  .seller-pill{background:var(--orange-tint);color:var(--orange-deep);}
+  .buyer-pill{background:var(--green-tint);color:var(--green);}
+
+  .testi-quote{font-size:13.5px;line-height:1.55;color:var(--ink-2);font-weight:600;}
+
+  /* Bottom user avatar row inside outer card */
+  .testi-user-row{display:flex;align-items:center;gap:12px;padding:4px 8px 6px 8px;}
+  .testi-user-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+  .testi-user-info b{display:block;font-size:13px;color:var(--ink);line-height:1.2;}
+  .testi-user-info span{display:block;font-size:11px;color:var(--ink-soft);margin-top:2px;}
+
+  /* ============ FAQ ============ */
+  .faq{background:var(--white);padding:88px 0;}
+  .faq-grid{display:grid;grid-template-columns:0.8fr 1.6fr;gap:48px;}
+  @media (max-width:860px){.faq-grid{grid-template-columns:1fr;gap:28px;}}
+  .faq-head h2{font-size:clamp(26px,3.4vw,36px);max-width:10ch;}
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:21px 0;text-align:left;font-family:var(--body);font-weight:700;font-size:15.5px;}
+  .faq-q .plus{width:25px;height:25px;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;transition:transform .3s;}
+  .faq-q .plus::before,.faq-q .plus::after{content:'';position:absolute;background:var(--ink);}
+  .faq-q .plus::before{width:9px;height:1.5px;}
+  .faq-q .plus::after{width:1.5px;height:9px;transition:transform .3s;}
+  .faq-item.open .plus::after{transform:rotate(90deg);opacity:0;}
+  .faq-item.open .plus{transform:rotate(180deg);background:var(--ink);}
+  .faq-item.open .plus::before,.faq-item.open .plus::after{background:var(--white);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .faq-a p{padding-bottom:21px;color:var(--ink-soft);font-size:14px;line-height:1.62;max-width:60ch;}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--ink);color:var(--white);padding:66px 0 28px;}
+  .foot-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:46px;border-bottom:1px solid var(--line-on-dark);margin-bottom:46px;gap:24px;flex-wrap:wrap;}
+  .foot-top h3{font-size:clamp(23px,3.2vw,32px);max-width:14ch;}
+  .foot-cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:28px;margin-bottom:52px;}
+  @media (max-width:760px){.foot-cols{grid-template-columns:1fr 1fr;}}
+  .foot-col h5{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.48);margin-bottom:15px;}
+  .foot-col ul{display:flex;flex-direction:column;gap:10px;}
+  .foot-col a{font-size:13.5px;opacity:0.82;transition:opacity .2s;}
+  .foot-col a:hover{opacity:1;color:var(--orange);}
+  .foot-col p{font-size:13.5px;opacity:0.68;line-height:1.6;max-width:32ch;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--line-on-dark);font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:12px;}
+
+  /* ============ APP DOWNLOAD MODAL ============ */
+  .app-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s;}
+  .app-modal.is-open{opacity:1;visibility:visible;pointer-events:auto;}
+  .app-modal-backdrop{position:absolute;inset:0;background:rgba(20,17,15,.76);backdrop-filter:blur(10px);}
+  .app-modal-card{position:relative;width:min(760px,100%);display:grid;grid-template-columns:1fr 270px;background:var(--white);border-radius:28px;overflow:hidden;box-shadow:0 40px 100px -24px rgba(0,0,0,.65);transform:translateY(22px) scale(.97);transition:transform .32s cubic-bezier(.2,.8,.2,1);}
+  .app-modal.is-open .app-modal-card{transform:none;}
+  .app-modal-copy{background:var(--ink);color:var(--white);padding:48px 42px;}
+  .app-modal-icon{width:52px;height:52px;border-radius:16px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:24px;}
+  .app-modal-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
+  .app-modal-copy h2{font-size:clamp(30px,4vw,42px);max-width:11ch;margin-bottom:16px;}
+  .app-modal-copy>p{color:rgba(255,255,255,.66);font-size:14px;line-height:1.6;max-width:42ch;}
+  .app-modal-store-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;}
+  .app-modal-store-links a{background:var(--white);color:var(--ink);border-radius:14px;padding:9px 13px;min-height:60px;display:flex;align-items:center;gap:10px;flex:1 1 145px;transition:transform .2s,box-shadow .2s;}
+  .app-modal-store-links a:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(255,255,255,.35);}
+  .modal-store-icon{width:34px;height:34px;border-radius:10px;background:var(--orange-tint);color:var(--orange-deep);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+  .app-modal-store-links small{display:block;font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);line-height:1.1;}
+  .app-modal-store-links b{display:block;font-family:var(--display);font-size:14px;line-height:1.2;margin-top:2px;}
+  .app-modal-qr{background:var(--paper);padding:58px 28px 34px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  .qr-frame{background:var(--white);padding:14px;border-radius:20px;box-shadow:0 18px 36px -18px rgba(20,17,15,.28);margin-bottom:20px;}
+  .qr-frame img{width:176px;height:176px;image-rendering:pixelated;}
+  .app-modal-qr b{font-family:var(--display);font-size:17px;margin-bottom:6px;}
+  .app-modal-qr p{font-size:12px;color:var(--ink-soft);line-height:1.45;max-width:20ch;}
+  .app-modal-close{position:absolute;top:16px;right:16px;z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(20,17,15,.08);display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1;transition:background .2s,transform .2s;}
+  .app-modal-close:hover{background:var(--orange-tint);transform:rotate(6deg);}
+  @media (max-width:700px){
+    .app-modal{padding:14px;align-items:flex-end;}
+    .app-modal-card{grid-template-columns:1fr;max-height:92vh;overflow-y:auto;border-radius:26px 26px 20px 20px;}
+    .app-modal-copy{padding:38px 26px 30px;}
+    .app-modal-copy h2{font-size:33px;}
+    .app-modal-qr{padding:24px;display:grid;grid-template-columns:auto 1fr;gap:18px;text-align:left;}
+    .qr-frame{margin:0;padding:9px;border-radius:14px;}
+    .qr-frame img{width:104px;height:104px;}
+    .app-modal-qr p{max-width:24ch;}
+    .app-modal-close{background:rgba(255,255,255,.12);color:var(--white);}
+  }
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .brand-logo{display:block;width:132px;height:auto;filter:brightness(0) invert(1);}
+  .cat-tile{color:inherit;text-decoration:none;}
+  .listing-state{grid-column:1/-1;padding:42px 24px;text-align:center;background:var(--white);border:1px solid var(--line);border-radius:16px;color:var(--ink-soft);}
+  .listing-state button{margin-top:14px;border:0;cursor:pointer;}
+  .app-preview{display:block;max-width:320px;width:100%;margin:0 auto;filter:drop-shadow(0 28px 30px rgba(20,17,15,.25));}
+  .search-go{border:0;cursor:pointer;}
+  .lcard{color:inherit;text-decoration:none;}
+  .lcard-heart{cursor:pointer;}
+  .blog-card.is-loading{min-height:360px;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);}
+  @media (max-width:640px){
+    .brand-logo{width:112px;}
+    .navrow{position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--white);border:0;display:flex;flex-direction:column;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-16px);transition:opacity .28s ease,transform .28s ease,visibility .28s;}
+    .navrow.mobile-open{opacity:1;visibility:visible;pointer-events:auto;transform:none;}
+    .mobile-menu-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line-on-dark);}
+    .mobile-brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:22px;font-weight:800;color:var(--white);}
+    .mobile-brand img{width:34px;height:34px;border-radius:10px;object-fit:cover;}
+    .menu-close{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:27px;line-height:1;}
+    .navrow>.wrap{width:100%;display:flex;flex-direction:column;flex:1;padding:12px 24px 28px;overflow-y:auto;}
+    .navlinks{display:flex;flex-direction:column;gap:0;padding:0;overflow:visible;}
+    .navlinks a{font-family:var(--display);font-size:clamp(25px,8vw,34px);font-weight:700;letter-spacing:-.02em;padding:10px 0;border-bottom:1px solid var(--line-on-dark);white-space:normal;opacity:1;justify-content:space-between;}
+    .navlinks a::after{content:'↗';font-family:var(--body);font-size:16px;color:var(--orange);}
+    .mobile-menu-extra{display:block;margin-top:auto;padding-top:30px;}
+    .mobile-menu-extra p{color:rgba(255,255,255,.58);font-size:13px;line-height:1.5;margin-bottom:14px;}
+    .mobile-store-links{display:flex;gap:10px;}
+    .mobile-store-links a{flex:1;min-height:48px;border:1px solid var(--line-on-dark);border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;background:rgba(255,255,255,.06);}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;}html{scroll-behavior:auto;}}
+</style>
+<link rel="stylesheet" href="global-shell.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
-        
-        <ul class="nav-links">
-            <li><a href="listings.html">View Listings</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-            <li><a href="#features">Features</a></li>
-            <li class="pricing-dropdown-wrapper">
-                <a href="#" id="pricing-link">Pricing</a>
-                <div id="pricing-dropdown" class="dropdown-content">
-                    <h3>Our transaction fee</h3>
-                    <p>Using Pettify is free for LIFE. We only make money when you start making money. We charge a little transaction fee. This helps us keep the lights on and cover payment processor fees. Don't worry about any monthly fees or any hidden fee.</p>
-                    <div class="pricing-section">
-                        <h4>For Vendors/Breeders/Pet sellers:</h4>
-                        <p>We charge 9% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
-                    </div>
-                    <!-- <div class="pricing-section">
-                        <h4>For Vets:</h4>
-                        <p>We charge 4% + ₦50 for every successful sale you make. We only make money if you make money. No other fees.</p>
-                    </div> -->
-                    <div class="pricing-section">
-                        <h4>For Buyers:</h4>
-                        <p>We charge 1% of product/pet/accessories and vet booking as service fee. No other fee is required.</p>
-                    </div>
-                    <p class="disclaimer"><strong>Disclaimer:</strong> Depending on the seller, delivery fee may apply when you want to purchase. This does not come to us as Pettify do not determine the delivery fee of the seller. Some sellers may offer free delivery while some don't.</p>
-                </div>
-            </li>
-            <li><a href="#testimonials">Reviews</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <a href="#download" onclick="event.preventDefault(); document.querySelector('#download').scrollIntoView({ behavior: 'smooth' });">
-                <button class="cta-btn">Get Started</button>
-            </a>
-        </ul>
 
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+<div class="micro">
+  <div class="wrap">
+    <div class="micro-left">
+      <span>hello@pettify.co</span>
+      <span>+234 800 123 4567</span>
+    </div>
+    <div><a href="blogs.html">Pet Care Blog</a></div>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap header-row">
+    <a href="index.html" class="logo" aria-label="Pettify home">
+      <img class="brand-logo" src="images/web_logo.webp" alt="Pettify">
+    </a>
+    <form class="search-bar" id="site-search" role="search">
+      <div class="search-category">
+        <button class="search-cat" id="category-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="category-menu">All categories <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="category-menu" id="category-menu" role="menu" aria-label="Pet categories">
+          <div class="category-menu-title">What are you looking for?</div>
+          <a class="category-option" href="listings.html?category=dogs" role="menuitem"><span class="category-emoji">🐶</span><span><b>Dogs</b><small>Puppies and adult dogs</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings.html?category=cats" role="menuitem"><span class="category-emoji">🐱</span><span><b>Cats</b><small>Kittens and adult cats</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings.html?category=others" role="menuitem"><span class="category-emoji">🐦</span><span><b>Other pets</b><small>Birds, rabbits and more</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="listings.html?category=accessories" role="menuitem"><span class="category-emoji">🦴</span><span><b>Accessories</b><small>Food, toys and essentials</small></span><span class="category-arrow">→</span></a>
+          <a class="category-option" href="#app" role="menuitem"><span class="category-emoji">🩺</span><span><b>Vet care</b><small>Book trusted professionals</small></span><span class="category-arrow">→</span></a>
         </div>
+      </div>
+      <input class="search-input" name="search" type="search" aria-label="Search listings" placeholder="Search breeds, pets, locations, accessories...">
+      <button class="search-go" type="submit" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+    </form>
+    <div class="help-block">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <div class="txt"><b>Need help?</b><span>+234 800 123 4567</span></div>
+    </div>
+    <div class="icon-cluster">
+      <button class="icon-btn account-trigger" type="button" data-app-modal data-modal-context="account" aria-label="Open your Pettify account"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
+      <button class="icon-btn cart-trigger" type="button" data-app-modal data-modal-context="cart" aria-label="Open your Pettify cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L22 7H5"/></svg></button>
+      <button class="burger" type="button" aria-label="Toggle navigation" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="navrow" id="global-navigation">
+  <div class="mobile-menu-head">
+    <a class="mobile-brand" href="index.html"><img src="images/nav_logo.webp" alt=""><span>Pettify</span></a>
+    <button class="menu-close" type="button" aria-label="Close navigation">×</button>
+  </div>
+  <div class="wrap">
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Listings</a>
+      <a href="listings.html?category=dogs">Dogs</a>
+      <a href="listings.html?category=cats">Cats</a>
+      <a href="listings.html?category=accessories">Accessories</a>
+      <a href="vet-booking.html">Vet Booking</a>
+      <a href="#steps">Sell on Pettify</a>
+      <a href="blogs.html">Blog</a>
+      <a href="#why">About Us</a>
+      <a href="mailto:hello@pettify.co">Contact</a>
     </nav>
+    <div class="mobile-menu-extra">
+      <p>Find pets, manage purchases and book vet care from the Pettify mobile app.</p>
+      <div class="mobile-store-links">
+        <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener"><i class="fa-brands fa-google-play" style="font-size:18px; margin-right:8px;"></i> Google Play</a>
+        <a href="https://apps.apple.com/ng/app/pettify/id6757312160" target="_blank" rel="noopener"><i class="fa-brands fa-apple" style="font-size:20px; margin-right:8px; margin-top:-2px;"></i> App Store</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Buy & Sell Pets With Ease</h1>
-                <p>Nigeria's leading online marketplace connecting pet lovers with trusted breeders and vendors.</p>
-                
-                <ul class="hero-checklist">
-                    <li>Perfect for breeders looking to grow their business</li>
-                    <li>Find your ideal companion from verified sellers</li>
-                    <li>Safe, secure, and stress-free pet transactions</li>
-                </ul>
+<div class="stripe">
+  <div class="wrap">
+    <div class="stripe-left">
+      <span>✓ Verified sellers only</span>
+      <span>✓ Free to list for life</span>
+      <span>✓ Delivery nationwide</span>
+    </div>
+    <div class="stripe-right">
+      <a href="#faq">Help</a>
+      <a href="#download-app" data-app-modal data-modal-context="account">My Account</a>
+    </div>
+  </div>
+</div>
 
-                <div class="hero-buttons">
-                    <a href="listings.html"><button class="btn-primary">Browse Pets</button></a>
-                    <a href="https://dashboard.pettify.co/register" target="_blank"><button class="btn-secondary">Start Selling</button></a>
-                </div>
-            </div>
-
-            <div class="hero-image">
-                <img src="images/hero_image.jpg" alt="Woman with pet">
-            </div>
+<section class="hero">
+  <div class="wrap hero-split">
+    <div class="hero-copy reveal-slide-right">
+      <span class="eyebrow">Nigeria's pet marketplace</span>
+      <h1>Find verified <em>pet vendors</em> around you.</h1>
+      <p class="lede">Every vendor on Pettify is verified and health-checked — so you can discover trusted breeders and services near you with total confidence.</p>
+      <div class="hero-ctas">
+        <a href="listings.html" class="btn btn--orange">Browse pets &nbsp;→</a>
+        <a href="#" class="btn btn--outline" data-app-modal data-modal-context="sell">Sell your pet</a>
+      </div>
+      <div class="hero-proof">
+        <div class="hero-proof-stack">
+          <img src="images/pet_avatar_1.webp" alt="Golden Retriever">
+          <img src="images/pet_avatar_2.webp" alt="French Bulldog">
+          <img src="images/pet_avatar_3.webp" alt="Persian Kitten">
+          <img src="images/pet_avatar_4.webp" alt="German Shepherd">
         </div>
-    </section>
-
-    <!-- Stats Section -->
-  <section class="stats">
-    <!-- <div class="stat-item">
-        <span class="stat-number">2K+</span>
-        <span class="stat-label">Active Buyers Daily</span>
-    </div> -->
-    <div class="stat-item">
-        <span class="stat-number">100+</span>
-        <span class="stat-label">Trusted Sellers</span>
+        <p>Join <b>2,100+ pet lovers</b> and start<br>finding your perfect companion.</p>
+      </div>
     </div>
-    <div class="stat-item">
-        <span class="stat-number">500+</span>
-        <span class="stat-label">Pets Listed</span>
+    <div class="hero-mosaic reveal-slide-left">
+      <div class="hero-mosaic-col">
+        <img src="images/hero-redesign.webp" alt="Pet owner with puppies">
+        <img src="images/pet_avatar_2.webp" alt="French Bulldog puppy">
+        <img src="images/about_hero_1.webp" alt="Happy pet owner">
+        <img src="images/story_buyer_1.webp" alt="Buyer with new pet">
+        <!-- duplicate set for seamless loop -->
+        <img src="images/hero-redesign.webp" alt="Pet owner with puppies">
+        <img src="images/pet_avatar_2.webp" alt="French Bulldog puppy">
+        <img src="images/about_hero_1.webp" alt="Happy pet owner">
+        <img src="images/story_buyer_1.webp" alt="Buyer with new pet">
+      </div>
+      <div class="hero-mosaic-col">
+        <img src="images/pet_avatar_1.webp" alt="Golden Retriever">
+        <img src="images/vet_doctor_hero.webp" alt="Vet examining pet">
+        <img src="images/pet_avatar_3.webp" alt="Persian Kitten">
+        <img src="images/story_buyer_2.webp" alt="Pet delivery">
+        <!-- duplicate set for seamless loop -->
+        <img src="images/pet_avatar_1.webp" alt="Golden Retriever">
+        <img src="images/vet_doctor_hero.webp" alt="Vet examining pet">
+        <img src="images/pet_avatar_3.webp" alt="Persian Kitten">
+        <img src="images/story_buyer_2.webp" alt="Pet delivery">
+      </div>
     </div>
-    <div class="stat-item">
-        <span class="stat-number">100%</span>
-        <span class="stat-label">Verified Listings</span>
-    </div>
-    <div class="stat-item">
-        <span class="stat-number">24/7</span>
-        <span class="stat-label">Customer Support</span>
-    </div>
+  </div>
 </section>
 
-    <!-- Tab Section -->
-    <section class="download" id="download">
-        <div class="tabs">
-            <button class="tab active" data-target="#customers">Customers</button>
-            <button class="tab" data-target="#vendors">Vendors</button>
-        </div>
+<section class="cats" id="categories">
+  <div class="wrap">
+    <div class="cats-head reveal-on-scroll">
+      <h2>Shop by category</h2>
+      <a href="listings.html" class="eyebrow">View all listings →</a>
+    </div>
+    <div class="cat-scroll reveal-scale">
+      <a class="cat-tile" href="listings.html?category=dogs">
+        <img src="images/hero-redesign.webp" alt="Dogs available on Pettify" data-category-image="dogs">
+        <span class="cat-count" data-category-count="dogs">Loading…</span>
+        <div class="cat-label"><b>Dogs</b><span>Puppies & adults</span></div>
+      </a>
+      <a class="cat-tile" href="listings.html?category=cats">
+        <img src="images/pettify.webp" alt="Cats available on Pettify" data-category-image="cats">
+        <span class="cat-count" data-category-count="cats">Loading…</span>
+        <div class="cat-label"><b>Cats</b><span>Kittens & adults</span></div>
+      </a>
+      <a class="cat-tile" href="listings.html?category=others">
+        <img src="images/pettify.webp" alt="Other pets available on Pettify" data-category-image="others">
+        <span class="cat-count" data-category-count="others">Loading…</span>
+        <div class="cat-label"><b>Other pets</b><span>Birds, rabbits & more</span></div>
+      </a>
+      <a class="cat-tile" href="listings.html?category=accessories">
+        <img src="images/buyers-preview.webp" alt="Pet accessories available on Pettify" data-category-image="accessories">
+        <span class="cat-count" data-category-count="accessories">Loading…</span>
+        <div class="cat-label"><b>Accessories</b><span>Food, leashes & more</span></div>
+      </a>
+      <a class="cat-tile" href="https://play.google.com/store/apps/details?id=com.pettify.app" data-app-link>
+        <img src="images/vet-doctor.webp" alt="Book veterinary care with Pettify">
+        <span class="cat-count">Book now</span>
+        <div class="cat-label"><b>Vet care</b><span>Book in the app</span></div>
+      </a>
+    </div>
+  </div>
+</section>
 
-        <div class="tab-content">
-            <!-- Download the App Section -->
-            <section id="customers" class="active-tab">
-                <div class="active-text">
-                    <h2>Download the App</h2>
-                    <p>Ready to find your pawfect companion? Download the Pettify app on Google Play and shop with trusted breeders and sellers near you. Your next best friend is just a click away.</p>
-                    <div class="download-active-btn">
-                        <button class="app-btn" onclick="window.open('https://play.google.com/store/apps/details?id=com.pettify.app', '_blank')">
-                            <i class="fab fa-google-play"></i>
-                            Download Now on Google Play
-                        </button>
-                        <button class="app-btn" onclick="window.open('https://apps.apple.com/ng/app/pettify/id6757312160', '_blank')">
-                            <i class="fab fa-app-store"></i>
-                            Download Now on Apple Store
-                        </button>
-                    </div>
-                </div>
-                <div class="app-download">
-                    <img src="images/app preview.png" alt="app preview" class="responsive-appPreview">
-                </div>
-            </section>
-    
-            <!-- Create Account Section -->
-            <section id="vendors" class="inactive-tab">
-                <div class="active-text">
-                    <h2>Create a free account</h2>
-                    <p>Are you a breeder or pet vendor? Join Pettify today to list your pets, pet accessories and connect with thousands of eager buyers. It's easy, secure and the best way to reach pet lovers near you.</p>
-                    <div class="vendor-active-btn">
-                        <button class="vendor-btn" onclick="window.open('https://dashboard.pettify.co/register', '_blank')">Create a free account</button>
-                    </div>
-                </div>
-                <div class="laptop-view">
-                    <img src="images/laptop-preview.png" alt="vendor preview" class="responsive-laptopImage">
-                </div>
-            </section>
-        </div>
-    </section>
+<section class="listings" id="listings">
+  <div class="wrap">
+    <div class="section-head reveal-on-scroll">
+      <h2>Fresh listings, verified sellers</h2>
+      <p>A rolling snapshot of pets added by trusted breeders this week — the full listings page is next.</p>
+    </div>
+    <div class="listing-grid" id="home-listings" aria-live="polite">
+      <div class="listing-state">Loading the latest Pettify listings…</div>
+    </div>
+    <div class="listings-more reveal-on-scroll">
+      <a href="listings.html" class="btn btn--ink">See all listings</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Company/Team Section -->
-    <section class="company" id="company">
-        <h1 class="section-title">Why Pettify?</h1>
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="why-header reveal-on-scroll">
+      <div>
+        <span class="eyebrow">Why Pettify</span>
+        <h2>A better way to know what you're bringing home.</h2>
+      </div>
+      <p>Pettify keeps the important details in one place, so choosing a pet feels considered—not like taking a chance on a stranger in your DMs.</p>
+    </div>
+    <div class="why-panel reveal-scale">
+      <div class="why-image">
+        <img src="images/why-pettify-redesign.webp" alt="Pet owner reviewing a dog's health information with a professional">
+        <div class="why-image-note">
+          <span class="status-dot"></span>
+          <div><b>Information stays connected</b><span>Seller profile, pet details and purchase history.</span></div>
+        </div>
+      </div>
+      <div class="why-content">
+        <div class="why-content-label">Before a pet reaches your home</div>
+        <h3>Three checks make the difference.</h3>
+        <div class="trust-list">
+          <article class="trust-item">
+            <div class="trust-number">01</div>
+            <div><h4>A seller you can identify</h4><p>Breeders and vendors complete verification before their first listing is published.</p></div>
+          </article>
+          <article class="trust-item">
+            <div class="trust-number">02</div>
+            <div><h4>Details you can review</h4><p>Breed, age, vaccination status, location and availability remain attached to the listing.</p></div>
+          </article>
+          <article class="trust-item">
+            <div class="trust-number">03</div>
+            <div><h4>A purchase trail you can keep</h4><p>In-app conversations, payment records and fulfilment details give both sides something concrete to reference.</p></div>
+          </article>
+        </div>
+        <div class="why-assurance"><span>✓</span>Designed for clearer, safer decisions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder">
+  <div class="wrap">
+    <div class="founder-grid">
+      <div class="founder-photo reveal-slide-right">
+        <img src="images/titi.webp" alt="Titilayo Sunday, Founder of Pettify">
+        <span class="tag tag--dark">Est. by a breeder's kid</span>
+      </div>
+      <div class="reveal-slide-left">
+        <span class="eyebrow">Why we built this</span>
+        <p class="founder-quote">"My dad bred dogs. Our first family pet, Jet, wandered off in 2002 and never came home. I've spent years since wishing there'd been an easier way to find him again — that's Pettify."</p>
+        <p class="founder-name"><b>Titilayo Sunday</b> — Founder & CEO, Pettify</p>
+      </div>
+    </div>
+    <div class="team-strip reveal-on-scroll">
+      <span class="eyebrow team-eyebrow">The team behind it</span>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="images/titi.webp" alt="Titilayo Sunday">
+          <div>
+            <h5>Titilayo Sunday</h5>
+            <div class="role">CEO / Founder</div>
+            <a class="li" href="https://www.linkedin.com/in/thetitilayo" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="images/darey.webp" alt="Emmanuel Oluwadare">
+          <div>
+            <h5>Emmanuel Oluwadare</h5>
+            <div class="role">CPO / Co-founder</div>
+            <a class="li" href="https://www.linkedin.com/in/oluwadare-emmanuel-4a0b75270/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="images/daniel1.webp" alt="Omole Daniel">
+          <div>
+            <h5>Omole Daniel</h5>
+            <div class="role">CTO / Co-founder</div>
+            <a class="li" href="https://www.linkedin.com/in/daniel-omole-34401521a" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="banner" id="steps">
+  <div class="wrap">
+    <div class="banner-top reveal-on-scroll">
+      <span class="eyebrow eyebrow--light">Pricing & how it works</span>
+      <h2>Free to list. You only pay when it actually works.</h2>
+      <p>No monthly fees, no hidden charges — Pettify makes money the same way you do: when a pet finds its home.</p>
+    </div>
+    <div class="banner-grid">
+      <div class="fee-cards reveal-slide-right">
+        <div class="fee-card">
+          <span class="eyebrow">Breeders & vendors</span>
+          <div class="fee-num">9% + ₦50</div>
+          <p>Charged only on a successful sale of a pet, accessory or vet booking. Listing itself is free, for life.</p>
+        </div>
+        <div class="fee-card">
+          <span class="eyebrow">Buyers</span>
+          <div class="fee-num">1%</div>
+          <p>A small service fee on your purchase. Delivery fees are set by the seller and shown before checkout.</p>
+        </div>
+      </div>
+      <div class="reveal-slide-left">
+        <div class="step-list">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div><h4>Create a free account</h4><p>Sign up with an email or Google — no fees, no waiting period.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div><h4>Connect your bank details</h4><p>Add the account your payouts should land in, verified once, not every sale.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div><h4>List your pets & accessories</h4><p>Add photos, breed, age and vaccination details — full records sell faster.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div><h4>Withdraw your earnings</h4><p>Once a sale clears, your payout (minus the fee) is yours to withdraw.</p></div>
+          </div>
+        </div>
+        <div class="banner-cta">
+          <a href="https://www.coachli.co/pettify" class="btn btn--outline-light" target="_blank" rel="noopener">Book a free demo call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app" id="app">
+  <div class="wrap app-grid">
+    <div class="app-copy reveal-slide-right">
+      <span class="eyebrow">The app</span>
+      <h2>Browse and buy from your phone.</h2>
+      <p>The full buying experience — browsing, chat, payment and delivery tracking — lives in the Pettify app. The website is where sellers run their shop.</p>
+      <div class="store-btns">
+        <a href="https://play.google.com/store/apps/details?id=com.pettify.app" class="store-btn" target="_blank" rel="noopener"><b><i class="fa-brands fa-google-play"></i></b><span><small>Get it on</small><b>Google Play</b></span></a>
+        <a href="https://apps.apple.com/ng/app/pettify/id6757312160" class="store-btn" target="_blank" rel="noopener"><b><i class="fa-brands fa-apple"></i></b><span><small>Download on the</small><b>App Store</b></span></a>
+      </div>
+    </div>
+    <div class="reveal-slide-left">
+      <img class="app-preview" src="images/app preview.webp" alt="Pettify mobile app listing screen">
+    </div>
+  </div>
+</section>
+
+<section class="blog" id="blog">
+  <div class="wrap">
+    <div class="section-head reveal-on-scroll">
+      <h2>Pet care insights</h2>
+      <p>Straight answers on buying, feeding and caring for a pet in Nigeria, from our team and vets.</p>
+    </div>
+    <div class="blog-grid" id="home-blogs" aria-live="polite">
+      <div class="blog-card is-loading">Loading the latest pet-care articles…</div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-redesign" id="testimonials">
+  <div class="wrap testi-layout">
+    <!-- Left Column -->
+    <div class="testi-left reveal-slide-right">
+      <div>
+        <span class="testi-pill-eyebrow">Testimonials</span>
+        <h2>Loved by buyers & sellers across Nigeria!</h2>
+        <p class="testi-subtext">Our community's stories highlight the trust, verified health records, and seamless experience behind every pet listing.</p>
+        <div class="testi-btn-group">
+          <a href="listings.html" class="btn btn--orange">Browse pets</a>
+          <a href="#" class="btn btn--black-pill" data-app-modal data-modal-context="sell">Sell your pet</a>
+        </div>
+      </div>
+      
+      <div class="testi-trust-footer">
+        <span class="trust-label">Verified Nationwide:</span>
+        <div class="trust-badges-row">
+          <span>🛡️ Verified Health Records</span>
+          <span>🚚 Nationwide Delivery</span>
+          <span>🔒 Safe Escrow</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column (2x2 Grid of Cards: 2 Sellers, 2 Buyers) -->
+    <div class="testi-right reveal">
+      <div class="testi-cards-grid">
         
-        <div class="team-slider">
-            <!-- Slide 1: Founder's Story -->
-            <div class="team-slide">
-                <div class="founder-container">
-                    <div class="company-bio">
-                        <h2>Founder's Story</h2>
-                        <img src="images/titi.jpg" alt="Titilayo Sunday" class="responsive-company-image">
-                        <h2>Titilayo Sunday</h2>
-                        <h3>CEO / FOUNDER</h3>
-                        <a href="https://www.linkedin.com/in/thetitilayo" target="_blank">
-                            <i class="fab fa-linkedin" style="font-size: 35px; color: var(--primary);"></i>
-                        </a>
-                    </div>
-                    <div class="company-story">
-                        <p>
-                            I grew up with dogs—my dad was a local breeder, and our first family pet, Jet, was more than just a dog; he was my childhood companion. But in 2002, Jet wandered off and never came back. Since then, I've searched for a pet like him—a companion that feels like family.
-                        </p>
-                        <p>
-                            Finding the right pet shouldn't be difficult, but traditional methods are slow, limited, and inconvenient. The process often involves long searches, word-of-mouth recommendations, or settling for fewer choices due to lack of accessibility. That's why we built Pettify—a platform that connects pet lovers with trusted breeders and vendors nearby, eliminating unnecessary hassle.
-                        </p>
-                        <p>
-                            Whether you're a remote worker needing a loyal companion or a family looking for the perfect pet, Pettify makes the experience simple, safe, and stress-free. Our platform provides variety, reliability, and ease, ensuring you find not just any pet, but the right one for your home and lifestyle.
-                        </p>
-                        <p>
-                            My journey started with Jet. Now, through Pettify, we help others find their own Jets—pets that bring love, loyalty, and companionship into our lives.
-                        </p>
-                    </div>
-                </div>
+        <!-- Card 1: Seller (Chinedu) -->
+        <div class="testi-nested-card">
+          <div class="testi-white-box">
+            <div class="testi-rating-row">
+              <span class="rating-num">4.9</span>
+              <span class="rating-star">★ Rating</span>
+              <span class="testi-tag-pill seller-pill">Seller</span>
             </div>
-    
-            <div class="team-slide co-founders-slide">
-                <div class="team-members-container">
-                    <div class="team-member">
-                        <img src="images/darey.jpg" alt="Emmanuel Oluwadare" class="team-member-img">
-                        <h2>Emmanuel Oluwadare</h2>
-                        <h3>CPO / CO-FOUNDER</h3>
-                        <a href="https://www.linkedin.com/in/oluwadare-emmanuel-4a0b75270/" target="_blank">
-                            <i class="fab fa-linkedin media-icon"></i>
-                        </a>
-                    </div>
-                    <div class="team-member">
-                        <img src="images/daniel1.jpg" alt="Omole Daniel" class="team-member-img">
-                        <h2>Omole Daniel</h2>
-                        <h3>CTO / CO-FOUNDER</h3>
-                        <a href="https://www.linkedin.com/in/daniel-omole-34401521a" target="_blank">
-                            <i class="fab fa-linkedin media-icon"></i>
-                        </a>
-                    </div>
-                </div>
+            <p class="testi-quote">"Pettify gave my kennel real legitimacy. Serious buyers message me directly, and I don't waste hours filtering out scammers."</p>
+          </div>
+          <div class="testi-user-row">
+            <img src="images/dark_guy.webp" alt="Chinedu Nwosu" class="testi-user-avatar">
+            <div class="testi-user-info">
+              <b>Chinedu Nwosu</b>
+              <span>Dog Breeder • Lagos</span>
             </div>
-        </div>
-        
-        <!-- Scroll indicator -->
-        <div class="scroll-indicator">
-            <span>Scroll right to see team →</span>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <h2 class="section-title">What Drives Us?</h2>
-        <p class="section-subtitle">Everything you need to buy or sell pets safely and conveniently</p>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <img src="images/dependability (1).png" alt="Trust" class="feature-icon">
-                <h3>Companionship First</h3>
-                <p>We believe every pet deserves a loving home and every owner deserves the perfect companion.</p>
-            </div>
-
-            <div class="feature-card">
-                <img src="images/trust.png" alt="Safety" class="feature-icon">
-                <h3>Trust & Safety</h3>
-                <p>All sellers are verified and pets come with health certifications for your peace of mind.</p>
-            </div>
-
-            <div class="feature-card">
-                <img src="images/convenience.png" alt="Convenience" class="feature-icon">
-                <h3>Convenience</h3>
-                <p>Find and purchase pets from the comfort of your home with seamless delivery options.</p>
-            </div>
-
-            <div class="feature-card">
-                <img src="images/creativity.png" alt="Innovation" class="feature-icon">
-                <h3>Innovation</h3>
-                <p>Leveraging technology to make pet transactions safer, faster, and more accessible.</p>
-            </div>
-
-            <div class="feature-card">
-                <img src="images/agreement.png" alt="Commitment" class="feature-icon">
-                <h3>Lifelong Commitment</h3>
-                <p>Supporting pet owners and sellers throughout their entire journey with us.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faqs" id="faqs"> 
-        <h2 class="section-title">We've Got Answers</h2>
-        <div class="faq-container">
-            <div class="questions">
-                <div class="question active">What is Pettify?</div>
-                <div class="question">How do I sign up for Pettify?</div>
-                <div class="question">How do I buy a pet on Pettify?</div>
-                <div class="question">How do I list a pet for sale?</div>
-                <div class="question">Is it safe to buy pets through Pettify?</div>
-                <div class="question">What payment methods are accepted?</div>
-                <div class="question">Can I get a refund for my purchase?</div>
-                <div class="question">How do I contact customer support?</div>
-            </div>
-            <div class="answers">
-                <div class="answer active">Pettify is an online marketplace for pet lovers, trusted breeders, pet vendors, and veterinarians. You can buy & sell pets, pet accessories, book vet appointments and many more.</div>
-                <div class="answer">Buyers - Download the Pettify app from Google Play & App Store. Breeders & Vets - Sign up on www.pettify.co to create an account. Simply provide your email or Google sign in to get started.</div>
-                <div class="answer">Download the Pettify mobile app from Google Play or App store. Browse the available pets listed by trusted breeders and sellers on the mobile app. Once you find the right companion, you can make the purchase and enter your delivery address for your pet to be delivered.</div>
-                <div class="answer">If you're a breeder or vendor, you can sign up on the Pettify web app at www.pettify.co and start listing pets for sale. Provide detailed descriptions such as category, breed, description, age and vaccination details and clear beautiful pet photos to attract eager buyers.</div>
-                <div class="answer">Pettify vets sellers and provides a safe platform to connect with breeders, but we recommend always verifying the seller and ensuring the pet's health records before making any purchase.</div>
-                <div class="answer">Pettify supports various payment methods such as direct transfers or payments via debit/credit cards through Paystack.</div>
-                <div class="answer">Refund policies are determined by Pettify only if the received Pet was in bad condition or false pet delivery. We can also refund canceled Vet appointments. Please contact Pettify through email hello@pettify.co directly for any refund requests or help.</div>
-                <div class="answer">If you have any questions or issues, you can contact Pettify support via email at hello@pettify.co or through the app's support section and social media channels.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
-        <h2 class="section-title">What Our Sellers Say</h2>
-        <p class="section-subtitle">Trusted by thousands of pet lovers across Nigeria</p>
-
-        <div class="testimonials-slider">
-            <div class="testimonial-card">
-                <p class="testimonial-text">"Before Pettify, selling pets was slow. Now, I get orders from serious buyers almost every day. My sales have tripled!"</p>
-                <p class="testimonial-author">– Chinedu, Lagos</p>
-            </div>
-
-            <div class="testimonial-card">
-                <p class="testimonial-text">"The platform makes selling so easy, and I've expanded my business faster than I expected. Highly recommended!"</p>
-                <p class="testimonial-author">– Aisha, Abuja</p>
-            </div>
-
-            <div class="testimonial-card">
-                <p class="testimonial-text">"Since listing my accessories on Pettify, I've seen a huge increase in sales. People trust me more because of the platform."</p>
-                <p class="testimonial-author">– Tunde, Ibadan</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Get Started Section -->
-    <section class="vendor-frame">
-        <div class="vendor-content">
-            <h2>Get started in few steps</h2>
-            <ul class="steps-list">
-                <li><i class="fas fa-check-circle"></i> Create a free account</li>
-                <li><i class="fas fa-check-circle"></i> Connect your bank details</li>
-                <li><i class="fas fa-check-circle"></i> List your pets & accessories</li>
-                <li><i class="fas fa-check-circle"></i> Withdraw your earnings</li>
-            </ul>
-            <a href="https://www.coachli.co/pettify" class="demo-button" target="_blank">
-                <i class="fas fa-arrow-right"></i> Book a free demo call
-            </a>            
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <!-- <section class="cta-section">
-        <h2>Ready to Find Your Perfect Pet?</h2>
-        <p>Join thousands of happy pet owners and trusted sellers on Nigeria's #1 pet marketplace</p>
-        <div class="cta-buttons">
-            <button class="btn-white">Download App</button>
-            <button class="btn-white">Create Seller Account</button>
-        </div>
-    </section> -->
-
-    <!-- Featured Blog Preview Section -->
-    <section class="home-blog-section" style="padding: 5rem 5%; background: #FFFBEC80;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
-                <div>
-                    <span style="color: #ED770B; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Pet Care Insights</span>
-                    <h2 style="font-size: 2.2rem; font-weight: 700; color: #2C2C2C; margin-top: 0.3rem;">Latest Articles & Guides</h2>
-                </div>
-                <a href="blogs.html" style="color: #ED770B; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                    View All Articles <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <div id="homeBlogGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <!-- Dynamically loaded blog cards -->
-            </div>
-        </div>
-    </section>
-
-    <script>
-        async function fetchHomeBlogs() {
-            try {
-                const res = await fetch('https://pettify-backend.onrender.com/api/v1/blogs?limit=3');
-                if (!res.ok) return;
-                const data = await res.json();
-                const blogs = data.blogs || data.data || [];
-                const grid = document.getElementById('homeBlogGrid');
-                if (!grid || blogs.length === 0) return;
-
-                grid.innerHTML = blogs.slice(0, 3).map(b => {
-                    const cover = b.coverImage || 'images/pettify.png';
-                    const category = b.category || 'Pet Care';
-                    const title = b.title || 'Untitled Post';
-                    const excerpt = b.excerpt || '';
-                    const slug = b.slug || b._id;
-
-                    return `
-                        <div style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.3s ease; display: flex; flex-direction: column;" onclick="window.location.href='blog-details.html?slug=${encodeURIComponent(slug)}'">
-                            <div style="position: relative; height: 180px; overflow: hidden; background: #FFF5E6;">
-                                <span style="position: absolute; top: 12px; left: 12px; background: #ED770B; color: white; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase;">${category}</span>
-                                <img src="${cover}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='images/pettify.png'">
-                            </div>
-                            <div style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1;">
-                                <h3 style="font-size: 1.15rem; font-weight: 700; color: #2C2C2C; margin-bottom: 0.5rem; line-height: 1.3;">${title}</h3>
-                                <p style="font-size: 0.9rem; color: #666; line-height: 1.4; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${excerpt}</p>
-                                <span style="color: #ED770B; font-weight: 600; font-size: 0.85rem; margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.4rem;">
-                                    Read Article <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
-                                </span>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            } catch (e) {
-                console.log('Failed to fetch home blogs:', e);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', fetchHomeBlogs);
-    </script>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Pettify</h3>
-                <p>Nigeria's leading pet marketplace connecting buyers with trusted sellers nationwide.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Product</h3>
-                <ul>
-                    <li><a href="listings.html">Listings</a></li>
-                    <li><a href="blogs.html">Blog</a></li>
-                    <li><a href="#prcing-link">Pricing</a></li>
-                    <li><a href="#faqs">FAQs</a></li>
-                </ul>
-            </div>
-
-            <!-- <div class="footer-section">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div> -->
-
-            <div class="footer-section">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="terms.html">Terms of Use</a></li>
-                    <li><a href="policy.html">Privacy Policy</a></li>
-                    <!-- <li><a href="#">Cookie Policy</a></li> -->
-                </ul>
-            </div>
+          </div>
         </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2025 Pettify Global Technologies LTD. All rights reserved.</p>
+        <!-- Card 2: Buyer (Sarah) -->
+        <div class="testi-nested-card">
+          <div class="testi-white-box">
+            <div class="testi-rating-row">
+              <span class="rating-num">4.9</span>
+              <span class="rating-star">★ Rating</span>
+              <span class="testi-tag-pill buyer-pill">Buyer</span>
+            </div>
+            <p class="testi-quote">"I was nervous about buying a dog online, but Pettify made it effortless. Vaccination records were verified and my puppy arrived safely!"</p>
+          </div>
+          <div class="testi-user-row">
+            <img src="images/user_sarah.webp" alt="Sarah Adeleke" class="testi-user-avatar">
+            <div class="testi-user-info">
+              <b>Sarah Adeleke</b>
+              <span>Pet Parent • Abuja</span>
+            </div>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        // Mobile menu toggle
-        function toggleMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        }
+        <!-- Card 3: Seller (Aisha) -->
+        <div class="testi-nested-card">
+          <div class="testi-white-box">
+            <div class="testi-rating-row">
+              <span class="rating-num">5.0</span>
+              <span class="rating-star">★ Rating</span>
+              <span class="testi-tag-pill seller-pill">Seller</span>
+            </div>
+            <p class="testi-quote">"Listing my pet supplies on Pettify increased my sales by 40%. Nationwide reach is genuine and conversations are far more focused."</p>
+          </div>
+          <div class="testi-user-row">
+            <img src="images/user_aisha.webp" alt="Aisha Bello" class="testi-user-avatar">
+            <div class="testi-user-info">
+              <b>Aisha Bello</b>
+              <span>Accessories Vendor • Ibadan</span>
+            </div>
+          </div>
+        </div>
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+        <!-- Card 4: Buyer (David) -->
+        <div class="testi-nested-card">
+          <div class="testi-white-box">
+            <div class="testi-rating-row">
+              <span class="rating-num">4.9</span>
+              <span class="rating-star">★ Rating</span>
+              <span class="testi-tag-pill buyer-pill">Buyer</span>
+            </div>
+            <p class="testi-quote">"Finding a healthy Persian kitten in Port Harcourt was easy with Pettify. The seller was transparent and delivery was smooth."</p>
+          </div>
+          <div class="testi-user-row">
+            <img src="images/user_david.webp" alt="David Okonjo" class="testi-user-avatar">
+            <div class="testi-user-info">
+              <b>David Okonjo</b>
+              <span>Cat Owner • Port Harcourt</span>
+            </div>
+          </div>
+        </div>
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                    document.querySelector('.nav-links').classList.remove('active');
-                }
-            });
-        });
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Tab functionality
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const target = this.getAttribute('data-target');
-                
-                // Remove active class from all tabs and sections
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.active-tab, .inactive-tab').forEach(section => {
-                    section.classList.remove('active-tab');
-                    section.classList.add('inactive-tab');
-                });
-                
-                // Add active class to clicked tab and target section
-                this.classList.add('active');
-                const targetSection = document.querySelector(target);
-                targetSection.classList.remove('inactive-tab');
-                targetSection.classList.add('active-tab');
-            });
-        });
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div class="faq-head reveal">
+      <span class="eyebrow">FAQs</span>
+      <h2>We've got answers</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-q">What is Pettify?<span class="plus"></span></button>
+        <div class="faq-a"><p>An online marketplace connecting pet lovers with trusted breeders, vendors and vets in Nigeria. Buy or sell pets and accessories, or book a vet appointment, all in one place.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do I sign up?<span class="plus"></span></button>
+        <div class="faq-a"><p>Buyers download the Pettify app from Google Play or the App Store. Breeders and vendors sign up at pettify.co with an email or Google account.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is it safe to buy pets through Pettify?<span class="plus"></span></button>
+        <div class="faq-a"><p>Every seller is vetted before their listings go live. We still recommend verifying health records directly before you complete a purchase.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What payment methods are accepted?<span class="plus"></span></button>
+        <div class="faq-a"><p>Direct bank transfer or debit/credit card, processed securely through Paystack.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I get a refund?<span class="plus"></span></button>
+        <div class="faq-a"><p>Yes — if a pet arrives in poor condition or doesn't match its listing. Cancelled vet appointments are refunded too. Email hello@pettify.co to start a request.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Pricing dropdown
-        const pricingLink = document.getElementById('pricing-link');
-        const pricingDropdown = document.getElementById('pricing-dropdown');
-        
-        pricingLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            pricingDropdown.classList.toggle('active');
-        });
+<footer>
+  <div class="wrap">
+    <div class="foot-top reveal">
+      <h3>Ready to find your pawfect companion?</h3>
+      <a href="#listings" class="btn btn--orange">Browse pets</a>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <a href="index.html" class="logo" style="margin-bottom:14px;">
+          <img class="brand-logo" src="images/web_logo.webp" alt="Pettify">
+        </a>
+        <p>Nigeria's leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="#steps">Pricing</a></li>
+          <li><a href="#faq">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="terms.html">Terms of use</a></li>
+          <li><a href="policy.html">Privacy policy</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@pettify.co">hello@pettify.co</a></li>
+          <li><a href="tel:+2348001234567">+234 800 123 4567</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pettify Global Technologies LTD. All rights reserved.</span>
+      <span>Made for pet lovers across Nigeria</span>
+    </div>
+  </div>
+</footer>
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.pricing-dropdown-wrapper')) {
-                pricingDropdown.classList.remove('active');
-            }
-        });
+<div class="app-modal" id="app-download-modal" aria-hidden="true">
+  <div class="app-modal-backdrop" data-modal-close></div>
+  <div class="app-modal-card" role="dialog" aria-modal="true" aria-labelledby="app-modal-title" aria-describedby="app-modal-description" tabindex="-1">
+    <button class="app-modal-close" type="button" data-modal-close aria-label="Close app download window">×</button>
+    <div class="app-modal-copy">
+      <div class="app-modal-icon">🐾</div>
+      <div class="app-modal-kicker">Continue with Pettify</div>
+      <h2 id="app-modal-title">Your account lives in the app.</h2>
+      <p id="app-modal-description">Download Pettify to manage your account, save pets, complete purchases and keep every conversation in one secure place.</p>
+      <div class="app-modal-store-links">
+        <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener" aria-label="Download Pettify on Google Play"><span class="modal-store-icon"><i class="fa-brands fa-google-play"></i></span><span><small>Get it on</small><b>Google Play</b></span></a>
+        <a href="https://apps.apple.com/ng/app/pettify/id6757312160" target="_blank" rel="noopener" aria-label="Download Pettify on the App Store"><span class="modal-store-icon"><i class="fa-brands fa-apple"></i></span><span><small>Download on the</small><b>App Store</b></span></a>
+      </div>
+    </div>
+    <div class="app-modal-qr">
+      <div class="qr-frame"><img src="images/pettify-app-qr.webp" alt="QR code for Pettify app download options"></div>
+      <div><b>Scan with your phone</b><p>Open Pettify download options instantly.</p></div>
+    </div>
+  </div>
+</div>
 
-        // FAQ functionality
-        document.querySelectorAll('.question').forEach((question, index) => {
-            question.addEventListener('click', function() {
-                // Remove active class from all questions and answers
-                document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-                document.querySelectorAll('.answer').forEach(a => a.classList.remove('active'));
-                
-                // Add active class to clicked question and corresponding answer
-                this.classList.add('active');
-                document.querySelectorAll('.answer')[index].classList.add('active');
-            });
-        });
-    </script>
+<script src="global-shell.js"></script>
+<script src="homepage.js"></script>
+<script>
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.12});
+    revealEls.forEach(el=>io.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('in'));
+  }
+</script>
+
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="listing-drawer" id="listing-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+  <div class="drawer-grip"></div>
+  <div class="drawer-header">
+    <span>Listing preview</span>
+    <button class="drawer-close" id="drawer-close" type="button" aria-label="Close listing details">×</button>
+  </div>
+  <div id="drawer-content"></div>
+</aside>
+
 </body>
 </html>

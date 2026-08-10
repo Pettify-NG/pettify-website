@@ -4,39 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post | Pettify</title>
-    <link rel="icon" href="images/pettify.png" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="global-shell.css">
 </head>
 <body>
 
-    <!-- Header Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="logo-link">
-            <img src="images/web_logo.png" alt="Pettify Logo" class="logo">
-        </a>
-        
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="listings.html">View Listings</a></li>
-            <li><a href="blogs.html" class="active">Blog</a></li>
-            <li><a href="index.html#pricing-link">Pricing</a></li>
-            <li><a href="index.html#testimonials">Reviews</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <a href="index.html#download">
-                <button class="cta-btn">Get Started</button>
-            </a>
-        </ul>
-    </nav>
+
 
     <!-- Main Detail Container -->
     <main class="blog-detail-container">
 
         <!-- Back Button -->
         <a href="blogs.html" class="back-btn">
-            <i class="fas fa-arrow-left"></i>
-            <span>Back to All Blogs</span>
+            <span>← Back to pet-care articles</span>
         </a>
 
         <!-- Loading State Spinner -->
@@ -78,7 +62,7 @@
 
             <!-- Hero Cover Image -->
             <div class="blog-hero-image-wrapper">
-                <img id="articleCoverImage" src="images/pettify.png" alt="Cover Image" onerror="this.onerror=null; this.src='images/pettify.png';">
+                <img id="articleCoverImage" src="images/pettify.webp" alt="Cover Image" onerror="this.onerror=null; this.src='images/pettify.webp';">
             </div>
 
             <!-- Rich HTML Body Content -->
@@ -118,41 +102,6 @@
         </article>
 
     </main>
-
-    <!-- Footer -->
-    <footer style="background: #2C2C2C; color: white; padding: 4rem 5% 2rem; margin-top: 4rem;">
-        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; padding-bottom: 3rem; border-bottom: 1px solid #444;">
-            <div>
-                <img src="images/web_logo.png" alt="Pettify" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
-                <p style="color: #aaa; font-size: 0.95rem;">Nigeria's leading pet marketplace connecting buyers with trusted sellers nationwide.</p>
-            </div>
-
-            <div>
-                <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Quick Links</h4>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.6rem;"><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
-                    <li style="margin-bottom: 0.6rem;"><a href="listings.html" style="color: #ccc; text-decoration: none;">Listings</a></li>
-                    <li style="margin-bottom: 0.6rem;"><a href="blogs.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Blog</a></li>
-                    <li style="margin-bottom: 0.6rem;"><a href="terms.html" style="color: #ccc; text-decoration: none;">Terms of Service</a></li>
-                    <li style="margin-bottom: 0.6rem;"><a href="policy.html" style="color: #ccc; text-decoration: none;">Privacy Policy</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Connect With Us</h4>
-                <p style="color: #ccc; margin-bottom: 1rem;">Have questions or feedback? Contact our support team anytime.</p>
-                <div style="display: flex; gap: 1rem; font-size: 1.3rem;">
-                    <a href="#" style="color: var(--primary);"><i class="fab fa-instagram"></i></a>
-                    <a href="#" style="color: var(--primary);"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="color: var(--primary);"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center; color: #888; margin-top: 2rem; font-size: 0.9rem;">
-            &copy; 2026 Pettify Technologies Inc. All rights reserved.
-        </div>
-    </footer>
 
     <!-- JavaScript Logic -->
     <script>
@@ -279,7 +228,7 @@
 
             document.getElementById('articleViews').textContent = `${blog.views || 1} views`;
 
-            const coverImg = blog.coverImage || 'images/pettify.png';
+            const coverImg = blog.coverImage || 'images/pettify.webp';
             const imgEl = document.getElementById('articleCoverImage');
             imgEl.src = coverImg;
             imgEl.alt = blog.title || 'Cover image';
@@ -328,7 +277,7 @@
                 }
 
                 relatedGrid.innerHTML = related.map(b => {
-                    const cover = b.coverImage || 'images/pettify.png';
+                    const cover = b.coverImage || 'images/pettify.webp';
                     const title = b.title || 'Untitled Post';
                     const cat = b.category || 'Pet Care';
                     const slug = b.slug || b._id;
@@ -338,7 +287,7 @@
                         <article class="blog-card" onclick="window.location.href='blog-details.html?slug=${encodeURIComponent(slug)}'">
                             <div class="blog-card-img-wrapper">
                                 <span class="category-badge">${escapeHtml(cat)}</span>
-                                <img src="${escapeHtml(cover)}" alt="${escapeHtml(title)}" onerror="this.onerror=null; this.src='images/pettify.png';">
+                                <img src="${escapeHtml(cover)}" alt="${escapeHtml(title)}" onerror="this.onerror=null; this.src='images/pettify.webp';">
                             </div>
                             <div class="blog-card-content">
                                 <h3 class="blog-card-title">${escapeHtml(title)}</h3>
@@ -389,5 +338,6 @@
 
         initBlogDetails();
     </script>
+    <script src="global-shell.js"></script>
 </body>
 </html>
