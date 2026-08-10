@@ -145,7 +145,7 @@
         <div class="foot-socials" style="margin-top: 18px; display: flex; gap: 10px; align-items: center;">
           <a href="https://instagram.com/usepettify" target="_blank" rel="noopener" aria-label="Instagram on Instagram" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>
           <a href="https://x.com/usepettify" target="_blank" rel="noopener" aria-label="Pettify on X" class="social-icon-btn"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="https://tiktok.com/usepetiffy" target="_blank" rel="noopener" aria-label="Pettify on TikTok" class="social-icon-btn"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="https://www.tiktok.com/@usepettify" target="_blank" rel="noopener" aria-label="Pettify on TikTok" class="social-icon-btn"><i class="fa-brands fa-tiktok"></i></a>
           <a href="https://www.linkedin.com/company/pettify" target="_blank" rel="noopener" aria-label="Pettify on LinkedIn" class="social-icon-btn"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
       </div>
