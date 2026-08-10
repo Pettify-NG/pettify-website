@@ -17,7 +17,7 @@
   <div class="wrap">
     <div class="micro-left">
       <span>hello@pettify.co</span>
-      <span>+234 800 123 4567</span>
+      <span>+234 701 859 0284</span>
     </div>
     <div><a href="blogs.html">Pet Care Blog</a></div>
   </div>
@@ -45,7 +45,7 @@
     </form>
     <div class="help-block">
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-      <div class="txt"><b>Need help?</b><span>+234 800 123 4567</span></div>
+      <div class="txt"><b>Need help?</b><span>+234 701 859 0284</span></div>
     </div>
     <div class="icon-cluster">
       <button class="icon-btn account-trigger" type="button" data-app-modal data-modal-context="account" aria-label="Open your Pettify account"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
@@ -108,6 +108,16 @@
       <div class="foot-col">
         <a href="index.html" class="logo shell-footer-logo"><img class="brand-logo" src="images/web_logo.webp" alt="Pettify"></a>
         <p>Nigeria's leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
+        <div class="foot-app-stores" style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener" class="foot-store-btn" aria-label="Get Pettify on Google Play">
+            <i class="fa-brands fa-google-play"></i>
+            <span><small>Get it on</small><b>Google Play</b></span>
+          </a>
+          <a href="https://apps.apple.com/ng/app/pettify/id6757312160" target="_blank" rel="noopener" class="foot-store-btn" aria-label="Download Pettify on App Store">
+            <i class="fa-brands fa-apple"></i>
+            <span><small>Download on</small><b>App Store</b></span>
+          </a>
+        </div>
       </div>
       <div class="foot-col">
         <h5>Product</h5>
@@ -130,8 +140,14 @@
         <ul>
           <li><a href="https://www.coachli.co/pettify" target="_blank" rel="noopener">Book a Call (Coachli)</a></li>
           <li><a href="mailto:hello@pettify.co">hello@pettify.co</a></li>
-          <li><a href="tel:+2348001234567">+234 800 123 4567</a></li>
+          <li><a href="tel:+2347018590284">+234 701 859 0284</a></li>
         </ul>
+        <div class="foot-socials" style="margin-top: 18px; display: flex; gap: 10px; align-items: center;">
+          <a href="https://instagram.com/usepettify" target="_blank" rel="noopener" aria-label="Instagram on Instagram" class="social-icon-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/usepettify" target="_blank" rel="noopener" aria-label="Pettify on X" class="social-icon-btn"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.tiktok.com/@usepettify" target="_blank" rel="noopener" aria-label="Pettify on TikTok" class="social-icon-btn"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="https://www.linkedin.com/company/pettify" target="_blank" rel="noopener" aria-label="Pettify on LinkedIn" class="social-icon-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
       </div>
     </div>
     <div class="foot-bottom">
