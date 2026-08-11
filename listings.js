@@ -121,9 +121,9 @@
   function nameFor(item) { return text(item.breed || item.name, "Pettify listing"); }
   function locationFor(item) {
     const location = item.location;
-    if (!location) return "Nigeria";
+    if (!location) return "All Locations";
     if (typeof location === "string") return location;
-    return text(location.lga || location.state || location.city, "Nigeria");
+    return text(location.lga || location.state || location.city, "All Locations");
   }
   function sellerFor(item) { return text(item.seller?.business_name || item.seller?.name || item.vendor?.business_name || item.owner?.name, "Pettify seller"); }
   function formatPrice(value) { const amount = Number(value); return Number.isFinite(amount) ? "₦" + amount.toLocaleString("en-NG") : "Price on request"; }
@@ -247,7 +247,7 @@
     ["all", "dogs", "cats", "others", "accessories"].forEach(function (category) { const count = category === "all" ? state.all.length : state.all.filter(function (item) { return categoryFor(item) === category; }).length; const node = document.getElementById("count-" + category); if (node) node.textContent = count; });
     var locationOptions = document.getElementById('location-filter-options');
     while (locationOptions.children.length > 1) locationOptions.removeChild(locationOptions.lastChild);
-    const locations = Array.from(new Set(state.all.map(locationFor))).filter(function (place) { return place && place !== "Nigeria"; }).sort();
+    const locations = Array.from(new Set(state.all.map(locationFor))).filter(function (place) { return place && place !== "Nigeria" && place !== "All Locations"; }).sort();
     locations.forEach(function (place) {
       var li = document.createElement('li');
       li.setAttribute('role', 'option');

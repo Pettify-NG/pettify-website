@@ -11,9 +11,9 @@
   }
 
   function getLocation(location) {
-    if (!location) return "Nigeria";
+    if (!location) return "All Locations";
     if (typeof location === "string") return location;
-    return location.lga || location.state || "Nigeria";
+    return location.lga || location.state || "All Locations";
   }
 
   function formatPrice(value) {
