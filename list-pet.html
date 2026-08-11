@@ -44,14 +44,25 @@
 
     .vendor-hero {
       background: linear-gradient(180deg, #FFF9F3 0%, var(--white) 100%);
-      padding: 72px 0 80px;
-      text-align: center;
+      padding: 64px 0 80px;
     }
 
-    .vendor-hero-wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 24px;
+    .vendor-hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    @media (max-width: 960px) {
+      .vendor-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      .hero-actions, .trust-bullets {
+        justify-content: center !important;
+      }
     }
 
     .vendor-app-tag {
@@ -72,7 +83,7 @@
 
     .vendor-hero h1 {
       font-family: var(--display);
-      font-size: clamp(38px, 5vw, 60px);
+      font-size: clamp(38px, 4.8vw, 58px);
       font-weight: 800;
       line-height: 1.08;
       letter-spacing: -0.025em;
@@ -85,23 +96,23 @@
     }
 
     .vendor-hero p.hero-copy {
-      font-size: clamp(17px, 2vw, 20px);
+      font-size: clamp(17px, 1.9vw, 19px);
       color: var(--ink-soft);
       line-height: 1.6;
-      margin: 0 auto 36px;
-      max-width: 54ch;
+      margin-bottom: 32px;
+      max-width: 52ch;
     }
 
     .hero-actions {
       display: flex;
-      justify-content: center;
       gap: 16px;
       align-items: center;
-      margin-bottom: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
     }
 
     .btn--large {
-      padding: 18px 40px !important;
+      padding: 18px 38px !important;
       font-size: 18px !important;
       font-weight: 700 !important;
       border-radius: 100px !important;
@@ -119,10 +130,9 @@
 
     .trust-bullets {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 24px;
-      font-size: 14.5px;
+      gap: 20px;
+      font-size: 14px;
       color: var(--ink-soft);
       font-weight: 600;
     }
@@ -133,28 +143,47 @@
       gap: 6px;
     }
 
+    .vendor-hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .vendor-hero-img {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      border-radius: 20px;
+      filter: drop-shadow(0 20px 40px rgba(20, 17, 15, 0.14));
+      transition: transform 0.3s ease;
+    }
+
+    .vendor-hero-img:hover {
+      transform: translateY(-4px);
+    }
+
     /* Clean Vendor App Notification Section */
     .vendor-app-box {
-      margin-top: 56px;
+      margin-top: 64px;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 24px;
-      padding: 40px 36px;
+      padding: 44px 36px;
       text-align: center;
     }
 
     .vendor-app-box h3 {
       font-family: var(--display);
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       margin-bottom: 10px;
       color: var(--ink);
     }
 
     .vendor-app-box p {
-      font-size: 15px;
+      font-size: 15.5px;
       color: var(--ink-soft);
-      max-width: 50ch;
+      max-width: 52ch;
       margin: 0 auto 24px;
     }
 
@@ -218,43 +247,49 @@
 </head>
 <body>
 
-  <!-- Clean Vendor Hero Section -->
+  <!-- Vendor Hero Section -->
   <section class="vendor-hero">
     <div class="wrap">
-      <div class="vendor-hero-wrap">
-        <div class="vendor-app-tag">
-          <i class="fa-solid fa-mobile-screen-button"></i>
-          <span>Pettify Vendor App — Coming Soon</span>
-        </div>
-
-        <h1>List your pet <span>& accessories.</span></h1>
-        <p class="hero-copy">Help your loving pet find a responsible owner. Join thousands of breeders and vendors currently selling on Pettify.</p>
-
-        <div class="hero-actions">
-          <a href="https://dashboard.pettify.co/register" target="_blank" rel="noopener" class="btn btn--orange btn--large">
-            Start selling <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <div class="trust-bullets">
-          <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Free to list for life</span>
-          <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Verified Buyer Community</span>
-          <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Direct Buyer Messaging</span>
-        </div>
-
-        <!-- Vendor App Notification Box -->
-        <div class="vendor-app-box">
-          <h3>Get notified when the Vendor App launches</h3>
-          <p>We're building a dedicated mobile app for breeders & vendors to manage inventory on the go. Enter your email for early access updates.</p>
-          
-          <form class="vendor-notify-form" id="vendorAppForm">
-            <input type="email" id="vendorAppEmail" placeholder="Enter your email address..." required>
-            <button type="submit">Notify Me</button>
-          </form>
-
-          <div class="vendor-success-msg" id="vendorAppSuccess">
-            <i class="fa-solid fa-circle-check"></i> You're on the early access list! We'll notify you as soon as the vendor app goes live.
+      <div class="vendor-hero-grid">
+        <div>
+          <div class="vendor-app-tag">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <span>Pettify Vendor App — Coming Soon</span>
           </div>
+
+          <h1>List your pet <span>& accessories.</span></h1>
+          <p class="hero-copy">Help your loving pet find a responsible owner. Join thousands of breeders and vendors currently selling on Pettify.</p>
+
+          <div class="hero-actions">
+            <a href="https://dashboard.pettify.co/register" target="_blank" rel="noopener" class="btn btn--orange btn--large">
+              Start selling <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="trust-bullets">
+            <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Free to list for life</span>
+            <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Verified Buyer Network</span>
+            <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Direct Buyer Messaging</span>
+          </div>
+        </div>
+
+        <div class="vendor-hero-visual">
+          <img src="images/vendor_page_image.png" class="vendor-hero-img" alt="Pettify Vendor Marketplace Showcase">
+        </div>
+      </div>
+
+      <!-- Vendor App Early Access Box -->
+      <div class="vendor-app-box">
+        <h3>Get notified when the Vendor App launches</h3>
+        <p>We're building a dedicated mobile app for breeders & vendors to manage inventory on the go. Enter your email for early access updates.</p>
+        
+        <form class="vendor-notify-form" id="vendorAppForm">
+          <input type="email" id="vendorAppEmail" placeholder="Enter your email address..." required>
+          <button type="submit">Notify Me</button>
+        </form>
+
+        <div class="vendor-success-msg" id="vendorAppSuccess">
+          <i class="fa-solid fa-circle-check"></i> You're on the early access list! We'll notify you as soon as the vendor app goes live.
         </div>
       </div>
     </div>
