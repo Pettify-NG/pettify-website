@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Help your loving pet find a responsible owner. Join thousands of breeders and vendors currently selling pets and accessories on Pettify.">
+  <title>List your pet & accessories | Pettify</title>
+  <link rel="icon" href="images/pettify.webp" type="image/png" />
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="global-shell.css">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --paper: #F8F5EF;
+      --ink: #14110F;
+      --ink-2: #221D18;
+      --ink-soft: #5B5349;
+      --orange: #ED770B;
+      --orange-deep: #C96208;
+      --orange-tint: #FCE9D6;
+      --green: #1E7245;
+      --green-tint: #E6F0E9;
+      --line: rgba(20, 17, 15, 0.1);
+      --display: 'Outfit', sans-serif;
+      --body: 'Satoshi', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--white);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .vendor-hero {
+      background: linear-gradient(180deg, #FFF9F3 0%, var(--white) 100%);
+      padding: 72px 0 80px;
+      text-align: center;
+    }
+
+    .vendor-hero-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .vendor-app-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--orange-deep);
+      background: var(--orange-tint);
+      border: 1px solid rgba(237, 119, 11, 0.3);
+      padding: 8px 20px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .vendor-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .vendor-hero h1 span {
+      color: var(--orange);
+    }
+
+    .vendor-hero p.hero-copy {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin: 0 auto 36px;
+      max-width: 54ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .btn--large {
+      padding: 18px 40px !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      border-radius: 100px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      text-decoration: none !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+
+    .btn--large:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px -8px rgba(237, 119, 11, 0.45);
+    }
+
+    .trust-bullets {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .trust-bullets span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Clean Vendor App Notification Section */
+    .vendor-app-box {
+      margin-top: 56px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+
+    .vendor-app-box h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .vendor-app-box p {
+      font-size: 15px;
+      color: var(--ink-soft);
+      max-width: 50ch;
+      margin: 0 auto 24px;
+    }
+
+    .vendor-notify-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .vendor-notify-form input[type="email"] {
+      flex: 1 1 240px;
+      padding: 14px 20px;
+      border-radius: 100px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .vendor-notify-form input[type="email"]:focus {
+      border-color: var(--orange);
+    }
+
+    .vendor-notify-form button {
+      padding: 14px 28px;
+      border-radius: 100px;
+      border: none;
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--body);
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .vendor-notify-form button:hover {
+      background: var(--orange);
+      transform: translateY(-1px);
+    }
+
+    .vendor-success-msg {
+      display: none;
+      background: var(--green-tint);
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-size: 14px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Clean Vendor Hero Section -->
+  <section class="vendor-hero">
+    <div class="wrap">
+      <div class="vendor-hero-wrap">
+        <div class="vendor-app-tag">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <span>Pettify Vendor App — Coming Soon</span>
+        </div>
+
+        <h1>List your pet <span>& accessories.</span></h1>
+        <p class="hero-copy">Help your loving pet find a responsible owner. Join thousands of breeders and vendors currently selling on Pettify.</p>
+
+        <div class="hero-actions">
+          <a href="https://dashboard.pettify.co/register" target="_blank" rel="noopener" class="btn btn--orange btn--large">
+            Start selling <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="trust-bullets">
+          <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Free to list for life</span>
+          <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Verified Buyer Community</span>
+          <span><i class="fa-solid fa-circle-check" style="color:var(--orange);"></i> Direct Buyer Messaging</span>
+        </div>
+
+        <!-- Vendor App Notification Box -->
+        <div class="vendor-app-box">
+          <h3>Get notified when the Vendor App launches</h3>
+          <p>We're building a dedicated mobile app for breeders & vendors to manage inventory on the go. Enter your email for early access updates.</p>
+          
+          <form class="vendor-notify-form" id="vendorAppForm">
+            <input type="email" id="vendorAppEmail" placeholder="Enter your email address..." required>
+            <button type="submit">Notify Me</button>
+          </form>
+
+          <div class="vendor-success-msg" id="vendorAppSuccess">
+            <i class="fa-solid fa-circle-check"></i> You're on the early access list! We'll notify you as soon as the vendor app goes live.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Early Access Script -->
+  <script>
+    (function() {
+      const form = document.getElementById('vendorAppForm');
+      const emailInput = document.getElementById('vendorAppEmail');
+      const successMsg = document.getElementById('vendorAppSuccess');
+      const STORAGE_KEY = 'pettify_vendor_app_notifications';
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          if (data && data.email) {
+            form.style.display = 'none';
+            successMsg.innerHTML = `<i class="fa-solid fa-circle-check"></i> You're on the vendor app early access list with <b>${escapeHtml(data.email)}</b>!`;
+            successMsg.style.display = 'block';
+          }
+        } catch (e) {}
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = (emailInput.value || '').trim();
+        const btn = form.querySelector('button');
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+
+        const payload = {
+          email: email,
+          timestamp: new Date().toISOString(),
+          source: 'vendor-app-page'
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+
+        try {
+          await fetch('https://pettify-backend.onrender.com/api/v1/vendor-app-notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {}
+
+        form.style.display = 'none';
+        successMsg.innerHTML = `<i class="fa-solid fa-circle-check"></i> You're on the list! We've saved <b>${escapeHtml(email)}</b> and will email you when the Pettify Vendor App launches.`;
+        successMsg.style.display = 'block';
+      });
+    })();
+  </script>
+
+  <!-- Global Shell Script -->
+  <script src="global-shell.js"></script>
+</body>
+</html>

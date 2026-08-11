@@ -68,7 +68,7 @@
       <a href="listings?category=cats">Cats</a>
       <a href="listings?category=accessories">Accessories</a>
       <a href="vet-booking">Vet Booking</a>
-      <a href="https://dashboard.pettify.co/register" target="_blank" rel="noopener">List your pet</a>
+      <a href="list-pet">List your pet & accessories</a>
       <a href="blogs">Blog</a>
       <a href="about">About Us</a>
       <a href="https://www.coachli.co/pettify" target="_blank" rel="noopener">Book a Call</a>
@@ -107,7 +107,7 @@
     <div class="foot-cols">
       <div class="foot-col">
         <a href="/" class="logo shell-footer-logo"><img class="brand-logo" src="images/web_logo.webp" alt="Pettify"></a>
-        <p>Nigeria's leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
+        <p>The leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
         <div class="foot-app-stores" style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
           <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener" class="foot-store-btn" aria-label="Get Pettify on Google Play">
             <i class="fa-brands fa-google-play"></i>
@@ -152,7 +152,7 @@
     </div>
     <div class="foot-bottom">
       <span>© 2026 Pettify Global Technologies LTD. All rights reserved.</span>
-      <span>Made for pet lovers across Nigeria</span>
+      <span>Made for pet lovers</span>
     </div>
   </div>
 </footer>`;

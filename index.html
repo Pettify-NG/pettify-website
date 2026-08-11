@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pettify — Nigeria's Pet Marketplace</title>
-<meta name="description" content="Discover verified pets, trusted sellers, pet accessories and veterinary care on Nigeria's pet marketplace.">
+<title>Pettify — Pet Marketplace</title>
+<meta name="description" content="Discover verified pets, trusted sellers, pet accessories and veterinary care on Pettify.">
 <link rel="icon" href="images/favicon.ico">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
@@ -317,7 +317,7 @@
 
   /* ============ APP ============ */
   .app{background:var(--white);padding:88px 0;}
-  .app-grid{display:grid;grid-template-columns:1fr 0.8fr;gap:48px;align-items:center;}
+  .app-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
   @media (max-width:860px){.app-grid{grid-template-columns:1fr;gap:38px;}}
   .app-copy h2{font-size:clamp(26px,3.4vw,38px);margin:14px 0 18px;max-width:12ch;}
   .app-copy p{color:var(--ink-soft);font-size:15px;line-height:1.62;max-width:44ch;margin-bottom:28px;}
@@ -465,7 +465,7 @@
   .cat-tile{color:inherit;text-decoration:none;}
   .listing-state{grid-column:1/-1;padding:42px 24px;text-align:center;background:var(--white);border:1px solid var(--line);border-radius:16px;color:var(--ink-soft);}
   .listing-state button{margin-top:14px;border:0;cursor:pointer;}
-  .app-preview{display:block;max-width:320px;width:100%;margin:0 auto;filter:drop-shadow(0 28px 30px rgba(20,17,15,.25));}
+  .app-preview{display:block;max-width:460px;width:100%;margin:0 auto;border-radius:20px;object-fit:cover;box-shadow:0 24px 60px -12px rgba(20,17,15,.28);border:1px solid rgba(20,17,15,.08);}
   .search-go{border:0;cursor:pointer;}
   .lcard{color:inherit;text-decoration:none;}
   .lcard-heart{cursor:pointer;}
@@ -548,7 +548,7 @@
       <a href="listings?category=cats">Cats</a>
       <a href="listings?category=accessories">Accessories</a>
       <a href="vet-booking">Vet Booking</a>
-      <a href="https://dashboard.pettify.co/register" target="_blank" rel="noopener">List your pet</a>
+      <a href="list-pet">List your pet & accessories</a>
       <a href="blogs">Blog</a>
       <a href="#why">About Us</a>
       <a href="mailto:hello@pettify.co">Contact</a>
@@ -580,12 +580,12 @@
 <section class="hero">
   <div class="wrap hero-split">
     <div class="hero-copy reveal-slide-right">
-      <span class="eyebrow">Nigeria's pet marketplace</span>
+      <span class="eyebrow">The pet marketplace</span>
       <h1>Find Healthy <em>Verified Pets</em> Near You.</h1>
       <p class="lede">Every breeder and vendor on Pettify is background-checked and health-verified — so you can discover and adopt with complete confidence.</p>
       <div class="hero-ctas">
         <a href="listings" class="btn btn--orange">Browse pets &nbsp;→</a>
-        <a href="https://dashboard.pettify.co/register" class="btn btn--outline" target="_blank" rel="noopener">List your pet</a>
+        <a href="list-pet" class="btn btn--outline">List your pet & accessories</a>
       </div>
       <div class="hero-proof">
         <div class="hero-proof-stack">
@@ -819,7 +819,7 @@
       </div>
     </div>
     <div class="reveal-slide-left">
-      <img class="app-preview" src="images/app preview.webp" alt="Pettify mobile app listing screen">
+      <img class="app-preview" src="images/vendor_app_preview.jpeg" alt="Pettify mobile app listing screen">
     </div>
   </div>
 </section>
@@ -828,7 +828,7 @@
   <div class="wrap">
     <div class="section-head reveal-on-scroll">
       <h2>Pet care insights</h2>
-      <p>Straight answers on buying, feeding and caring for a pet in Nigeria, from our team and vets.</p>
+      <p>Straight answers on buying, feeding and caring for a pet, from our team and vets.</p>
     </div>
     <div class="blog-grid" id="home-blogs" aria-live="polite">
       <div class="blog-card is-loading">Loading the latest pet-care articles…</div>
@@ -842,11 +842,11 @@
     <div class="testi-left reveal-slide-right">
       <div>
         <span class="testi-pill-eyebrow">Testimonials</span>
-        <h2>Loved by buyers & sellers across Nigeria!</h2>
+        <h2>Loved by Breeders, Vets & Petowners</h2>
         <p class="testi-subtext">Our community's stories highlight the trust, verified health records, and seamless experience behind every pet listing.</p>
         <div class="testi-btn-group">
           <a href="listings" class="btn btn--orange">Browse pets</a>
-          <a href="https://dashboard.pettify.co/register" class="btn btn--black-pill" target="_blank" rel="noopener">List your pet</a>
+          <a href="list-pet" class="btn btn--black-pill">List your pet & accessories</a>
         </div>
       </div>
       
@@ -954,7 +954,7 @@
     <div class="reveal">
       <div class="faq-item">
         <button class="faq-q">What is Pettify?<span class="plus"></span></button>
-        <div class="faq-a"><p>An online marketplace connecting pet lovers with trusted breeders, vendors and vets in Nigeria. Buy or sell pets and accessories, or book a vet appointment, all in one place.</p></div>
+        <div class="faq-a"><p>An online marketplace connecting pet lovers with trusted breeders, vendors and vets. Buy or sell pets and accessories, or book a vet appointment, all in one place.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">How do I sign up?<span class="plus"></span></button>
@@ -987,7 +987,7 @@
         <a href="/" class="logo" style="margin-bottom:14px;">
           <img class="brand-logo" src="images/web_logo.webp" alt="Pettify">
         </a>
-        <p>Nigeria's leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
+        <p>The leading pet marketplace, connecting buyers with trusted sellers nationwide.</p>
       </div>
       <div class="foot-col">
         <h5>Product</h5>
@@ -1015,7 +1015,7 @@
     </div>
     <div class="foot-bottom">
       <span>© 2026 Pettify Global Technologies LTD. All rights reserved.</span>
-      <span>Made for pet lovers across Nigeria</span>
+      <span>Made for pet lovers</span>
     </div>
   </div>
 </footer>
