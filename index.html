@@ -319,7 +319,8 @@
   .app{background:var(--white);padding:88px 0;}
   .app-grid{display:grid;grid-template-columns:1fr 0.8fr;gap:48px;align-items:center;}
   @media (max-width:860px){.app-grid{grid-template-columns:1fr;gap:38px;}}
-  .app-copy h2{font-size:clamp(26px,3.4vw,38px);margin:14px 0 18px;max-width:12ch;}
+  .app-copy h2{font-size:clamp(26px,3.4vw,38px);margin:14px 0 18px;max-width:32ch;line-height:1.2;}
+  @media (max-width:640px){.app-h2-br{display:none}}
   .app-copy p{color:var(--ink-soft);font-size:15px;line-height:1.62;max-width:44ch;margin-bottom:28px;}
   .store-btns{display:flex;gap:12px;flex-wrap:wrap;}
   .store-btn{display:flex;align-items:center;gap:10px;background:var(--white);border:1.5px solid var(--ink);color:var(--ink);padding:11px 18px;border-radius:12px;font-size:13px;}
@@ -531,6 +532,16 @@
       <button class="icon-btn account-trigger" type="button" data-app-modal data-modal-context="account" aria-label="Open your Pettify account"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
       <button class="icon-btn cart-trigger" type="button" data-app-modal data-modal-context="cart" aria-label="Open your Pettify cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L22 7H5"/></svg></button>
       <button class="burger" type="button" aria-label="Toggle navigation" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+    <div class="header-app-btns">
+      <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener" class="hdr-store-btn" aria-label="Get Pettify on Google Play">
+        <i class="fa-brands fa-google-play"></i>
+        <span><small>Get it on</small><b>Google Play</b></span>
+      </a>
+      <a href="https://apps.apple.com/ng/app/pettify/id6757312160" target="_blank" rel="noopener" class="hdr-store-btn" aria-label="Download Pettify on App Store">
+        <i class="fa-brands fa-apple"></i>
+        <span><small>Download on</small><b>App Store</b></span>
+      </a>
     </div>
   </div>
 </header>
@@ -811,7 +822,7 @@
   <div class="wrap app-grid">
     <div class="app-copy reveal-slide-right">
       <span class="eyebrow">The app</span>
-      <h2>Browse and shop confidently for pets on your phone.</h2>
+      <h2>Browse and shop confidently<br class="app-h2-br"> for pets on your phone.</h2>
       <p>Enjoy the full pet shopping experience on the Pettify App. Browse listed pets, shop for your pet's accessories and learn more about pet care all on the app. Available on Google Play and Apple store.</p>
       <div class="store-btns">
         <a href="https://play.google.com/store/apps/details?id=com.pettify.app" class="store-btn" target="_blank" rel="noopener"><b><i class="fa-brands fa-google-play"></i></b><span><small>Get it on</small><b>Google Play</b></span></a>

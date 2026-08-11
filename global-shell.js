@@ -52,6 +52,16 @@
       <button class="icon-btn cart-trigger" type="button" data-app-modal data-modal-context="cart" aria-label="Open your Pettify cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L22 7H5"/></svg></button>
       <button class="burger" type="button" aria-label="Toggle navigation" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     </div>
+    <div class="header-app-btns">
+      <a href="https://play.google.com/store/apps/details?id=com.pettify.app" target="_blank" rel="noopener" class="hdr-store-btn" aria-label="Get Pettify on Google Play">
+        <i class="fa-brands fa-google-play"></i>
+        <span><small>Get it on</small><b>Google Play</b></span>
+      </a>
+      <a href="https://apps.apple.com/ng/app/pettify/id6757312160" target="_blank" rel="noopener" class="hdr-store-btn" aria-label="Download Pettify on App Store">
+        <i class="fa-brands fa-apple"></i>
+        <span><small>Download on</small><b>App Store</b></span>
+      </a>
+    </div>
   </div>
 </header>
 
