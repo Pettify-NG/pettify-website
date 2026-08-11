@@ -1041,6 +1041,16 @@
   </div>
 </div>
 
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="listing-drawer" id="listing-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+  <div class="drawer-grip"></div>
+  <div class="drawer-header">
+    <span>Listing preview</span>
+    <button class="drawer-close" id="drawer-close" type="button" aria-label="Close listing details">×</button>
+  </div>
+  <div id="drawer-content"></div>
+</aside>
+
 <script src="global-shell.js"></script>
 <script src="homepage.js"></script>
 <script>
@@ -1070,16 +1080,6 @@
     revealEls.forEach(el=>el.classList.add('in'));
   }
 </script>
-
-<div class="drawer-backdrop" id="drawer-backdrop"></div>
-<aside class="listing-drawer" id="listing-drawer" aria-hidden="true" aria-labelledby="drawer-title">
-  <div class="drawer-grip"></div>
-  <div class="drawer-header">
-    <span>Listing preview</span>
-    <button class="drawer-close" id="drawer-close" type="button" aria-label="Close listing details">×</button>
-  </div>
-  <div id="drawer-content"></div>
-</aside>
 
 </body>
 </html>

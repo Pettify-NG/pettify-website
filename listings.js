@@ -314,6 +314,17 @@
     els.grid.addEventListener("click", function (event) { const save = event.target.closest("[data-save-id]"); if (save) { event.stopPropagation(); save.classList.toggle("saved"); const icon = save.querySelector("i"); if (icon) { icon.classList.toggle("fa-regular", !save.classList.contains("saved")); icon.classList.toggle("fa-solid", save.classList.contains("saved")); } return; } const card = event.target.closest("[data-listing-id]"); if (card) openDrawer(card.dataset.listingId); });
     els.grid.addEventListener("keydown", function (event) { if ((event.key === "Enter" || event.key === " ") && event.target.matches("[data-listing-id]")) { event.preventDefault(); openDrawer(event.target.dataset.listingId); } });
     document.getElementById("drawer-close").addEventListener("click", closeDrawer); els.drawerBackdrop.addEventListener("click", closeDrawer);
+    document.addEventListener("click", function (event) {
+      if (!els.drawer || !els.drawer.classList.contains("open")) return;
+      if (event.target.closest("#drawer-close, .drawer-close, #drawer-backdrop, .drawer-backdrop")) {
+        event.preventDefault();
+        closeDrawer();
+        return;
+      }
+      if (!event.target.closest("#listing-drawer, .listing-drawer") && !event.target.closest("[data-listing-id]")) {
+        closeDrawer();
+      }
+    });
     document.getElementById("filter-open").addEventListener("click", openFilters); document.getElementById("filter-close").addEventListener("click", closeFilters); document.getElementById("apply-mobile").addEventListener("click", closeFilters); els.filterBackdrop.addEventListener("click", closeFilters);
     document.addEventListener("click", function (event) { const trigger = event.target.closest("[data-app-modal]"); if (trigger) { event.preventDefault(); openAppModal(trigger.dataset.modalContext || "account"); } if (event.target.closest("[data-share-current]")) shareItem(state.activeListing); });
     document.querySelectorAll("[data-modal-close]").forEach(function (button) { button.addEventListener("click", closeAppModal); });

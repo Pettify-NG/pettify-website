@@ -466,6 +466,29 @@
     if (drawerClose) drawerClose.addEventListener("click", closeListingDrawer);
     if (drawerBackdrop) drawerBackdrop.addEventListener("click", closeListingDrawer);
 
+    // Global click delegate for closing listing drawer when clicking close button, backdrop, or outside
+    document.addEventListener("click", function (event) {
+      const listingDrawer = document.getElementById("listing-drawer");
+      if (!listingDrawer || !listingDrawer.classList.contains("open")) return;
+
+      const isCloseBtn = event.target.closest("#drawer-close, .drawer-close, [data-drawer-close]");
+      const isBackdrop = event.target.closest("#drawer-backdrop, .drawer-backdrop");
+
+      if (isCloseBtn || isBackdrop) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeListingDrawer();
+        return;
+      }
+
+      // Close if clicking outside the drawer and not clicking a listing card trigger
+      const insideDrawer = event.target.closest("#listing-drawer, .listing-drawer");
+      const insideCard = event.target.closest(".lcard");
+      if (!insideDrawer && !insideCard) {
+        closeListingDrawer();
+      }
+    });
+
     document.addEventListener("keydown", function (event) {
       if (event.key !== "Escape") return;
       closeCategoryMenu();
